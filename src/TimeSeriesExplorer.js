@@ -10,7 +10,7 @@ const getDefaultBrushExtents = (data, ordinalColumn) =>
     {}
   )
 
-const getDefaultFrameProps = (ordinalColumn, ratioColumn, groupColumn) => ({
+const getDefaultFrameProps = (ordinalColumn, ratioColumn, groupId) => ({
   size: [900, 800],
   margin: { left: 40, top: 50, bottom: 75, right: 120 },
   type: {
@@ -19,7 +19,7 @@ const getDefaultFrameProps = (ordinalColumn, ratioColumn, groupColumn) => ({
       return 5
     },
   },
-  connectorType: (e) => e[groupColumn],
+  connectorType: (e) => e[groupId],
   oAccessor: ordinalColumn,
   rAccessor: ratioColumn,
   rExtent: [0],
@@ -54,15 +54,17 @@ export default ({
   data, // NOTE: should be sorted by ordinal column
   ordinalColumn,
   ratioColumn,
-  groupColumn,
+  groupId,
 }) => {
   const nonInteractiveFrameProps = getDefaultFrameProps(
     ordinalColumn,
     ratioColumn,
-    groupColumn
+    groupId
   )
   const defaultBrushExtents = getDefaultBrushExtents(data, ordinalColumn)
+
   const [brushExtents, setBrushExtents] = useState(defaultBrushExtents)
+
   return (
     <OrdinalFrame
       {...nonInteractiveFrameProps}
