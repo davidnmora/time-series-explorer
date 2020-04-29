@@ -65,13 +65,16 @@ export default ({
   ordinalColumn,
   ratioColumn,
   groupId,
+  renderKey,
 }) => {
   const [brushExtents, setBrushExtents] = useState(null)
   const [filteredOutGroupIds, setFilteredOutGroupIds] = useState(new Set([]))
   useEffect(() => {
     setBrushExtents(getDefaultBrushExtents(data, ordinalColumn))
   }, [data])
+
   console.log(brushExtents, filteredOutGroupIds)
+
   const nonInteractiveFrameProps = getDefaultFrameProps(
     ordinalColumn,
     ratioColumn,
@@ -79,30 +82,31 @@ export default ({
     filteredOutGroupIds
   )
 
+  const onBrushEnd = (newExtent, ordinalValue) => {
+    const newBrushExtents = {
+      ...brushExtents,
+      [ordinalValue]: newExtent,
+    }
+    setBrushExtents(newBrushExtents)
+    // GOAL: for each data point, if it doesn't fit the bounds add its groupId
+    const _filterIds = data.reduce((_filteredOutGroupIds, d) => {
+      if (!withinExtents(d[ratioColumn], newBrushExtents[d[ordinalColumn]])) {
+        _filteredOutGroupIds.add(d[groupId])
+      }
+      return _filteredOutGroupIds
+    }, new Set([]))
+
+    setFilteredOutGroupIds(_filterIds)
+  }
+  console.log('UPDATE!!!')
   return (
     <OrdinalFrame
       {...nonInteractiveFrameProps}
+      renderKey={renderKey}
       data={data}
       interaction={{
         columnsBrush: true,
-        end: (newExtent, ordinalValue) => {
-          setBrushExtents({
-            ...brushExtents,
-            [ordinalValue]: newExtent,
-          })
-          // GOAL: for each data point, if it doesn't fit the bounds add its groupId
-          setFilteredOutGroupIds(
-            data.reduce((_filteredOutGroupIds, d) => {
-              if (
-                !withinExtents(d[ratioColumn], brushExtents[d[ordinalColumn]])
-              ) {
-                debugger
-                _filteredOutGroupIds.add(d[groupId])
-              }
-              return _filteredOutGroupIds
-            }, new Set([]))
-          )
-        },
+        end: onBrushEnd,
         extent: brushExtents,
       }}
     />
