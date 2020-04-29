@@ -15,15 +15,14 @@ const DATA = [
   { name: 'Oakland', color: '#7566ff', year: 2011, value: 30.5 },
 ]
 
-const DEFAULT_EXTENT = [10, 20]
-
-const DEFAULT_BRUSH_EXTENTS = DATA.reduce(
-  (accumulator, { year }) => ({
-    ...accumulator,
-    [year]: DEFAULT_EXTENT,
-  }),
-  {}
-)
+const getDefaultBrushExtents = (data, ordinalColumn) =>
+  data.reduce(
+    (accumulator, row) => ({
+      ...accumulator,
+      [row[ordinalColumn]]: null,
+    }),
+    {}
+  )
 
 const getDefaultFrameProps = (ordinalColumn, ratioColumn, groupColumn) => ({
   size: [500, 450],
@@ -79,7 +78,8 @@ export default ({
     ratioColumn,
     groupColumn
   )
-  const [brushExtents, setBrushExtents] = useState(DEFAULT_BRUSH_EXTENTS)
+  const defaultBrushExtents = getDefaultBrushExtents(data, ordinalColumn)
+  const [brushExtents, setBrushExtents] = useState(defaultBrushExtents)
   return (
     <OrdinalFrame
       {...nonInteractiveFrameProps}
@@ -87,12 +87,6 @@ export default ({
       interaction={{
         columnsBrush: true,
         end: (newExtent, fieldName) => {
-          console.log(
-            'newExtent, fieldName, brushExtents\n',
-            newExtent,
-            fieldName,
-            brushExtents
-          )
           setBrushExtents({
             ...brushExtents,
             [fieldName]: newExtent,
