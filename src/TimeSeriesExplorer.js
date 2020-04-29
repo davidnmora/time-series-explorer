@@ -1,20 +1,6 @@
 import React, { useState } from 'react'
 import OrdinalFrame from 'semiotic/lib/OrdinalFrame'
 
-const DATA = [
-  { name: 'New York', year: 2015, value: 17.2 },
-  { name: 'Las Vegas', year: 2015, value: 13.9 },
-  { name: 'San Diego', year: 2015, value: 16.1 },
-  { name: 'Denver', year: 2015, value: 26.6 },
-  { name: 'Oakland', year: 2015, value: 37.2 },
-
-  { name: 'New York', year: 2011, value: 17.9 },
-  { name: 'Las Vegas', year: 2011, value: 18.7 },
-  { name: 'San Diego', year: 2011, value: 18.9 },
-  { name: 'Denver', year: 2011, value: 27.4 },
-  { name: 'Oakland', year: 2011, value: 30.5 },
-]
-
 const getDefaultBrushExtents = (data, ordinalColumn) =>
   data.reduce(
     (accumulator, row) => ({
@@ -65,10 +51,10 @@ const getDefaultFrameProps = (ordinalColumn, ratioColumn, groupColumn) => ({
 })
 
 export default ({
-  data = DATA, // NOTE: should be sorted by ordinal column
-  ordinalColumn = 'year',
-  ratioColumn = 'value',
-  groupColumn = 'name',
+  data, // NOTE: should be sorted by ordinal column
+  ordinalColumn,
+  ratioColumn,
+  groupColumn,
 }) => {
   const nonInteractiveFrameProps = getDefaultFrameProps(
     ordinalColumn,
