@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import OrdinalFrame from 'semiotic/lib/OrdinalFrame'
 
 const getDefaultBrushExtents = (data, ordinalColumn) =>
@@ -10,7 +10,15 @@ const getDefaultBrushExtents = (data, ordinalColumn) =>
     {}
   )
 
-const getDefaultFrameProps = (ordinalColumn, ratioColumn, groupId) => ({
+const withinExtents = (value, extent) =>
+  !extent || (value >= extent[0] && value <= extent[1])
+
+const getDefaultFrameProps = (
+  ordinalColumn,
+  ratioColumn,
+  groupId,
+  filteredOutGroupIds
+) => ({
   size: [900, 800],
   margin: { left: 40, top: 50, bottom: 75, right: 120 },
   type: {
@@ -23,9 +31,11 @@ const getDefaultFrameProps = (ordinalColumn, ratioColumn, groupId) => ({
   oAccessor: ordinalColumn,
   rAccessor: ratioColumn,
   rExtent: [0],
-  // style: function (e) {
-  //   return { fill: e.color, stroke: 'white', strokeOpacity: 0.5 }
-  // },
+  style: (d) => {
+    return filteredOutGroupIds.has(d[groupId])
+      ? { fill: 'black', fillOpacity: 0.05 }
+      : { fill: 'black' }
+  },
   // connectorStyle: function (e) {
   // 	return {
   // 		fill: e.source.color,
@@ -56,14 +66,18 @@ export default ({
   ratioColumn,
   groupId,
 }) => {
+  const [brushExtents, setBrushExtents] = useState(null)
+  const [filteredOutGroupIds, setFilteredOutGroupIds] = useState(new Set([]))
+  useEffect(() => {
+    setBrushExtents(getDefaultBrushExtents(data, ordinalColumn))
+  }, [data])
+  console.log(brushExtents, filteredOutGroupIds)
   const nonInteractiveFrameProps = getDefaultFrameProps(
     ordinalColumn,
     ratioColumn,
-    groupId
+    groupId,
+    filteredOutGroupIds
   )
-  const defaultBrushExtents = getDefaultBrushExtents(data, ordinalColumn)
-
-  const [brushExtents, setBrushExtents] = useState(defaultBrushExtents)
 
   return (
     <OrdinalFrame
@@ -71,11 +85,23 @@ export default ({
       data={data}
       interaction={{
         columnsBrush: true,
-        end: (newExtent, fieldName) => {
+        end: (newExtent, ordinalValue) => {
           setBrushExtents({
             ...brushExtents,
-            [fieldName]: newExtent,
+            [ordinalValue]: newExtent,
           })
+          // GOAL: for each data point, if it doesn't fit the bounds add its groupId
+          setFilteredOutGroupIds(
+            data.reduce((_filteredOutGroupIds, d) => {
+              if (
+                !withinExtents(d[ratioColumn], brushExtents[d[ordinalColumn]])
+              ) {
+                debugger
+                _filteredOutGroupIds.add(d[groupId])
+              }
+              return _filteredOutGroupIds
+            }, new Set([]))
+          )
         },
         extent: brushExtents,
       }}
