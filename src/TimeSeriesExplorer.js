@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import OrdinalFrame from 'semiotic/lib/OrdinalFrame'
 
-const frameProps = {
-  data: [
-    { name: 'New York', color: '#ac58e5', year: 2011, value: 17.9 },
-    { name: 'Las Vegas', color: '#E0488B', year: 2011, value: 18.7 },
-    { name: 'San Diego', color: '#9fd0cb', year: 2011, value: 18.9 },
-    { name: 'Denver', color: '#e0d33a', year: 2011, value: 27.4 },
-    { name: 'Oakland', color: '#7566ff', year: 2011, value: 30.5 },
-    { name: 'New York', color: '#ac58e5', year: 2015, value: 17.2 },
-    { name: 'Las Vegas', color: '#E0488B', year: 2015, value: 13.9 },
-    { name: 'San Diego', color: '#9fd0cb', year: 2015, value: 16.1 },
-    { name: 'Denver', color: '#e0d33a', year: 2015, value: 26.6 },
-    { name: 'Oakland', color: '#7566ff', year: 2015, value: 37.2 },
-  ],
+const DATA = [
+  { name: 'New York', color: '#ac58e5', year: 2011, value: 17.9 },
+  { name: 'Las Vegas', color: '#E0488B', year: 2011, value: 18.7 },
+  { name: 'San Diego', color: '#9fd0cb', year: 2011, value: 18.9 },
+  { name: 'Denver', color: '#e0d33a', year: 2011, value: 27.4 },
+  { name: 'Oakland', color: '#7566ff', year: 2011, value: 30.5 },
+  { name: 'New York', color: '#ac58e5', year: 2015, value: 17.2 },
+  { name: 'Las Vegas', color: '#E0488B', year: 2015, value: 13.9 },
+  { name: 'San Diego', color: '#9fd0cb', year: 2015, value: 16.1 },
+  { name: 'Denver', color: '#e0d33a', year: 2015, value: 26.6 },
+  { name: 'Oakland', color: '#7566ff', year: 2015, value: 37.2 },
+]
+
+const DEFAULT_FRAME_PROPS = {
   size: [500, 450],
   margin: { left: 40, top: 50, bottom: 75, right: 120 },
   type: {
@@ -40,25 +41,6 @@ const frameProps = {
     }
   },
   title: '% of Adults Who Binge Drink',
-  foregroundGraphics: [
-    <g transform="translate(440, 73)" key="legend">
-      <text key={1} fill={'#ac58e5'}>
-        New York
-      </text>
-      <text key={1} y={20} fill={'#E0488B'}>
-        Las Vegas
-      </text>
-      <text key={1} y={40} fill={'#9fd0cb'}>
-        San Diego
-      </text>
-      <text key={1} y={60} fill={'#e0d33a'}>
-        Denver
-      </text>
-      <text key={1} y={80} fill={'#7566ff'}>
-        Oakland
-      </text>
-    </g>,
-  ],
   axes: [
     {
       orient: 'left',
@@ -79,6 +61,39 @@ const frameProps = {
   oLabel: true,
 }
 
+const DEFAULT_EXTENT = [10, 20]
+
+const DEFAULT_BRUSH_EXTENTS = DATA.reduce(
+  (accumulator, { year }) => ({
+    ...accumulator,
+    [year]: DEFAULT_EXTENT,
+  }),
+  {}
+)
+
 export default () => {
-  return <OrdinalFrame {...frameProps} />
+  const [brushExtents, setBrushExtents] = useState(DEFAULT_BRUSH_EXTENTS)
+  return (
+    <OrdinalFrame
+      {...DEFAULT_FRAME_PROPS}
+      data={DATA}
+      interaction={{
+        columnsBrush: true,
+        end: (newExtent, fieldName) => {
+          console.log(
+            'newExtent, fieldName, brushExtents\n',
+            newExtent,
+            fieldName,
+            brushExtents
+          )
+          debugger
+          setBrushExtents({
+            ...brushExtents,
+            [fieldName]: newExtent,
+          })
+        },
+        extent: brushExtents,
+      }}
+    />
+  )
 }
