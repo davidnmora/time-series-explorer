@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
+import 'antd/dist/antd.css'
 import TimeSeriesExplorer, { withinExtents } from './TimeSeriesExplorer'
 import Filters from './Filters'
 import useCartoData, {
@@ -38,11 +39,13 @@ function App() {
     [RURAL_PERCENTAGE_COLUMN]: [0, 100],
   })
 
+  const onFilterChange = () => {}
+
   const filteredData = data.filter((d) => {
-    return !Object.keys(filters).some((filterFieldName) => {
-      debugger
-      return !withinExtents(d[filterFieldName], filters[filterFieldName])
-    })
+    return !Object.keys(filters).some(
+      (filterFieldName) =>
+        !withinExtents(d[filterFieldName], filters[filterFieldName])
+    )
   })
 
   return (
@@ -58,7 +61,7 @@ function App() {
         />
         <YearLegend />
       </div>
-      <Filters />
+      <Filters filters={filters} onFilterChange={onFilterChange} />
     </div>
   )
 }
