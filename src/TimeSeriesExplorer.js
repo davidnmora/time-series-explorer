@@ -10,6 +10,21 @@ const getDefaultBrushExtents = (data, ordinalColumn) =>
     {}
   )
 
+const getStyleClass = (dataPointGroupId, filteredOutGroupIds) =>
+  filteredOutGroupIds.has(dataPointGroupId)
+    ? 'data-point filtered-out'
+    : 'data-point'
+
+const DEFAULT_OPACITY = 0.8
+const FILTERED_OUT_OPACITY = 0.05
+const getConnectorClass = (connectorLine, filteredOutGroupIds, groupId) => {
+  const connectorGroupId =
+    connectorLine.source[groupId] || connectorLine.target[groupId]
+  return filteredOutGroupIds.has(connectorGroupId)
+    ? { strokeOpacity: FILTERED_OUT_OPACITY, fillOpacity: FILTERED_OUT_OPACITY }
+    : { strokeOpacity: DEFAULT_OPACITY, fillOpacity: DEFAULT_OPACITY }
+}
+
 const withinExtents = (value, extent) =>
   !extent || (value >= extent[0] && value <= extent[1])
 
@@ -31,20 +46,8 @@ const getDefaultFrameProps = (
   oAccessor: ordinalColumn,
   rAccessor: ratioColumn,
   rExtent: [0],
-  style: (d) => {
-    const isFilteredOut = filteredOutGroupIds.has(d[groupId])
-    return isFilteredOut
-      ? { fill: 'black', fillOpacity: 0.05 }
-      : { fill: 'black' }
-  },
-  // connectorStyle: function (e) {
-  // 	return {
-  // 		fill: e.source.color,
-  // 		stroke: e.source.color,
-  // 		strokeOpacity: 0.5,
-  // 		fillOpacity: 0.5,
-  // 	}
-  // },
+  pieceClass: (d) => getStyleClass(d[groupId], filteredOutGroupIds),
+  connectorStyle: (d) => getConnectorClass(d, filteredOutGroupIds, groupId),
   axes: [
     {
       orient: 'left',

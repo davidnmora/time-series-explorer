@@ -1,3 +1,9 @@
-circle {
-  transition: fill-opacity 1s;
+
+.data-point {
+  fill-opacity: 0.8;
+  transition: fill-opacity 800ms;
+}
+
+.data-point.filtered-out {
+  fill-opacity: 0.05;
 }
