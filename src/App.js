@@ -59,6 +59,11 @@ function App() {
 
   return (
     <div className="App">
+      <div>
+        {Object.keys(YEAR_COLORS).map((year) => (
+          <div style={{ backgroundColor: YEAR_COLORS[year] }}>{year}</div>
+        ))}
+      </div>
       <TimeSeriesExplorer
         data={data}
         ratioColumn={ratioColumn}

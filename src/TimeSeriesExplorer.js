@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 import OrdinalFrame from 'semiotic/lib/OrdinalFrame'
 
 const getDefaultBrushExtents = (data, ordinalColumn) =>
@@ -74,7 +75,7 @@ const getDefaultFrameProps = (
       orient: 'right',
     },
   ],
-  oLabel: true,
+  oLabel: (e) => <text fontSize={12}>{moment.monthsShort(+e - 1)}</text>,
 })
 
 export default ({
