@@ -41,11 +41,13 @@ function App() {
 
   useEffect(() => {
     // TODO: don't limit to 2019
-    DataFetcher.fetchSQL(CARTO_TABLE_NAME, FIELDS, 'WHERE year = 2019').then(
-      (fetchedData) => {
-        setData(formatData(fetchedData))
-      }
-    )
+    DataFetcher.fetchSQL(
+      CARTO_TABLE_NAME,
+      FIELDS,
+      'WHERE year = 2018' // TODO: remove year filter. Also, for debug: 'WHERE geoid = 26013 AND month = 2'
+    ).then((fetchedData) => {
+      setData(formatData(fetchedData))
+    })
   }, [])
 
   return (

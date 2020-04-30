@@ -32,7 +32,8 @@ const getDefaultFrameProps = (
   rAccessor: ratioColumn,
   rExtent: [0],
   style: (d) => {
-    return filteredOutGroupIds.has(d[groupId])
+    const isFilteredOut = filteredOutGroupIds.has(d[groupId])
+    return isFilteredOut
       ? { fill: 'black', fillOpacity: 0.05 }
       : { fill: 'black' }
   },
@@ -67,27 +68,36 @@ export default ({
   groupId,
   renderKey,
 }) => {
-  const [brushExtents, setBrushExtents] = useState(null)
-  const [filteredOutGroupIds, setFilteredOutGroupIds] = useState(new Set([]))
-  useEffect(() => {
-    setBrushExtents(getDefaultBrushExtents(data, ordinalColumn))
-  }, [data])
+  const [filterInfo, setFilterInfo] = useState({
+    brushExtents: null,
+    filteredOutGroupIds: new Set([]),
+  })
 
-  console.log(brushExtents, filteredOutGroupIds)
+  const updateFilterInfo = (updates) =>
+    setFilterInfo({
+      ...filterInfo,
+      ...updates,
+    })
+
+  useEffect(() => {
+    updateFilterInfo({
+      brushExtents: getDefaultBrushExtents(data, ordinalColumn),
+    })
+  }, [data])
 
   const nonInteractiveFrameProps = getDefaultFrameProps(
     ordinalColumn,
     ratioColumn,
     groupId,
-    filteredOutGroupIds
+    filterInfo.filteredOutGroupIds
   )
 
   const onBrushEnd = (newExtent, ordinalValue) => {
     const newBrushExtents = {
-      ...brushExtents,
+      ...filterInfo.brushExtents,
       [ordinalValue]: newExtent,
     }
-    setBrushExtents(newBrushExtents)
+
     // GOAL: for each data point, if it doesn't fit the bounds add its groupId
     const _filterIds = data.reduce((_filteredOutGroupIds, d) => {
       if (!withinExtents(d[ratioColumn], newBrushExtents[d[ordinalColumn]])) {
@@ -96,9 +106,12 @@ export default ({
       return _filteredOutGroupIds
     }, new Set([]))
 
-    setFilteredOutGroupIds(_filterIds)
+    updateFilterInfo({
+      brushExtents: newBrushExtents,
+      filteredOutGroupIds: _filterIds,
+    })
   }
-  console.log('UPDATE!!!')
+
   return (
     <OrdinalFrame
       {...nonInteractiveFrameProps}
@@ -107,7 +120,7 @@ export default ({
       interaction={{
         columnsBrush: true,
         end: onBrushEnd,
-        extent: brushExtents,
+        extent: filterInfo.brushExtents,
       }}
     />
   )
