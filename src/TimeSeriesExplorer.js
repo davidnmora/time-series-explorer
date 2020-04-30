@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
+import { Button } from 'antd'
 import OrdinalFrame from 'semiotic/lib/OrdinalFrame'
 
 const getDefaultBrushExtents = (data, ordinalColumn) =>
@@ -42,6 +43,7 @@ export const withinExtents = (value, extent) =>
 const getDefaultFrameProps = (
   ordinalColumn,
   ratioColumn,
+  displayNameColumn,
   groupId,
   filteredOutGroupIds,
   getColor
@@ -76,12 +78,20 @@ const getDefaultFrameProps = (
     },
   ],
   oLabel: (e) => <text fontSize={12}>{moment.monthsShort(+e - 1)}</text>,
+  pieceHoverAnnotation: true,
+  tooltipContent: (d) => (
+    <div className="tooltip-content">
+      <h4>{d[displayNameColumn]}</h4>
+      <p>{d[ratioColumn]}</p>
+    </div>
+  ),
 })
 
 export default ({
   data, // NOTE: should be sorted by ordinal column
   ordinalColumn,
   ratioColumn,
+  displayNameColumn,
   groupId,
   renderKey,
   getColor = null,
@@ -90,6 +100,7 @@ export default ({
     brushExtents: null,
     filteredOutGroupIds: new Set([]),
   })
+  const [showBrushes, setShowBrushes] = useState(true)
 
   const updateFilterInfo = (updates) =>
     setFilterInfo({
@@ -106,6 +117,7 @@ export default ({
   const nonInteractiveFrameProps = getDefaultFrameProps(
     ordinalColumn,
     ratioColumn,
+    displayNameColumn,
     groupId,
     filterInfo.filteredOutGroupIds,
     getColor
@@ -131,16 +143,27 @@ export default ({
     })
   }
 
-  return (
-    <OrdinalFrame
-      {...nonInteractiveFrameProps}
-      renderKey={renderKey}
-      data={data}
-      interaction={{
+  const brushInteraction = showBrushes
+    ? {
         columnsBrush: true,
         end: onBrushEnd,
         extent: filterInfo.brushExtents,
-      }}
-    />
+      }
+    : undefined
+
+  return (
+    <div>
+      <Button onClick={() => setShowBrushes(!showBrushes)}>
+        {showBrushes
+          ? '🙈 Hide Chart filter brushes (vertical gray bars) to hover/inspect data'
+          : '🐵 Show filter brushes to adjust filters'}
+      </Button>
+      <OrdinalFrame
+        {...nonInteractiveFrameProps}
+        renderKey={renderKey}
+        data={data}
+        interaction={brushInteraction}
+      />
+    </div>
   )
 }

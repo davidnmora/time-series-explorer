@@ -12,8 +12,11 @@ export const RATIO_COLUMNS = [
   'total_spend_retail_categories_province_all_origins',
 ]
 export const REGION_COLUMN = 'geoid'
+export const DISPLAY_NAME_COLUMN = 'name'
 export const FIELDS = [
+  // TODO: export a single object, COLUMNS
   REGION_COLUMN,
+  DISPLAY_NAME_COLUMN,
   YEAR_COLUMN,
   DATE_STRING_COLUMN,
   RURAL_PERCENTAGE_COLUMN,

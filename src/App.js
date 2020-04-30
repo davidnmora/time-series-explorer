@@ -8,6 +8,7 @@ import useCartoData, {
   FIELDS,
   RATIO_COLUMNS,
   ORDINAL_COLUMN,
+  DISPLAY_NAME_COLUMN,
   YEAR_COLUMN,
   GROUP_ID,
   RENDER_KEY,
@@ -66,6 +67,7 @@ function App() {
           data={filteredData}
           ratioColumn={ratioColumn}
           ordinalColumn={ORDINAL_COLUMN}
+          displayNameColumn={DISPLAY_NAME_COLUMN}
           groupId={GROUP_ID}
           renderKey={RENDER_KEY}
           getColor={getColor}
