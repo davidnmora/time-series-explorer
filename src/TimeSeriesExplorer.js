@@ -88,6 +88,7 @@ const getDefaultFrameProps = (
 })
 
 export default ({
+  title = '',
   data, // NOTE: should be sorted by ordinal column
   ordinalColumn,
   ratioColumn,
@@ -153,6 +154,7 @@ export default ({
 
   return (
     <div>
+      {title && <h1>{title}</h1>}
       <Button onClick={() => setShowBrushes(!showBrushes)}>
         {showBrushes
           ? '🙈 Hide Chart filter brushes (vertical gray bars) to hover/inspect data'

@@ -64,6 +64,9 @@ function App() {
     <div className="App">
       <div style={{ display: 'flex' }}>
         <TimeSeriesExplorer
+          title={`Filterable time series of ${ratioColumn} for ${Object.keys(
+            YEAR_COLORS
+          ).join(', ')}`}
           data={filteredData}
           ratioColumn={ratioColumn}
           ordinalColumn={ORDINAL_COLUMN}
