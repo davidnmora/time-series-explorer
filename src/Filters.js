@@ -2,9 +2,14 @@ import React from 'react'
 import { Slider } from 'antd'
 
 const RangeSlider = ({ title, value, onChange }) => (
-  <div>
+  <div className="range-slider field-filter-container">
     <h3>{title}</h3>
-    <Slider range value={value} onChange={onChange} />
+    <Slider
+      range
+      tooltipVisible={true}
+      defaultValue={value}
+      onAfterChange={(newExtent) => onChange(newExtent)}
+    />
   </div>
 )
 
@@ -16,7 +21,7 @@ export default ({ filters, onFilterChange }) => {
         <RangeSlider
           title={filterFieldName}
           value={filters[filterFieldName]}
-          onChange={onFilterChange}
+          onChange={(newExtent) => onFilterChange(filterFieldName, newExtent)}
         />
       ))}
     </div>

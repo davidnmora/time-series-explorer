@@ -2,12 +2,9 @@
   padding: 48px;
 }
 
-
-.data-point {
-  fill-opacity: 0.8;
-  transition: fill-opacity 800ms;
+.field-filter-container {
+  padding: 8px;
 }
-
-.data-point.filtered-out {
-  fill-opacity: 0.05;
+.field-filter-container h3 {
+  padding-bottom: 8px;
 }

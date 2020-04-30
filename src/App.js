@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import './App.css'
 import 'antd/dist/antd.css'
 import TimeSeriesExplorer, { withinExtents } from './TimeSeriesExplorer'
@@ -39,14 +39,25 @@ function App() {
     [RURAL_PERCENTAGE_COLUMN]: [0, 100],
   })
 
-  const onFilterChange = () => {}
+  const onFilterChange = (filterFieldName, newExtent) => {
+    console.log(filterFieldName, newExtent)
+    setFilters({
+      ...filters,
+      [filterFieldName]: newExtent,
+    })
+  }
 
-  const filteredData = data.filter((d) => {
-    return !Object.keys(filters).some(
-      (filterFieldName) =>
-        !withinExtents(d[filterFieldName], filters[filterFieldName])
-    )
-  })
+  const filteredData = useMemo(
+    () =>
+      data.filter(
+        (d) =>
+          !Object.keys(filters).some(
+            (filterFieldName) =>
+              !withinExtents(d[filterFieldName], filters[filterFieldName])
+          )
+      ),
+    [data, filters]
+  )
 
   return (
     <div className="App">
