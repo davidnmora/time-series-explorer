@@ -10,19 +10,29 @@ const getDefaultBrushExtents = (data, ordinalColumn) =>
     {}
   )
 
-const getStyleClass = (dataPointGroupId, filteredOutGroupIds) =>
-  filteredOutGroupIds.has(dataPointGroupId)
-    ? 'data-point filtered-out'
-    : 'data-point'
-
 const DEFAULT_OPACITY = 0.8
 const FILTERED_OUT_OPACITY = 0.05
-const getConnectorClass = (connectorLine, filteredOutGroupIds, groupId) => {
-  const connectorGroupId =
-    connectorLine.source[groupId] || connectorLine.target[groupId]
-  return filteredOutGroupIds.has(connectorGroupId)
+const getStyle = (isFilteredOut, color) =>
+  isFilteredOut
     ? { strokeOpacity: FILTERED_OUT_OPACITY, fillOpacity: FILTERED_OUT_OPACITY }
-    : { strokeOpacity: DEFAULT_OPACITY, fillOpacity: DEFAULT_OPACITY }
+    : {
+        strokeOpacity: DEFAULT_OPACITY,
+        fillOpacity: DEFAULT_OPACITY,
+        fill: color,
+      }
+
+const getDataPointStyle = (dataPointGroupId, filteredOutGroupIds, color) =>
+  getStyle(filteredOutGroupIds.has(dataPointGroupId), color)
+
+const getConnectorClass = (
+  connectorLine,
+  filteredOutGroupIds,
+  groupId,
+  getColor
+) => {
+  const { source, target } = connectorLine
+  const d = source || target
+  return getStyle(filteredOutGroupIds.has(d[groupId]), getColor && getColor(d))
 }
 
 const withinExtents = (value, extent) =>
@@ -32,7 +42,8 @@ const getDefaultFrameProps = (
   ordinalColumn,
   ratioColumn,
   groupId,
-  filteredOutGroupIds
+  filteredOutGroupIds,
+  getColor
 ) => ({
   size: [900, 800],
   margin: { left: 40, top: 50, bottom: 75, right: 120 },
@@ -46,8 +57,10 @@ const getDefaultFrameProps = (
   oAccessor: ordinalColumn,
   rAccessor: ratioColumn,
   rExtent: [0],
-  pieceClass: (d) => getStyleClass(d[groupId], filteredOutGroupIds),
-  connectorStyle: (d) => getConnectorClass(d, filteredOutGroupIds, groupId),
+  style: (d) =>
+    getDataPointStyle(d[groupId], filteredOutGroupIds, getColor && getColor(d)),
+  connectorStyle: (d) =>
+    getConnectorClass(d, filteredOutGroupIds, groupId, getColor),
   axes: [
     {
       orient: 'left',
@@ -70,6 +83,7 @@ export default ({
   ratioColumn,
   groupId,
   renderKey,
+  getColor = null,
 }) => {
   const [filterInfo, setFilterInfo] = useState({
     brushExtents: null,
@@ -92,7 +106,8 @@ export default ({
     ordinalColumn,
     ratioColumn,
     groupId,
-    filterInfo.filteredOutGroupIds
+    filterInfo.filteredOutGroupIds,
+    getColor
   )
 
   const onBrushEnd = (newExtent, ordinalValue) => {

@@ -35,16 +35,23 @@ const formatData = (fetchedData) => {
     .sort((a, b) => a[DATE_STRING_COLUMN].diff(b[DATE_STRING_COLUMN]))
 }
 
+const YEAR_COLORS = {
+  2018: '#edf8b1',
+  2019: '#7fcdbb',
+  2020: '#2c7fb8',
+}
+
+const getColor = (d) => YEAR_COLORS[d[YEAR_COLUMN]]
+
 function App() {
   const [data, setData] = useState([])
   const [ratioColumn, setRatioColumn] = useState(RATIO_COLUMNS[0])
 
   useEffect(() => {
-    // TODO: don't limit to 2019
     DataFetcher.fetchSQL(
       CARTO_TABLE_NAME,
-      FIELDS,
-      'WHERE year = 2018' // TODO: remove year filter. Also, for debug: 'WHERE geoid = 26013 AND month = 2'
+      FIELDS
+      // for debug: 'WHERE geoid = 26013 AND month = 2'
     ).then((fetchedData) => {
       setData(formatData(fetchedData))
     })
@@ -58,6 +65,7 @@ function App() {
         ordinalColumn={ORDINAL_COLUMN}
         groupId={GROUP_ID}
         renderKey={RENDER_KEY}
+        getColor={getColor}
       />
     </div>
   )
