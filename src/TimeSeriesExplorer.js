@@ -36,7 +36,7 @@ const getConnectorClass = (
   return getStyle(filteredOutGroupIds.has(d[groupId]), getColor && getColor(d))
 }
 
-const withinExtents = (value, extent) =>
+export const withinExtents = (value, extent) =>
   !extent || (value >= extent[0] && value <= extent[1])
 
 const getDefaultFrameProps = (

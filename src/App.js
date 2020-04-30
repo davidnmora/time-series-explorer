@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
-import TimeSeriesExplorer from './TimeSeriesExplorer'
+import TimeSeriesExplorer, { withinExtents } from './TimeSeriesExplorer'
 import Filters from './Filters'
 import useCartoData, {
   CARTO_TABLE_NAME,
@@ -10,6 +10,7 @@ import useCartoData, {
   YEAR_COLUMN,
   GROUP_ID,
   RENDER_KEY,
+  RURAL_PERCENTAGE_COLUMN,
 } from './useCartoData'
 
 const YEAR_COLORS = {
@@ -33,12 +34,22 @@ const getColor = (d) => YEAR_COLORS[d[YEAR_COLUMN]]
 function App() {
   const data = useCartoData(CARTO_TABLE_NAME, FIELDS)
   const [ratioColumn, setRatioColumn] = useState(RATIO_COLUMNS[0])
+  const [filters, setFilters] = useState({
+    [RURAL_PERCENTAGE_COLUMN]: [0, 100],
+  })
+
+  const filteredData = data.filter((d) => {
+    return !Object.keys(filters).some((filterFieldName) => {
+      debugger
+      return !withinExtents(d[filterFieldName], filters[filterFieldName])
+    })
+  })
 
   return (
     <div className="App">
       <div style={{ display: 'flex' }}>
         <TimeSeriesExplorer
-          data={data}
+          data={filteredData}
           ratioColumn={ratioColumn}
           ordinalColumn={ORDINAL_COLUMN}
           groupId={GROUP_ID}

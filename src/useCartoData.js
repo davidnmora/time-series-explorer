@@ -7,6 +7,7 @@ export const CARTO_TABLE_NAME = 'mrli_county_commercial_details'
 export const ORDINAL_COLUMN = 'month'
 export const YEAR_COLUMN = 'year'
 export const DATE_STRING_COLUMN = 'date'
+export const RURAL_PERCENTAGE_COLUMN = 'rural_area_pct_ruca'
 export const RATIO_COLUMNS = [
   'total_spend_retail_categories_province_all_origins',
 ]
@@ -15,6 +16,7 @@ export const FIELDS = [
   REGION_COLUMN,
   YEAR_COLUMN,
   DATE_STRING_COLUMN,
+  RURAL_PERCENTAGE_COLUMN,
   ORDINAL_COLUMN,
   ...RATIO_COLUMNS,
 ]
