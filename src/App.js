@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import './App.css'
 import 'antd/dist/antd.css'
-import { withinExtents } from './TimeSeriesExplorer'
+import LineChart from './data-viz/LineChart'
 import ScrollytellingContainer from './ScrollytellingContainer'
 import Filters from './Filters'
 import useCartoData, {
@@ -10,30 +10,12 @@ import useCartoData, {
   RATIO_COLUMNS,
   MONTH_COLUMN,
   DISPLAY_NAME_COLUMN,
-  YEAR_COLUMN,
   // RURAL_PERCENTAGE_COLUMN,
 } from './useCartoData'
 
-const YEAR_COLORS = {
-  2018: '#edf8b1',
-  2019: '#7fcdbb',
-  2020: '#2c7fb8',
-}
-
-const YearLegend = () => (
-  <div>
-    {Object.keys(YEAR_COLORS).map((year) => (
-      <div key={year} style={{ backgroundColor: YEAR_COLORS[year] }}>
-        {year}
-      </div>
-    ))}
-  </div>
-)
-
-const getColor = (d) => YEAR_COLORS[d[YEAR_COLUMN]]
-
 function App() {
-  // const data = useCartoData(CARTO_TABLE_NAME, FIELDS)
+  const data = useCartoData(CARTO_TABLE_NAME, FIELDS)
+
   const [ratioColumn, setRatioColumn] = useState(RATIO_COLUMNS[0])
   const [filters, setFilters] = useState({
     [MONTH_COLUMN]: [0, 100],
@@ -49,8 +31,12 @@ function App() {
 
   return (
     <div className="App">
-      <ScrollytellingContainer />
-      <Filters filters={filters} onFilterChange={onFilterChange} />
+      {[...data.keys()].map((regionId) => (
+        <LineChart key={regionId} regionYearData={data.get(regionId)} />
+      ))}
+
+      {/*<ScrollytellingContainer />*/}
+      {/*<Filters filters={filters} onFilterChange={onFilterChange} />*/}
     </div>
   )
 }
