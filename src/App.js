@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react'
 import './App.css'
 import 'antd/dist/antd.css'
 import { withinExtents } from './TimeSeriesExplorer'
+import ScrollytellingContainer from './ScrollytellingContainer'
 import Filters from './Filters'
 import useCartoData, {
   CARTO_TABLE_NAME,
@@ -32,7 +33,7 @@ const YearLegend = () => (
 const getColor = (d) => YEAR_COLORS[d[YEAR_COLUMN]]
 
 function App() {
-  const data = useCartoData(CARTO_TABLE_NAME, FIELDS)
+  // const data = useCartoData(CARTO_TABLE_NAME, FIELDS)
   const [ratioColumn, setRatioColumn] = useState(RATIO_COLUMNS[0])
   const [filters, setFilters] = useState({
     [MONTH_COLUMN]: [0, 100],
@@ -48,7 +49,7 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{ display: 'flex' }}></div>
+      <ScrollytellingContainer />
       <Filters filters={filters} onFilterChange={onFilterChange} />
     </div>
   )
