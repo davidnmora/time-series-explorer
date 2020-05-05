@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useState } from 'react'
 import injectSheet from 'react-jss'
 import { Scrollama, Step } from 'react-scrollama'
 import LineChart, { YEAR_COLORS } from './data-viz/LineChart'
@@ -6,37 +6,6 @@ import LineChart, { YEAR_COLORS } from './data-viz/LineChart'
 const YEARS = Object.keys(YEAR_COLORS).map((year) => +year)
 
 const styles = {
-  navbar: {
-    position: 'fixed',
-    display: 'flex',
-    top: 0,
-    right: 0,
-    zIndex: 1,
-    '& a': {
-      display: 'block',
-      fontFamily: 'Helvetica',
-      fontSize: '20px',
-      color: '#00e',
-      padding: '20px',
-    },
-  },
-  pageTitle: {
-    fontFamily: 'Rubik',
-    fontWeight: '900',
-    textAlign: 'center',
-    fontSize: '48px',
-    margin: '110px 0 10px',
-    '& a': {
-      color: '#00e',
-    },
-  },
-  pageSubtitle: {
-    margin: 0,
-    fontFamily: 'Helvetica',
-    textAlign: 'center',
-    fontSize: '24px',
-    color: '#888',
-  },
   graphicContainer: {
     padding: '40vh 2vw 70vh',
     display: 'flex',
@@ -48,7 +17,7 @@ const styles = {
     position: 'sticky',
     width: '100%',
     padding: '5rem 0',
-    top: '160px',
+    top: '100px',
     alignSelf: 'flex-start',
     backgroundColor: '#aaa',
     '& p': {
@@ -76,74 +45,59 @@ const styles = {
   },
 }
 
-class ScrollytellingContainer extends PureComponent {
-  state = {
-    data: 0,
-    progress: 0,
-  }
+const ScrollytellingContainer = ({ classes, regionData }) => {
+  const [state, setState] = useState({})
+  const [progress, setProgress] = useState(0)
 
-  onStepEnter = ({ element, data }) => {
+  const onStepEnter = ({ element, data }) => {
     element.style.backgroundColor = 'lightgoldenrodyellow'
-    this.setState({ data })
+    setState({ ...state, data })
   }
 
-  onStepExit = ({ element }) => {
+  const onStepExit = ({ element }) => {
     element.style.backgroundColor = '#fff'
   }
 
-  onStepProgress = ({ element, progress }) => {
-    this.setState({ progress })
+  const onStepProgress = ({ element, progress }) => {
+    setProgress(progress)
   }
 
-  render() {
-    const { data, steps, progress } = this.state
-    const { classes, regionData } = this.props
-
-    return (
-      <div>
-        <div className={classes.navbar}>
-          <a href="https://ruralinnovation.us/">
-            The Center on Rural Innovation
-          </a>
-        </div>
-        <p className={classes.pageTitle}>
-          Exploring change in spending in Michigan during COVID-19
-        </p>
-        <p className={classes.pageSubtitle}>Scroll ↓</p>
-        <div className={classes.graphicContainer}>
-          <div className={classes.scroller}>
-            <Scrollama
-              onStepEnter={this.onStepEnter}
-              onStepExit={this.onStepExit}
-              progress
-              onStepProgress={this.onStepProgress}
-              offset={0.4}
-              debug
-            >
-              {YEARS.map((year) => (
-                <Step data={year} key={year}>
-                  <div className={classes.step}>
-                    <p>step year: {year}</p>
-                    {year === data && <p>{Math.round(progress * 100)}%</p>}
-                  </div>
-                </Step>
-              ))}
-            </Scrollama>
-          </div>
-          <div className={classes.graphic}>
-            <p>{data}</p>
-            {[...regionData.keys()].splice(0, 2).map((regionId) => (
-              <LineChart
-                key={regionId}
-                visibleYears={[data]}
-                regionYearData={regionData.get(regionId)}
-              />
+  return (
+    <div>
+      <div className={classes.graphicContainer}>
+        <div className={classes.scroller}>
+          <Scrollama
+            onStepEnter={onStepEnter}
+            onStepExit={onStepExit}
+            progress
+            onStepProgress={onStepProgress}
+            offset={0.4}
+            debug
+          >
+            {YEARS.map((year) => (
+              <Step data={year} key={year}>
+                <div className={classes.step}>
+                  <p>step year: {year}</p>
+                  {year === state.data && <p>{Math.round(progress * 100)}%</p>}
+                </div>
+              </Step>
             ))}
-          </div>
+          </Scrollama>
+        </div>
+
+        <div className={classes.graphic}>
+          <p>{state.data}</p>
+          {[...regionData.keys()].splice(0, 2).map((regionId) => (
+            <LineChart
+              key={regionId}
+              visibleYears={[state.data]}
+              regionYearData={regionData.get(regionId)}
+            />
+          ))}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default injectSheet(styles)(ScrollytellingContainer)
