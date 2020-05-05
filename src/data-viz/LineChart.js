@@ -52,11 +52,16 @@ const Line = ({ lineData, color }) => {
     .x((d) => xScale(d[MONTH_COLUMN]))
     .y((d) => yScale(d[TOTAL_SPEND_COLUMN]))
   const path = pathGenerator(lineData)
+  const dashLineProps = {
+    'stroke-dasharray': DIM.width,
+    'stroke-dashoffset': 0,
+  }
   return (
     <TransitionablePath
       style={{ stroke: color, fill: 'none', strokeWidth: 2 }}
       className={`line`}
       d={path}
+      {...dashLineProps}
     />
   )
 }
