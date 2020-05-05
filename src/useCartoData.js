@@ -9,6 +9,10 @@ export const YEAR_COLUMN = 'year'
 export const TOTAL_SPEND_COVID_TREND = 'retail_status'
 export const TOTAL_SPEND_COLUMN =
   'total_spend_retail_categories_country_all_origins'
+export const TOTAL_SPEND_EATING =
+  'total_spend_eating_places_country_all_origins'
+export const TOTAL_SPEND_GROCERY =
+  'total_spend_grocery_and_food_stores_country_all_origins'
 // export const RURAL_PERCENTAGE_COLUMN = 'rural_area_pct_ruca'
 export const RATIO_COLUMNS = [TOTAL_SPEND_COLUMN]
 export const REGION_COLUMN = 'geoid'

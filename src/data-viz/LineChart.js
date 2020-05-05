@@ -1,7 +1,7 @@
 import React from 'react'
 import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
-import { useTransition, useSpring, animated } from 'react-spring'
+import { useTransition, animated } from 'react-spring'
 import {
   MONTH_COLUMN,
   TOTAL_SPEND_COLUMN,

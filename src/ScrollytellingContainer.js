@@ -21,9 +21,10 @@ const styles = {
     },
   },
   pageTitle: {
-    fontFamily: 'Helvetica',
+    fontFamily: 'Rubik',
+    fontWeight: '900',
     textAlign: 'center',
-    fontSize: '30px',
+    fontSize: '48px',
     margin: '110px 0 10px',
     '& a': {
       color: '#00e',
@@ -101,13 +102,12 @@ class ScrollytellingContainer extends PureComponent {
     return (
       <div>
         <div className={classes.navbar}>
-          <a href="https://github.com/jsonkao/react-scrollama">GitHub</a>
+          <a href="https://ruralinnovation.us/">
+            The Center on Rural Innovation
+          </a>
         </div>
         <p className={classes.pageTitle}>
-          <a href="https://github.com/jsonkao/react-scrollama">
-            React Scrollama
-          </a>{' '}
-          Example
+          Exploring change in spending in Michigan during COVID-19
         </p>
         <p className={classes.pageSubtitle}>Scroll ↓</p>
         <div className={classes.graphicContainer}>
