@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
 import injectSheet from 'react-jss'
 import { Scrollama, Step } from 'react-scrollama'
-import LineChart from './data-viz/LineChart'
+import LineChart, { YEAR_COLORS } from './data-viz/LineChart'
+
+const YEARS = Object.keys(YEAR_COLORS).map((year) => +year)
 
 const styles = {
   navbar: {
@@ -76,7 +78,6 @@ const styles = {
 class ScrollytellingContainer extends PureComponent {
   state = {
     data: 0,
-    steps: [10, 20, 30],
     progress: 0,
   }
 
@@ -119,11 +120,11 @@ class ScrollytellingContainer extends PureComponent {
               offset={0.4}
               debug
             >
-              {steps.map((value) => (
-                <Step data={value} key={value}>
+              {YEARS.map((year) => (
+                <Step data={year} key={year}>
                   <div className={classes.step}>
-                    <p>step value: {value}</p>
-                    {value === data && <p>{Math.round(progress * 100)}%</p>}
+                    <p>step year: {year}</p>
+                    {year === data && <p>{Math.round(progress * 100)}%</p>}
                   </div>
                 </Step>
               ))}
@@ -134,6 +135,7 @@ class ScrollytellingContainer extends PureComponent {
             {[...regionData.keys()].splice(0, 2).map((regionId) => (
               <LineChart
                 key={regionId}
+                visibleYears={[data]}
                 regionYearData={regionData.get(regionId)}
               />
             ))}

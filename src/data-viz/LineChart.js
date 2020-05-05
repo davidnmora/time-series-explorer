@@ -18,7 +18,7 @@ const COLORS = {
   sunrise: '#dee45e',
 }
 
-const YEAR_COLORS = {
+export const YEAR_COLORS = {
   2018: COLORS.mystic,
   2019: COLORS.sinbad,
   2020: COLORS.sanMarino,
@@ -72,8 +72,10 @@ const Line = ({ lineData, stroke, ...rest }) => {
   )
 }
 
-const LineChart = ({ regionYearData }) => {
-  const _regionYearData = [...regionYearData.values()]
+const LineChart = ({ visibleYears, regionYearData }) => {
+  const _regionYearData = [...regionYearData.values()].filter(([aDatum]) =>
+    visibleYears.includes(aDatum[YEAR_COLUMN])
+  )
   const transitions = useTransition(
     _regionYearData,
     ([aDatum]) => aDatum[YEAR_COLUMN],
