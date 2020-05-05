@@ -1,5 +1,7 @@
+import { hot } from 'react-hot-loader/root'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const HotReloadingApp = hot(App)
+ReactDOM.render(<HotReloadingApp />, document.getElementById('root'))
