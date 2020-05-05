@@ -1,12 +1,11 @@
 import React from 'react'
 import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
-import TransitionablePath from './transitionable-svgs/TransitionablePath'
+import { useSpring, animated } from 'react-spring'
 import {
   MONTH_COLUMN,
   TOTAL_SPEND_COLUMN,
   TOTAL_SPEND_COVID_TREND,
-  YEAR_COLUMN,
 } from '../useCartoData'
 
 const COLORS = {
@@ -52,16 +51,19 @@ const Line = ({ lineData, color }) => {
     .x((d) => xScale(d[MONTH_COLUMN]))
     .y((d) => yScale(d[TOTAL_SPEND_COLUMN]))
   const path = pathGenerator(lineData)
-  const dashLineProps = {
-    'stroke-dasharray': DIM.width,
-    'stroke-dashoffset': 0,
-  }
+
+  const props = useSpring({ x: 0, from: { x: DIM.width } })
+
   return (
-    <TransitionablePath
-      style={{ stroke: color, fill: 'none', strokeWidth: 2 }}
-      className={`line`}
+    <animated.path
+      strokeDashoffset={props.x}
+      strokeDasharray={DIM.width}
       d={path}
-      {...dashLineProps}
+      style={{
+        stroke: color,
+        fill: 'none',
+        strokeWidth: 2,
+      }}
     />
   )
 }
