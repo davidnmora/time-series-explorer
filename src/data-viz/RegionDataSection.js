@@ -1,16 +1,21 @@
 import React from 'react'
 import LineChart from './LineChart'
-import {
+import { COVID_FIELDS } from '../useCartoData'
+
+const {
   DISPLAY_NAME_COLUMN,
   TOTAL_SPEND_COLUMN,
+  TOTAL_SPEND_COVID_TREND,
+  EATING_COVID_TREND,
+  GROCERY_COVID_TREND,
   TOTAL_SPEND_EATING,
   TOTAL_SPEND_GROCERY,
-} from '../useCartoData'
+} = COVID_FIELDS
 
 const DATA_COLUMNS = [
-  TOTAL_SPEND_COLUMN,
-  TOTAL_SPEND_EATING,
-  TOTAL_SPEND_GROCERY,
+  { numeric: TOTAL_SPEND_COLUMN, trend: TOTAL_SPEND_COVID_TREND },
+  { numeric: TOTAL_SPEND_EATING, trend: EATING_COVID_TREND },
+  { numeric: TOTAL_SPEND_GROCERY, trend: GROCERY_COVID_TREND },
 ]
 
 const RegionDataSection = ({
@@ -27,7 +32,7 @@ const RegionDataSection = ({
       <div style={{ display: 'flex' }}>
         {dataColumns.map((dataColumn) => (
           <LineChart
-            key={`${regionName}-${dataColumn}`}
+            key={`${regionName}-${dataColumn.numeric}`}
             dataColumn={dataColumn}
             visibleYears={visibleYears}
             regionDataByYear={regionDataByYear}

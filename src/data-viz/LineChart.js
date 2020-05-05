@@ -2,11 +2,9 @@ import React from 'react'
 import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
 import { useTransition, animated } from 'react-spring'
-import {
-  MONTH_COLUMN,
-  TOTAL_SPEND_COVID_TREND,
-  YEAR_COLUMN,
-} from '../useCartoData'
+import { COVID_FIELDS } from '../useCartoData'
+
+const { MONTH_COLUMN, YEAR_COLUMN } = COVID_FIELDS
 
 const COLORS = {
   mystic: '#D8E8E8',
@@ -29,12 +27,12 @@ const TREND_COLORS = {
   Equal: COLORS.bluewood,
 }
 
-const getLineColor = (lineData) => {
+const getLineColor = (lineData, dataColumn) => {
   const aPoint = lineData[0]
-  const trend = aPoint[TOTAL_SPEND_COVID_TREND]
   const year = aPoint[YEAR_COLUMN]
 
   if (year === 2020) {
+    const trend = aPoint[dataColumn.trend]
     return TREND_COLORS[trend]
   }
   return YEAR_COLORS[year]
@@ -52,7 +50,7 @@ const Line = ({ lineData, dataColumn, stroke, ...rest }) => {
 
   const pathGenerator = d3line()
     .x((d) => xScale(d[MONTH_COLUMN]))
-    .y((d) => yScale(d[dataColumn]))
+    .y((d) => yScale(d[dataColumn.numeric]))
   const path = pathGenerator(lineData)
 
   // const props = useSpring({ x: , from: { x: 'black' } })
@@ -61,7 +59,7 @@ const Line = ({ lineData, dataColumn, stroke, ...rest }) => {
     <animated.path
       strokeDasharray={DIM.width}
       d={path}
-      stroke={getLineColor(lineData)}
+      stroke={getLineColor(lineData, dataColumn)}
       style={{
         fill: 'none',
         strokeWidth: 2,
@@ -92,7 +90,7 @@ const LineChart = ({ dataColumn, visibleYears, regionDataByYear }) => {
   )
   return (
     <div>
-      <p>{dataColumn.replace(/_/g, ' ')}</p>
+      <p>{dataColumn.numeric.replace(/_/g, ' ')}</p>
       <svg className="line-chart-svg" style={{ border: '2px solid black' }}>
         <g key="line-group" opacity={1}>
           {transitions.map(({ item, props, key }) => (
