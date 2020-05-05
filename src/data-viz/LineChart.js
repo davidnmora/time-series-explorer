@@ -1,11 +1,12 @@
 import React from 'react'
 import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
-import { useSpring, animated } from 'react-spring'
+import { useTransition, useSpring, animated } from 'react-spring'
 import {
   MONTH_COLUMN,
   TOTAL_SPEND_COLUMN,
   TOTAL_SPEND_COVID_TREND,
+  YEAR_COLUMN,
 } from '../useCartoData'
 
 const COLORS = {
@@ -29,10 +30,14 @@ const TREND_COLORS = {
   Equal: COLORS.bluewood,
 }
 
-const getLineColor = (points, year) => {
+const getLineColor = (points) => {
+  debugger
   const aPoint = points[0]
-  if (year === 2020 && aPoint) {
-    return TREND_COLORS[aPoint[TOTAL_SPEND_COVID_TREND]]
+  const trend = aPoint[TOTAL_SPEND_COVID_TREND]
+  const year = aPoint[YEAR_COLUMN]
+
+  if (year === 2020) {
+    return TREND_COLORS[trend]
   }
   return YEAR_COLORS[year]
 }
@@ -42,7 +47,7 @@ const DIM = {
   height: 200,
 }
 
-const Line = ({ lineData, color }) => {
+const Line = ({ lineData, color, ...rest }) => {
   const yScale = scaleLinear().range([DIM.height, 0]).domain([0, 160])
 
   const xScale = scaleLinear().range([0, DIM.width]).domain([1, 12])
@@ -52,32 +57,42 @@ const Line = ({ lineData, color }) => {
     .y((d) => yScale(d[TOTAL_SPEND_COLUMN]))
   const path = pathGenerator(lineData)
 
-  const props = useSpring({ x: 0, from: { x: DIM.width } })
-
+  // const props = useSpring({ x: 0, from: { x: DIM.width } })
+  debugger
   return (
     <animated.path
-      strokeDashoffset={props.x}
       strokeDasharray={DIM.width}
       d={path}
       style={{
-        stroke: color,
+        stroke: 'red',
         fill: 'none',
         strokeWidth: 2,
       }}
+      {...rest}
     />
   )
 }
 
 const LineChart = ({ regionYearData }) => {
+  const _regionYearData = [...regionYearData.values()]
+  const transitions = useTransition(
+    _regionYearData,
+    ([aDatum]) => aDatum[YEAR_COLUMN],
+    {
+      from: { strokeDashoffset: DIM.width, strokeOpacity: 0.8, color: 'black' },
+      enter: {
+        strokeDashoffset: 0,
+        strokeOpacity: 1,
+        // color: (item) => getLineColor(item),
+      },
+      leave: { strokeOpacity: 0 },
+    }
+  )
   return (
-    <svg className={'radarPolygonGroup'} style={{ border: '2px solid black' }}>
-      <g key={`polygon-group`} opacity={1}>
-        {[...regionYearData.keys()].map((year) => (
-          <Line
-            key={year}
-            color={getLineColor(regionYearData.get(year), year)}
-            lineData={regionYearData.get(year)}
-          />
+    <svg className="line-chart-svg" style={{ border: '2px solid black' }}>
+      <g key="line-group" opacity={1}>
+        {transitions.map(({ item, props, key }) => (
+          <Line key={key} lineData={item} {...props} />
         ))}
       </g>
     </svg>
