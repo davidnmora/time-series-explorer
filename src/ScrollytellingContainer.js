@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import injectSheet from 'react-jss'
 import { Scrollama, Step } from 'react-scrollama'
-import LineChart, { YEAR_COLORS } from './data-viz/LineChart'
+import { YEAR_COLORS } from './data-viz/LineChart'
+import RegionDataSection from './data-viz/RegionDataSection'
 
 const YEARS = Object.keys(YEAR_COLORS).map((year) => +year)
 
@@ -21,7 +22,7 @@ const styles = {
     alignSelf: 'flex-start',
     backgroundColor: '#aaa',
     '& p': {
-      fontSize: '5rem',
+      fontSize: '1rem',
       textAlign: 'center',
       color: '#fff',
     },
@@ -45,7 +46,7 @@ const styles = {
   },
 }
 
-const ScrollytellingContainer = ({ classes, regionData }) => {
+const ScrollytellingContainer = ({ classes, dataByRegion }) => {
   const [state, setState] = useState({})
   const [progress, setProgress] = useState(0)
 
@@ -87,11 +88,11 @@ const ScrollytellingContainer = ({ classes, regionData }) => {
 
         <div className={classes.graphic}>
           <p>{state.data}</p>
-          {[...regionData.keys()].splice(0, 2).map((regionId) => (
-            <LineChart
+          {[...dataByRegion.keys()].splice(1, 2).map((regionId) => (
+            <RegionDataSection
               key={regionId}
               visibleYears={[state.data]}
-              regionYearData={regionData.get(regionId)}
+              regionDataByYear={dataByRegion.get(regionId)}
             />
           ))}
         </div>

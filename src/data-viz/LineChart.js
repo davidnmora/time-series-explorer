@@ -4,7 +4,6 @@ import { scaleLinear } from 'd3-scale'
 import { useTransition, animated } from 'react-spring'
 import {
   MONTH_COLUMN,
-  TOTAL_SPEND_COLUMN,
   TOTAL_SPEND_COVID_TREND,
   YEAR_COLUMN,
 } from '../useCartoData'
@@ -46,14 +45,14 @@ const DIM = {
   height: 200,
 }
 
-const Line = ({ lineData, stroke, ...rest }) => {
+const Line = ({ lineData, dataColumn, stroke, ...rest }) => {
   const yScale = scaleLinear().range([DIM.height, 0]).domain([0, 160])
 
   const xScale = scaleLinear().range([0, DIM.width]).domain([1, 12])
 
   const pathGenerator = d3line()
     .x((d) => xScale(d[MONTH_COLUMN]))
-    .y((d) => yScale(d[TOTAL_SPEND_COLUMN]))
+    .y((d) => yScale(d[dataColumn]))
   const path = pathGenerator(lineData)
 
   // const props = useSpring({ x: , from: { x: 'black' } })
@@ -72,12 +71,12 @@ const Line = ({ lineData, stroke, ...rest }) => {
   )
 }
 
-const LineChart = ({ visibleYears, regionYearData }) => {
-  const _regionYearData = [...regionYearData.values()].filter(([aDatum]) =>
-    visibleYears.includes(aDatum[YEAR_COLUMN])
+const LineChart = ({ dataColumn, visibleYears, regionDataByYear }) => {
+  const _regionDataByYear = [...regionDataByYear.values()].filter(
+    ([aDatum]) => !visibleYears || visibleYears.includes(aDatum[YEAR_COLUMN])
   )
   const transitions = useTransition(
-    _regionYearData,
+    _regionDataByYear,
     ([aDatum]) => aDatum[YEAR_COLUMN],
     {
       from: {
@@ -95,7 +94,7 @@ const LineChart = ({ visibleYears, regionYearData }) => {
     <svg className="line-chart-svg" style={{ border: '2px solid black' }}>
       <g key="line-group" opacity={1}>
         {transitions.map(({ item, props, key }) => (
-          <Line key={key} lineData={item} {...props} />
+          <Line key={key} dataColumn={dataColumn} lineData={item} {...props} />
         ))}
       </g>
     </svg>

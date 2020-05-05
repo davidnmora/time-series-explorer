@@ -6,12 +6,12 @@ import useCartoData, { CARTO_TABLE_NAME, FIELDS } from './useCartoData'
 import ArticleHeader from './ArticleHeader'
 
 function App() {
-  const data = useCartoData(CARTO_TABLE_NAME, FIELDS)
+  const dataByRegion = useCartoData(CARTO_TABLE_NAME, FIELDS)
 
   return (
     <div className="App">
       <ArticleHeader />
-      <ScrollytellingContainer regionData={data} />
+      <ScrollytellingContainer dataByRegion={dataByRegion} />
     </div>
   )
 }
