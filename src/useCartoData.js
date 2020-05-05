@@ -6,6 +6,7 @@ import DataFetcher from './DataFetcher'
 export const CARTO_TABLE_NAME = 'mrli_county_time_series'
 export const MONTH_COLUMN = 'month'
 export const YEAR_COLUMN = 'year'
+export const TOTAL_SPEND_COVID_TREND = 'retail_status'
 export const TOTAL_SPEND_COLUMN =
   'total_spend_retail_categories_country_all_origins'
 // export const RURAL_PERCENTAGE_COLUMN = 'rural_area_pct_ruca'
@@ -17,6 +18,7 @@ export const FIELDS = [
   REGION_COLUMN,
   DISPLAY_NAME_COLUMN,
   YEAR_COLUMN,
+  TOTAL_SPEND_COVID_TREND,
   // RURAL_PERCENTAGE_COLUMN,
   MONTH_COLUMN,
   ...RATIO_COLUMNS,
