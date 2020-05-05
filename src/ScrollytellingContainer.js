@@ -4,7 +4,18 @@ import { Scrollama, Step } from 'react-scrollama'
 import { YEAR_COLORS } from './data-viz/LineChart'
 import RegionDataSection from './data-viz/RegionDataSection'
 
-const YEARS = Object.keys(YEAR_COLORS).map((year) => +year)
+const STEPS_DATA = [
+  { visibleYears: [] },
+  {
+    visibleYears: [2018],
+  },
+  {
+    visibleYears: [2018, 2019],
+  },
+  {
+    visibleYears: [2018, 2019, 2020],
+  },
+]
 
 const styles = {
   graphicContainer: {
@@ -47,7 +58,7 @@ const styles = {
 }
 
 const ScrollytellingContainer = ({ classes, dataByRegion }) => {
-  const [state, setState] = useState({})
+  const [state, setState] = useState({ data: STEPS_DATA[0] })
   const [progress, setProgress] = useState(0)
 
   const onStepEnter = ({ element, data }) => {
@@ -63,6 +74,8 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
     setProgress(progress)
   }
 
+  if (![...dataByRegion.keys()].length) return null
+
   return (
     <div>
       <div className={classes.graphicContainer}>
@@ -75,11 +88,13 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
             offset={0.4}
             debug
           >
-            {YEARS.map((year) => (
-              <Step data={year} key={year}>
+            {STEPS_DATA.map((stepData, i) => (
+              <Step data={stepData} key={i}>
                 <div className={classes.step}>
-                  <p>step year: {year}</p>
-                  {year === state.data && <p>{Math.round(progress * 100)}%</p>}
+                  <p>Here's the data from {stepData.visibleYears.join(', ')}</p>
+                  {stepData === state.data && (
+                    <p>{Math.round(progress * 100)}%</p>
+                  )}
                 </div>
               </Step>
             ))}
@@ -87,11 +102,11 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
         </div>
 
         <div className={classes.graphic}>
-          <p>{state.data}</p>
+          <p>{state.data && state.data.visibleYears.join(', ')}</p>
           {[...dataByRegion.keys()].splice(1, 2).map((regionId) => (
             <RegionDataSection
               key={regionId}
-              visibleYears={[state.data]}
+              visibleYears={state.data.visibleYears}
               regionDataByYear={dataByRegion.get(regionId)}
             />
           ))}

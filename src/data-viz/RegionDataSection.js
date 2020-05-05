@@ -18,9 +18,9 @@ const RegionDataSection = ({
   dataColumns = DATA_COLUMNS,
   visibleYears = null,
 }) => {
-  const regionName = regionDataByYear.get(visibleYears[0] || 2020)[0][
-    DISPLAY_NAME_COLUMN
-  ]
+  const regionName = regionDataByYear.get(
+    (visibleYears && visibleYears[0]) || 2020
+  )[0][DISPLAY_NAME_COLUMN]
   return (
     <div>
       <p>{regionName}</p>
