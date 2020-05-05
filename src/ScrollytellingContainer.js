@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import injectSheet from 'react-jss'
 import { Scrollama, Step } from 'react-scrollama'
+import LineChart from './data-viz/LineChart'
 
 const styles = {
   navbar: {
@@ -94,7 +95,7 @@ class ScrollytellingContainer extends PureComponent {
 
   render() {
     const { data, steps, progress } = this.state
-    const { classes } = this.props
+    const { classes, regionData } = this.props
 
     return (
       <div>
@@ -130,6 +131,12 @@ class ScrollytellingContainer extends PureComponent {
           </div>
           <div className={classes.graphic}>
             <p>{data}</p>
+            {[...regionData.keys()].splice(0, 2).map((regionId) => (
+              <LineChart
+                key={regionId}
+                regionYearData={regionData.get(regionId)}
+              />
+            ))}
           </div>
         </div>
       </div>

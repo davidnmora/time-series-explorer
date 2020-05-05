@@ -16,26 +16,9 @@ import useCartoData, {
 function App() {
   const data = useCartoData(CARTO_TABLE_NAME, FIELDS)
 
-  const [ratioColumn, setRatioColumn] = useState(RATIO_COLUMNS[0])
-  const [filters, setFilters] = useState({
-    [MONTH_COLUMN]: [0, 100],
-  })
-
-  const onFilterChange = (filterFieldName, newExtent) => {
-    console.log(filterFieldName, newExtent)
-    setFilters({
-      ...filters,
-      [filterFieldName]: newExtent,
-    })
-  }
-
   return (
     <div className="App">
-      {[...data.keys()].map((regionId) => (
-        <LineChart key={regionId} regionYearData={data.get(regionId)} />
-      ))}
-
-      {/*<ScrollytellingContainer />*/}
+      <ScrollytellingContainer regionData={data} />
       {/*<Filters filters={filters} onFilterChange={onFilterChange} />*/}
     </div>
   )

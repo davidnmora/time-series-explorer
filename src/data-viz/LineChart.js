@@ -30,9 +30,8 @@ const TREND_COLORS = {
   Equal: COLORS.bluewood,
 }
 
-const getLineColor = (points) => {
-  debugger
-  const aPoint = points[0]
+const getLineColor = (lineData) => {
+  const aPoint = lineData[0]
   const trend = aPoint[TOTAL_SPEND_COVID_TREND]
   const year = aPoint[YEAR_COLUMN]
 
@@ -47,7 +46,7 @@ const DIM = {
   height: 200,
 }
 
-const Line = ({ lineData, color, ...rest }) => {
+const Line = ({ lineData, stroke, ...rest }) => {
   const yScale = scaleLinear().range([DIM.height, 0]).domain([0, 160])
 
   const xScale = scaleLinear().range([0, DIM.width]).domain([1, 12])
@@ -57,14 +56,14 @@ const Line = ({ lineData, color, ...rest }) => {
     .y((d) => yScale(d[TOTAL_SPEND_COLUMN]))
   const path = pathGenerator(lineData)
 
-  // const props = useSpring({ x: 0, from: { x: DIM.width } })
-  debugger
+  // const props = useSpring({ x: , from: { x: 'black' } })
+
   return (
     <animated.path
       strokeDasharray={DIM.width}
       d={path}
+      stroke={getLineColor(lineData)}
       style={{
-        stroke: 'red',
         fill: 'none',
         strokeWidth: 2,
       }}
@@ -79,11 +78,13 @@ const LineChart = ({ regionYearData }) => {
     _regionYearData,
     ([aDatum]) => aDatum[YEAR_COLUMN],
     {
-      from: { strokeDashoffset: DIM.width, strokeOpacity: 0.8, color: 'black' },
+      from: {
+        strokeDashoffset: DIM.width,
+        strokeOpacity: 0.8,
+      },
       enter: {
         strokeDashoffset: 0,
         strokeOpacity: 1,
-        // color: (item) => getLineColor(item),
       },
       leave: { strokeOpacity: 0 },
     }
