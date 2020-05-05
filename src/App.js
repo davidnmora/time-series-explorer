@@ -1,5 +1,4 @@
 import React from 'react'
-import './App.css'
 import 'antd/dist/antd.css'
 import ScrollytellingContainer from './ScrollytellingContainer'
 import useCartoData, { CARTO_TABLES, COVID_FIELDS } from './useCartoData'
