@@ -91,13 +91,21 @@ const LineChart = ({ dataColumn, visibleYears, regionDataByYear }) => {
     }
   )
   return (
-    <svg className="line-chart-svg" style={{ border: '2px solid black' }}>
-      <g key="line-group" opacity={1}>
-        {transitions.map(({ item, props, key }) => (
-          <Line key={key} dataColumn={dataColumn} lineData={item} {...props} />
-        ))}
-      </g>
-    </svg>
+    <div>
+      <p>{dataColumn.replace(/_/g, ' ')}</p>
+      <svg className="line-chart-svg" style={{ border: '2px solid black' }}>
+        <g key="line-group" opacity={1}>
+          {transitions.map(({ item, props, key }) => (
+            <Line
+              key={key}
+              dataColumn={dataColumn}
+              lineData={item}
+              {...props}
+            />
+          ))}
+        </g>
+      </svg>
+    </div>
   )
 }
 

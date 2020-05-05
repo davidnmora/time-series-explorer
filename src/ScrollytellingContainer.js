@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import injectSheet from 'react-jss'
 import { Scrollama, Step } from 'react-scrollama'
-import { YEAR_COLORS } from './data-viz/LineChart'
 import RegionDataSection from './data-viz/RegionDataSection'
 
 const STEPS_DATA = [
