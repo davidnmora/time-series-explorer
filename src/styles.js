@@ -9,15 +9,17 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const NavBarContainer = styled.div`
-  position: fixed;
   display: flex;
+  justify-content: center;
+  position: fixed;
   top: 0;
   right: 0;
+  width: 100%;
   z-index: auto;
-  :1 ;
   font-family: Rubik, sans-serif;
   font-size: 20px;
   padding: 20px;
+  background-color: white;
 `
 
 const Headline = styled.h1`
@@ -34,4 +36,34 @@ const Subtitle = styled.p`
   color: rgb(136, 136, 136);
 `
 
-export { GlobalStyle, NavBarContainer, Headline, Subtitle }
+const TextSection = styled.div`
+  margin: 0 auto;
+  padding-top: 100px;
+  max-width: 600px;
+  width: 95%;
+`
+
+const Paragraph = styled.p`
+  font-weight: 400;
+  color: #222;
+  font-size: 22px;
+  line-height: 1.6;
+`
+
+const LabelText = styled.p`
+  font-weight: 100;
+  color: #222;
+  font-size: 16px;
+  padding: 8px;
+  //line-height: 1.6;
+`
+
+export {
+  GlobalStyle,
+  NavBarContainer,
+  Headline,
+  Subtitle,
+  TextSection,
+  Paragraph,
+  LabelText,
+}

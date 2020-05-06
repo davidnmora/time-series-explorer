@@ -18,9 +18,9 @@ const STEPS_DATA = [
 
 const styles = {
   graphicContainer: {
-    padding: '40vh 2vw 70vh',
+    // padding: '40vh 2vw 70vh',
     display: 'flex',
-    fontFamily: 'Helvetica',
+    fontFamily: 'Rubik',
     justifyContent: 'space-between',
   },
   graphic: {
@@ -30,11 +30,11 @@ const styles = {
     padding: '5rem 0',
     top: '100px',
     alignSelf: 'flex-start',
-    backgroundColor: '#aaa',
+    // backgroundColor: '#aaa',
     '& p': {
       fontSize: '1rem',
       textAlign: 'center',
-      color: '#fff',
+      // color: '#fff',
     },
   },
   scroller: {
@@ -85,7 +85,6 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
             progress
             onStepProgress={onStepProgress}
             offset={0.4}
-            debug
           >
             {STEPS_DATA.map((stepData, i) => (
               <Step data={stepData} key={i}>
@@ -101,7 +100,6 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
         </div>
 
         <div className={classes.graphic}>
-          <p>{state.data && state.data.visibleYears.join(', ')}</p>
           {[...dataByRegion.keys()].splice(1, 2).map((regionId) => (
             <RegionDataSection
               key={regionId}

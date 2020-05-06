@@ -2,6 +2,7 @@ import React from 'react'
 import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
 import { useTransition, animated } from 'react-spring'
+import { LabelText } from '../styles'
 import { COVID_FIELDS } from '../useCartoData'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = COVID_FIELDS
@@ -90,7 +91,7 @@ const LineChart = ({ dataColumn, visibleYears, regionDataByYear }) => {
   )
   return (
     <div>
-      <p>{dataColumn.numeric.replace(/_/g, ' ')}</p>
+      <LabelText>{dataColumn.numeric.replace(/_/g, ' ')}</LabelText>
       <svg className="line-chart-svg" style={{ border: '2px solid black' }}>
         <g key="line-group" opacity={1}>
           {transitions.map(({ item, props, key }) => (

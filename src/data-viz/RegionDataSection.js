@@ -1,5 +1,6 @@
 import React from 'react'
 import LineChart from './LineChart'
+import { LabelText } from '../styles'
 import { COVID_FIELDS } from '../useCartoData'
 
 const {
@@ -28,7 +29,7 @@ const RegionDataSection = ({
   )[0][DISPLAY_NAME_COLUMN]
   return (
     <div>
-      <p>{regionName}</p>
+      <LabelText>{regionName}</LabelText>
       <div style={{ display: 'flex' }}>
         {dataColumns.map((dataColumn) => (
           <LineChart
