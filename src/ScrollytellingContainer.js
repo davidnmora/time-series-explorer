@@ -13,7 +13,6 @@ const STEPS_DATA = [
   {
     visibleYears: [2018, 2019, 2020],
     text: 'But COVID changed things.',
-    ruralPercentLowerBound: 50,
   },
   {
     visibleYears: [2018, 2019, 2020],
