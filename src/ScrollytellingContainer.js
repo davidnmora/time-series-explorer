@@ -1,19 +1,24 @@
 import React, { useState } from 'react'
 import injectSheet from 'react-jss'
-import { ScrollVizContainer } from './styles'
+import { ScrollVizContainer, LineChartSection, Subtitle } from './styles'
 import { Scrollama, Step } from 'react-scrollama'
 import RegionDataSection from './data-viz/RegionDataSection'
+import { COVID_FIELDS, TRENDS } from './useCartoData'
 
 const STEPS_DATA = [
-  { visibleYears: [] },
-  {
-    visibleYears: [2018],
-  },
   {
     visibleYears: [2018, 2019],
+    text: 'Spending was fairly similar across 2018 and 2019',
   },
   {
     visibleYears: [2018, 2019, 2020],
+    text: 'But COVID changed things.',
+    ruralPercentLowerBound: 50,
+  },
+  {
+    visibleYears: [2018, 2019, 2020],
+    text: 'Particularly for rural areas (urban are faded out)',
+    ruralPercentLowerBound: 50,
   },
 ]
 
@@ -77,7 +82,7 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
             {STEPS_DATA.map((stepData, i) => (
               <Step data={stepData} key={i}>
                 <div className={classes.step}>
-                  <p>Here's the data from {stepData.visibleYears.join(', ')}</p>
+                  <p>{stepData.text}</p>
                   {stepData === state.data && (
                     <p>{Math.round(progress * 100)}%</p>
                   )}
@@ -88,17 +93,54 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
         </div>
 
         <ScrollVizContainer>
-          {[...dataByRegion.keys()].splice(1, 200).map((regionId) => (
-            <RegionDataSection
-              key={regionId}
-              visibleYears={state.data.visibleYears}
-              regionDataByYear={dataByRegion.get(regionId)}
-            />
-          ))}
+          {/*TODO: abstract these into their own components*/}
+          <div>
+            <Subtitle>Counties that grew during COVID</Subtitle>
+            <LineChartSection>
+              {dataByRegionFilter(
+                dataByRegion,
+                COVID_FIELDS.TOTAL_SPEND_COVID_TREND,
+                TRENDS.boost
+              ).map((regionId) => (
+                <RegionDataSection
+                  key={regionId}
+                  visibleYears={state.data.visibleYears}
+                  regionDataByYear={dataByRegion.get(regionId)}
+                  ruralPercentLowerBound={
+                    state.data.ruralPercentLowerBound || 0
+                  }
+                />
+              ))}
+            </LineChartSection>
+          </div>
+          <div>
+            <Subtitle>Counties that decreased during COVID</Subtitle>
+            <LineChartSection>
+              {dataByRegionFilter(
+                dataByRegion,
+                COVID_FIELDS.TOTAL_SPEND_COVID_TREND,
+                TRENDS.plummet
+              ).map((regionId) => (
+                <RegionDataSection
+                  key={regionId}
+                  visibleYears={state.data.visibleYears}
+                  regionDataByYear={dataByRegion.get(regionId)}
+                  ruralPercentLowerBound={
+                    state.data.ruralPercentLowerBound || 0
+                  }
+                />
+              ))}
+            </LineChartSection>
+          </div>
         </ScrollVizContainer>
       </div>
     </div>
   )
 }
+
+const dataByRegionFilter = (dataByRegion, filterField, match) =>
+  [...dataByRegion.keys()].filter(
+    (regionId) => dataByRegion.get(regionId).get(2020)[0][filterField] === match
+  )
 
 export default injectSheet(styles)(ScrollytellingContainer)

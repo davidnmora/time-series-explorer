@@ -11,6 +11,7 @@ const {
   // GROCERY_COVID_TREND,
   // TOTAL_SPEND_EATING,
   // TOTAL_SPEND_GROCERY,
+  RURAL_PERCENTAGE_COLUMN,
 } = COVID_FIELDS
 
 const DATA_COLUMNS = [
@@ -23,13 +24,15 @@ const RegionDataSection = ({
   regionDataByYear,
   dataColumns = DATA_COLUMNS,
   visibleYears = null,
+  ruralPercentLowerBound = 0,
 }) => {
-  const aYearData = regionDataByYear.get(
+  const aYearDatum = regionDataByYear.get(
     (visibleYears && visibleYears[0]) || 2020
   )[0]
-  const regionName = aYearData[DISPLAY_NAME_COLUMN]
+  const regionName = aYearDatum[DISPLAY_NAME_COLUMN]
+  const show = aYearDatum[RURAL_PERCENTAGE_COLUMN] >= ruralPercentLowerBound
   return (
-    <div>
+    <div style={{ opacity: show ? '1' : '0.1' }}>
       <LabelText>{regionName}</LabelText>
       <div style={{ display: 'flex' }}>
         {dataColumns.map((dataColumn) => (

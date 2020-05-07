@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { group as d3group } from 'd3-array'
 import DataFetcher from './DataFetcher'
 
-// export const RURAL_PERCENTAGE_COLUMN = 'rural_area_pct_ruca'
+// export const
 export const CARTO_TABLES = {
   MRLI_TIME_SERIES: 'mrli_county_time_series',
 }
@@ -20,6 +20,13 @@ export const COVID_FIELDS = {
 
   REGION_COLUMN: 'geoid',
   DISPLAY_NAME_COLUMN: 'name',
+  RURAL_PERCENTAGE_COLUMN: 'rural_area_pct_usda',
+}
+
+export const TRENDS = {
+  boost: 'Boost',
+  equal: 'Equal',
+  plummet: 'Plummet',
 }
 
 // Created columns

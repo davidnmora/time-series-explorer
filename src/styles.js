@@ -60,12 +60,17 @@ const LabelText = styled.p`
 const SVGContainer = styled.svg``
 
 const ScrollVizContainer = styled.div`
-  display: flex;
+  //display: flex;
   flex-wrap: wrap;
-  top: 32px;
+  top: 48px;
   width: 100%;
   position: sticky;
   align-self: flex-start;
+`
+
+const LineChartSection = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `
 
 export {
@@ -78,4 +83,5 @@ export {
   LabelText,
   SVGContainer,
   ScrollVizContainer,
+  LineChartSection,
 }
