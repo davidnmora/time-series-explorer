@@ -76,8 +76,7 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
             onStepExit={onStepExit}
             progress
             onStepProgress={onStepProgress}
-            offset={0.6}
-            debug
+            offset={0.5}
           >
             {STEPS_DATA.map((stepData, i) => (
               <Step data={stepData} key={i}>
