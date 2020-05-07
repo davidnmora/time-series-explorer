@@ -2,7 +2,7 @@ import React from 'react'
 import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
 import { useTransition, animated } from 'react-spring'
-import { LabelText } from '../styles'
+import { LabelText, SVGContainer } from '../styles'
 import { COVID_FIELDS } from '../useCartoData'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = COVID_FIELDS
@@ -39,38 +39,39 @@ const getLineColor = (lineData, dataColumn) => {
   return YEAR_COLORS[year]
 }
 
-const DIM = {
-  width: 300,
-  height: 200,
+const DEFAULT_DIMENSIONS = {
+  width: 80,
+  height: 40,
 }
 
-const Line = ({ lineData, dataColumn, stroke, ...rest }) => {
-  const yScale = scaleLinear().range([DIM.height, 0]).domain([0, 160])
-
-  const xScale = scaleLinear().range([0, DIM.width]).domain([1, 12])
-
+const Line = ({ lineData, dataColumn, stroke, scale, ...rest }) => {
   const pathGenerator = d3line()
-    .x((d) => xScale(d[MONTH_COLUMN]))
-    .y((d) => yScale(d[dataColumn.numeric]))
+    .x((d) => scale.x(d[MONTH_COLUMN]))
+    .y((d) => scale.y(d[dataColumn.numeric]))
   const path = pathGenerator(lineData)
 
   // const props = useSpring({ x: , from: { x: 'black' } })
 
   return (
     <animated.path
-      strokeDasharray={DIM.width}
       d={path}
       stroke={getLineColor(lineData, dataColumn)}
       style={{
         fill: 'none',
-        strokeWidth: 2,
+        strokeWidth: 3,
       }}
       {...rest}
     />
   )
 }
 
-const LineChart = ({ dataColumn, visibleYears, regionDataByYear }) => {
+const LineChart = ({
+  dataColumn,
+  visibleYears,
+  regionDataByYear,
+  title = false,
+  dimensions = DEFAULT_DIMENSIONS,
+}) => {
   const _regionDataByYear = [...regionDataByYear.values()].filter(
     ([aDatum]) => !visibleYears || visibleYears.includes(aDatum[YEAR_COLUMN])
   )
@@ -79,7 +80,7 @@ const LineChart = ({ dataColumn, visibleYears, regionDataByYear }) => {
     ([aDatum]) => aDatum[YEAR_COLUMN],
     {
       from: {
-        strokeDashoffset: DIM.width,
+        strokeDashoffset: dimensions.width,
         strokeOpacity: 0.8,
       },
       enter: {
@@ -89,21 +90,31 @@ const LineChart = ({ dataColumn, visibleYears, regionDataByYear }) => {
       leave: { strokeOpacity: 0 },
     }
   )
+  const scale = {
+    x: scaleLinear().range([0, dimensions.width]).domain([1, 12]),
+    y: scaleLinear().range([dimensions.height, 0]).domain([0, 160]),
+  }
+
   return (
     <div>
-      <LabelText>{dataColumn.numeric.replace(/_/g, ' ')}</LabelText>
-      <svg className="line-chart-svg" style={{ border: '2px solid black' }}>
+      {title && <LabelText>{dataColumn.numeric.replace(/_/g, ' ')}</LabelText>}
+      <SVGContainer
+        height={`${dimensions.height}px`}
+        width={`${dimensions.width}px`}
+      >
         <g key="line-group" opacity={1}>
           {transitions.map(({ item, props, key }) => (
             <Line
               key={key}
               dataColumn={dataColumn}
               lineData={item}
+              scale={scale}
+              strokeDasharray={dimensions.width}
               {...props}
             />
           ))}
         </g>
-      </svg>
+      </SVGContainer>
     </div>
   )
 }

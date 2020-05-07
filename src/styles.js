@@ -11,9 +11,9 @@ const GlobalStyle = createGlobalStyle`
 const NavBarContainer = styled.div`
   display: flex;
   justify-content: center;
-  position: fixed;
-  top: 0;
-  right: 0;
+  //position: fixed;
+  //top: 0;
+  //right: 0;
   width: 100%;
   z-index: auto;
   font-family: Rubik, sans-serif;
@@ -53,9 +53,19 @@ const Paragraph = styled.p`
 const LabelText = styled.p`
   font-weight: 100;
   color: #222;
-  font-size: 16px;
-  padding: 8px;
-  //line-height: 1.6;
+  font-size: 8px;
+  padding: 4px;
+`
+
+const SVGContainer = styled.svg``
+
+const ScrollVizContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  top: 32px;
+  width: 100%;
+  position: sticky;
+  align-self: flex-start;
 `
 
 export {
@@ -66,4 +76,6 @@ export {
   TextSection,
   Paragraph,
   LabelText,
+  SVGContainer,
+  ScrollVizContainer,
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import injectSheet from 'react-jss'
+import { ScrollVizContainer } from './styles'
 import { Scrollama, Step } from 'react-scrollama'
 import RegionDataSection from './data-viz/RegionDataSection'
 
@@ -22,20 +23,6 @@ const styles = {
     display: 'flex',
     fontFamily: 'Rubik',
     justifyContent: 'space-between',
-  },
-  graphic: {
-    flexBasis: '60%',
-    position: 'sticky',
-    width: '100%',
-    padding: '5rem 0',
-    top: '100px',
-    alignSelf: 'flex-start',
-    // backgroundColor: '#aaa',
-    '& p': {
-      fontSize: '1rem',
-      textAlign: 'center',
-      // color: '#fff',
-    },
   },
   scroller: {
     flexBasis: '35%',
@@ -84,7 +71,8 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
             onStepExit={onStepExit}
             progress
             onStepProgress={onStepProgress}
-            offset={0.4}
+            offset={0.6}
+            debug
           >
             {STEPS_DATA.map((stepData, i) => (
               <Step data={stepData} key={i}>
@@ -99,15 +87,15 @@ const ScrollytellingContainer = ({ classes, dataByRegion }) => {
           </Scrollama>
         </div>
 
-        <div className={classes.graphic}>
-          {[...dataByRegion.keys()].splice(1, 2).map((regionId) => (
+        <ScrollVizContainer>
+          {[...dataByRegion.keys()].splice(1, 200).map((regionId) => (
             <RegionDataSection
               key={regionId}
               visibleYears={state.data.visibleYears}
               regionDataByYear={dataByRegion.get(regionId)}
             />
           ))}
-        </div>
+        </ScrollVizContainer>
       </div>
     </div>
   )
