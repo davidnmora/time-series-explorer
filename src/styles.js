@@ -73,6 +73,32 @@ const LineChartSection = styled.div`
   flex-wrap: wrap;
 `
 
+const GraphicContainer = styled.div`
+  display: flex;
+  font-family: Rubik, sans-serif;
+  justify-content: space-between;
+`
+
+const ScrollContainer = styled.div`
+  flex-basis: 35%;
+  &:first-child {
+    margin-top: 50vh;
+  }
+`
+
+const StepWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px dashed lightgray;
+  height: 80vh;
+`
+
+const StepContent = styled.div`
+  border: 1px solid #333;
+  padding: 24px;
+`
+
 export {
   GlobalStyle,
   NavBarContainer,
@@ -84,4 +110,8 @@ export {
   SVGContainer,
   ScrollVizContainer,
   LineChartSection,
+  GraphicContainer,
+  ScrollContainer,
+  StepWrapper,
+  StepContent,
 }

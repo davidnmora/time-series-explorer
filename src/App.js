@@ -1,6 +1,6 @@
 import React from 'react'
 import 'antd/dist/antd.css'
-import TimeSeriesScrollytelling from './TimeSeriesScrollytelling'
+import { TimeSeriesScrollytelling } from './TimeSeriesScrollytelling'
 import useCartoData, { CARTO_TABLES, COVID_FIELDS } from './useCartoData'
 import ArticleHeader from './ArticleHeader'
 import { TextAreaDemo } from './TextArea'
