@@ -47,7 +47,7 @@ const styles = {
   },
 }
 
-const ScrollytellingContainer = ({ classes, dataByRegion }) => {
+const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
   const [state, setState] = useState({ data: STEPS_DATA[0] })
   const [progress, setProgress] = useState(0)
 
@@ -141,4 +141,4 @@ const dataByRegionFilter = (dataByRegion, filterField, match) =>
     (regionId) => dataByRegion.get(regionId).get(2020)[0][filterField] === match
   )
 
-export default injectSheet(styles)(ScrollytellingContainer)
+export default injectSheet(styles)(TimeSeriesScrollytelling)

@@ -1,6 +1,6 @@
 import React from 'react'
 import 'antd/dist/antd.css'
-import ScrollytellingContainer from './ScrollytellingContainer'
+import TimeSeriesScrollytelling from './TimeSeriesScrollytelling'
 import useCartoData, { CARTO_TABLES, COVID_FIELDS } from './useCartoData'
 import ArticleHeader from './ArticleHeader'
 import { TextAreaDemo } from './TextArea'
@@ -20,7 +20,7 @@ function App() {
 
       <TextAreaDemo />
 
-      <ScrollytellingContainer dataByRegion={dataByRegion} />
+      <TimeSeriesScrollytelling dataByRegion={dataByRegion} />
 
       <TextAreaDemo />
     </div>
