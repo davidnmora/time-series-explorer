@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ReactMapGL, { FlyToInterpolator } from 'react-map-gl'
+import ReactMapGL, { FlyToInterpolator, NavigationControl } from 'react-map-gl'
 import { easeQuadInOut } from 'd3-ease'
 import { MAP_LOCATIONS } from './mapLocations'
 
@@ -17,6 +17,25 @@ const DEFAULT_VIEWPORT = {
   ...VIEWPORT_TRANSITION_PROPERTIES,
   width: '65vw',
   height: '100vh',
+}
+
+export const MAP_DEFAULT_SETTINGS = {
+  dragPan: true,
+  dragRotate: false,
+  scrollZoom: false,
+  touchZoom: false,
+  touchRotate: true,
+  keyboard: false,
+  doubleClickZoom: true,
+  minZoom: 3,
+  maxZoom: 24, // Note: this IS the maximum possible zoom
+}
+
+const navStyle = {
+  position: 'absolute',
+  bottom: 76,
+  right: 0,
+  padding: '10px',
 }
 
 export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
@@ -42,12 +61,17 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
   return (
     <div className="map">
       <ReactMapGL
+        {...MAP_DEFAULT_SETTINGS}
         {...DEFAULT_VIEWPORT}
         {...viewport}
         onViewportChange={handleViewportChange}
         mapboxApiAccessToken={MAPBOX_TOKEN}
         mapStyle={'mapbox://styles/ruralinno/cjxytxnul151q1cq6u96niqs2'}
-      />
+      >
+        <div style={navStyle}>
+          <NavigationControl showCompass={false} />
+        </div>
+      </ReactMapGL>
     </div>
   )
 }
