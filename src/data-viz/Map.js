@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import ReactMapGL, { FlyToInterpolator } from 'react-map-gl'
 import { easeQuadInOut } from 'd3-ease'
+import { MAP_LOCATIONS } from './mapLocations'
 
 const MAPBOX_TOKEN =
   'pk.eyJ1IjoicnVyYWxpbm5vIiwiYSI6ImNqeHl0cW0xODBlMm0zY2x0dXltYzRuazUifQ.zZBovoCHzLIW0wCZveEKzA'
@@ -12,24 +13,16 @@ const VIEWPORT_TRANSITION_PROPERTIES = {
   transitionDuration: MAP_PAN_TRANSITION_DURATION,
 }
 
-const MICHIGAN = {
-  longitude: -84.81596,
-  latitude: 44.82781,
-  zoom: 6.29,
-  pitch: 26.0,
-  bearing: 0.0,
-}
-
 const DEFAULT_VIEWPORT = {
   ...VIEWPORT_TRANSITION_PROPERTIES,
   width: 400,
   height: 400,
 }
 
-export const Map = () => {
+export const Map = ({ defaultLocation = MAP_LOCATIONS.michigan }) => {
   const [viewport, setViewport] = useState({
     ...DEFAULT_VIEWPORT,
-    ...MICHIGAN,
+    ...defaultLocation,
   })
   const updateViewport = useCallback(
     (newViewport) =>
