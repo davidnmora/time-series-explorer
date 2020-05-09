@@ -19,25 +19,13 @@ const DEFAULT_VIEWPORT = {
   height: 400,
 }
 
-export const Map = ({ defaultLocation = MAP_LOCATIONS.michigan }) => {
-  const [viewport, setViewport] = useState({
-    ...DEFAULT_VIEWPORT,
-    ...defaultLocation,
-  })
-  const updateViewport = useCallback(
-    (newViewport) =>
-      setViewport({
-        ...DEFAULT_VIEWPORT,
-        ...newViewport,
-      }),
-    []
-  )
-
+export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
   return (
     <div className="map">
       <ReactMapGL
-        {...viewport}
-        onViewportChange={updateViewport}
+        {...DEFAULT_VIEWPORT}
+        {...location}
+        // onViewportChange={updateViewport}
         mapboxApiAccessToken={MAPBOX_TOKEN}
         mapStyle={'mapbox://styles/ruralinno/cjxytxnul151q1cq6u96niqs2'}
       />

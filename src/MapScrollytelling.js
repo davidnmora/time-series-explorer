@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import {
   ScrollVizContainer,
   GraphicContainer,
@@ -9,18 +9,19 @@ import {
 } from './styles'
 import { Scrollama, Step } from 'react-scrollama'
 import { Map } from './data-viz/Map'
+import { MAP_LOCATIONS } from './data-viz/mapLocations'
 
 const STEPS_DATA = [
   {
-    viewport: {},
+    location: MAP_LOCATIONS.michigan,
     text: 'Spending was fairly similar across 2018 and 2019',
   },
   {
-    viewport: {},
+    location: MAP_LOCATIONS.traverseCity,
     text: 'But COVID changed things.',
   },
   {
-    viewport: {},
+    location: MAP_LOCATIONS.michigan,
     text: 'Particularly for rural areas (urban are faded out)',
     ruralPercentLowerBound: 50,
   },
@@ -42,6 +43,19 @@ export const MapScrollytelling = () => {
   const onStepProgress = ({ element, progress }) => {
     setProgress(progress)
   }
+
+  // const [viewport, setViewport] = useState({
+  //   ...DEFAULT_VIEWPORT,
+  //   ...location,
+  // })
+  // const updateViewport = useCallback(
+  //   (newViewport) =>
+  //     setViewport({
+  //       ...DEFAULT_VIEWPORT,
+  //       ...newViewport,
+  //     }),
+  //   []
+  // )
 
   return (
     <div>
@@ -70,7 +84,7 @@ export const MapScrollytelling = () => {
         </ScrollContainer>
 
         <ScrollVizContainer>
-          <Map />
+          <Map location={state.data.location} />
         </ScrollVizContainer>
       </GraphicContainer>
     </div>
