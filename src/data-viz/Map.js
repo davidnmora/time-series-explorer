@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactMapGL, { FlyToInterpolator } from 'react-map-gl'
 import { easeQuadInOut } from 'd3-ease'
 import { MAP_LOCATIONS } from './mapLocations'
@@ -20,12 +20,31 @@ const DEFAULT_VIEWPORT = {
 }
 
 export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
+  const [viewport, setViewport] = useState({
+    ...DEFAULT_VIEWPORT,
+    ...location,
+  })
+
+  useEffect(
+    () =>
+      setViewport({
+        ...DEFAULT_VIEWPORT,
+        ...location,
+      }),
+    [location, setViewport]
+  )
+
+  const handleViewportChange = (newViewport) =>
+    setViewport({
+      ...DEFAULT_VIEWPORT,
+      ...newViewport,
+    })
   return (
     <div className="map">
       <ReactMapGL
         {...DEFAULT_VIEWPORT}
-        {...location}
-        // onViewportChange={updateViewport}
+        {...viewport}
+        onViewportChange={handleViewportChange}
         mapboxApiAccessToken={MAPBOX_TOKEN}
         mapStyle={'mapbox://styles/ruralinno/cjxytxnul151q1cq6u96niqs2'}
       />

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import {
   ScrollVizContainer,
   GraphicContainer,
@@ -43,19 +43,6 @@ export const MapScrollytelling = () => {
   const onStepProgress = ({ element, progress }) => {
     setProgress(progress)
   }
-
-  // const [viewport, setViewport] = useState({
-  //   ...DEFAULT_VIEWPORT,
-  //   ...location,
-  // })
-  // const updateViewport = useCallback(
-  //   (newViewport) =>
-  //     setViewport({
-  //       ...DEFAULT_VIEWPORT,
-  //       ...newViewport,
-  //     }),
-  //   []
-  // )
 
   return (
     <div>
