@@ -15,8 +15,8 @@ const VIEWPORT_TRANSITION_PROPERTIES = {
 
 const DEFAULT_VIEWPORT = {
   ...VIEWPORT_TRANSITION_PROPERTIES,
-  width: 400,
-  height: 400,
+  width: '65vw',
+  height: '100vh',
 }
 
 export const Map = ({ location = MAP_LOCATIONS.michigan }) => {

@@ -31,7 +31,7 @@ const Headline = styled.h1`
 
 const Subtitle = styled.p`
   margin: 0px;
-  text-align: center;
+  //text-align: center;
   font-size: 24px;
   color: rgb(136, 136, 136);
 `
