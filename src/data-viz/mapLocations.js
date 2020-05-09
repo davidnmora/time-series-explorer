@@ -13,4 +13,11 @@ export const MAP_LOCATIONS = {
     pitch: 57.5,
     bearing: -0.23,
   },
+  marquette: {
+    longitude: -85.58476,
+    latitude: 44.34022,
+    zoom: 15.37,
+    pitch: 60.0,
+    bearing: 88.8,
+  },
 }

@@ -5,7 +5,6 @@ import {
   ScrollContainer,
   StepWrapper,
   StepContent,
-  Subtitle,
 } from './styles'
 import { Scrollama, Step } from 'react-scrollama'
 import { Map } from './data-viz/Map'
@@ -14,15 +13,15 @@ import { MAP_LOCATIONS } from './data-viz/mapLocations'
 const STEPS_DATA = [
   {
     location: MAP_LOCATIONS.michigan,
-    text: 'Spending was fairly similar across 2018 and 2019',
+    text: 'Welcome to Michigan',
   },
   {
     location: MAP_LOCATIONS.traverseCity,
-    text: 'But COVID changed things.',
+    text: '... home of Traverse City',
   },
   {
-    location: MAP_LOCATIONS.michigan,
-    text: 'Particularly for rural areas (urban are faded out)',
+    location: MAP_LOCATIONS.marquette,
+    text: '... and Marquette!',
     ruralPercentLowerBound: 50,
   },
 ]
