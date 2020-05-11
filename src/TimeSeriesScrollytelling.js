@@ -38,12 +38,12 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
   const [progress, setProgress] = useState(0)
 
   const onStepEnter = ({ element, data }) => {
-    element.style.backgroundColor = 'lightgoldenrodyellow'
+    element.style.opacity = 1
     setState({ ...state, data })
   }
 
   const onStepExit = ({ element }) => {
-    element.style.backgroundColor = '#fff'
+    element.style.opacity = 0.7
   }
 
   const onStepProgress = ({ element, progress }) => {
@@ -68,9 +68,6 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
                 <StepWrapper>
                   <StepContent>
                     <p>{stepData.text}</p>
-                    {stepData === state.data && (
-                      <p>{Math.round(progress * 100)}%</p>
-                    )}
                   </StepContent>
                 </StepWrapper>
               </Step>

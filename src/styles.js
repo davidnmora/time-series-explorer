@@ -90,13 +90,17 @@ const StepWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border: 1px dashed lightgray;
+  //border: 1px dashed lightgray;
   height: 80vh;
 `
 
 const StepContent = styled.div`
-  border: 1px solid #333;
   padding: 24px;
+  
+  border-radius: 5px;
+  box-shadow: 0 3px 3px 1px rgba(0,0,0,.11);
+  border: 1px solid #d0cccc;
+}
 `
 
 export {
