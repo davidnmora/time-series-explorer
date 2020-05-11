@@ -3,7 +3,6 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    padding: 48px;
     font-family: Rubik, sans-serif;
   }
 `
@@ -61,11 +60,10 @@ const SVGContainer = styled.svg``
 
 const ScrollVizContainer = styled.div`
   //display: flex;
-  flex-wrap: wrap;
-  top: 48px;
+  top: 0;
   width: 100%;
   position: sticky;
-  align-self: flex-start;
+  z-index: -1;
 `
 
 const LineChartSection = styled.div`
@@ -80,26 +78,29 @@ const GraphicContainer = styled.div`
 `
 
 const ScrollContainer = styled.div`
-  flex-basis: 35%;
+  position: relative;
   &:first-child {
     margin-top: 50vh;
   }
 `
 
 const StepWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  width: 100%;
   //border: 1px dashed lightgray;
   height: 80vh;
+  z-index: 10000;
 `
 
 const StepContent = styled.div`
-  padding: 24px;
+  width: 320px;
+  margin: 0 auto;
   
+  padding: 24px;
   border-radius: 5px;
   box-shadow: 0 3px 3px 1px rgba(0,0,0,.11);
   border: 1px solid #d0cccc;
+  
+  background: white;
 }
 `
 

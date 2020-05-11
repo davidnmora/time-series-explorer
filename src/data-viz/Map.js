@@ -15,7 +15,7 @@ const VIEWPORT_TRANSITION_PROPERTIES = {
 
 const DEFAULT_VIEWPORT = {
   ...VIEWPORT_TRANSITION_PROPERTIES,
-  width: '65vw',
+  width: '100vw',
   height: '100vh',
 }
 

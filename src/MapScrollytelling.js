@@ -44,35 +44,33 @@ export const MapScrollytelling = () => {
   }
 
   return (
-    <div>
-      <GraphicContainer>
-        <ScrollContainer>
-          <Scrollama
-            onStepEnter={onStepEnter}
-            onStepExit={onStepExit}
-            progress
-            onStepProgress={onStepProgress}
-            offset={0.5}
-          >
-            {STEPS_DATA.map((stepData, i) => (
-              <Step data={stepData} key={i}>
-                <StepWrapper>
-                  <StepContent>
-                    <p>{stepData.text}</p>
-                    {/*{stepData === state.data && (*/}
-                    {/*<p>{Math.round(progress * 100)}%</p>*/}
-                    {/*)}*/}
-                  </StepContent>
-                </StepWrapper>
-              </Step>
-            ))}
-          </Scrollama>
-        </ScrollContainer>
-
+    <GraphicContainer>
+      <ScrollContainer>
         <ScrollVizContainer>
           <Map location={state.data.location} />
         </ScrollVizContainer>
-      </GraphicContainer>
-    </div>
+
+        <Scrollama
+          onStepEnter={onStepEnter}
+          onStepExit={onStepExit}
+          progress
+          onStepProgress={onStepProgress}
+          offset={0.5}
+        >
+          {STEPS_DATA.map((stepData, i) => (
+            <Step data={stepData} key={i}>
+              <StepWrapper>
+                <StepContent>
+                  <p>{stepData.text}</p>
+                  {/*{stepData === state.data && (*/}
+                  {/*<p>{Math.round(progress * 100)}%</p>*/}
+                  {/*)}*/}
+                </StepContent>
+              </StepWrapper>
+            </Step>
+          ))}
+        </Scrollama>
+      </ScrollContainer>
+    </GraphicContainer>
   )
 }
