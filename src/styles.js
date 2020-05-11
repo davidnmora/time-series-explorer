@@ -59,11 +59,11 @@ const LabelText = styled.p`
 const SVGContainer = styled.svg``
 
 const ScrollVizContainer = styled.div`
-  //display: flex;
+  pointer-events: all;
   top: 0;
   width: 100%;
   position: sticky;
-  z-index: -1;
+  z-index: 0;
 `
 
 const LineChartSection = styled.div`
@@ -78,6 +78,7 @@ const GraphicContainer = styled.div`
 `
 
 const ScrollContainer = styled.div`
+  pointer-events: none;
   position: relative;
   &:first-child {
     margin-top: 50vh;
@@ -85,6 +86,7 @@ const ScrollContainer = styled.div`
 `
 
 const StepWrapper = styled.div`
+  position: relative;
   width: 100%;
   //border: 1px dashed lightgray;
   height: 80vh;
