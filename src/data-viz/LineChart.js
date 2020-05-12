@@ -17,15 +17,15 @@ const COLORS = {
 }
 
 export const YEAR_COLORS = {
-  2018: COLORS.mystic,
-  2019: COLORS.sinbad,
+  2018: COLORS.sinbad,
+  2019: COLORS.bluewood,
   2020: COLORS.sanMarino,
 }
 
 export const TREND_COLORS = {
   Boost: 'green',
   Plummet: COLORS.cinnibar,
-  Equal: COLORS.bluewood,
+  // Equal: COLORS.bluewood,
 }
 
 const getLineColor = (lineData, dataColumn) => {
@@ -58,7 +58,7 @@ const Line = ({ lineData, dataColumn, stroke, scale, ...rest }) => {
       stroke={getLineColor(lineData, dataColumn)}
       style={{
         fill: 'none',
-        strokeWidth: 1,
+        strokeWidth: 2,
       }}
       {...rest}
     />

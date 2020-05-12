@@ -6,23 +6,47 @@ import {
   ScrollContainer,
   StepWrapper,
   StepContent,
+  ColoredText,
 } from './styles'
 import { LineChartsWithTitle } from './data-viz/LineChartsWithTitle'
 import { TRENDS } from './useCartoData'
-import { TREND_COLORS } from './data-viz/LineChart'
+import { TREND_COLORS, YEAR_COLORS } from './data-viz/LineChart'
 
 const STEPS_DATA = [
   {
     visibleYears: [2018, 2019],
-    text: 'Spending was fairly similar across 2018 and 2019',
+    text: (
+      <>
+        Overall consumer spending changed little between{' '}
+        <ColoredText color={YEAR_COLORS['2018']}>2018</ColoredText> and{' '}
+        <ColoredText color={YEAR_COLORS['2019']}>2019</ColoredText>.
+      </>
+    ),
   },
   {
     visibleYears: [2018, 2019, 2020],
-    text: 'But COVID changed things.',
+    text: (
+      <>
+        As COVID struck, counties saw unprecedented relative{' '}
+        <ColoredText color={TREND_COLORS[TRENDS.boost]}>growth</ColoredText> and{' '}
+        <ColoredText color={TREND_COLORS[TRENDS.plummet]}>decrease</ColoredText>
+        .
+      </>
+    ),
   },
   {
     visibleYears: [2018, 2019, 2020],
-    text: 'Particularly for rural areas (urban are faded out)',
+    text: (
+      <>
+        Fading out urban counties, wee see that most relative{' '}
+        <ColoredText color={TREND_COLORS[TRENDS.boost]}>growth</ColoredText>{' '}
+        growth happened in rural counties, with two notable exceptions:{' '}
+        <ColoredText color={TREND_COLORS[TRENDS.plummet]}>
+          Grand Traverse & Isabella county
+        </ColoredText>
+        .
+      </>
+    ),
     ruralPercentLowerBound: 50,
   },
 ]
@@ -55,7 +79,9 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
             title={
               <>
                 Counties that{' '}
-                <span style={{ color: TREND_COLORS[TRENDS.boost] }}>grew</span>{' '}
+                <ColoredText color={TREND_COLORS[TRENDS.boost]}>
+                  growth
+                </ColoredText>{' '}
                 during COVID
               </>
             }
@@ -68,9 +94,9 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
             title={
               <>
                 Counties that{' '}
-                <span style={{ color: TREND_COLORS[TRENDS.plummet] }}>
+                <ColoredText color={TREND_COLORS[TRENDS.plummet]}>
                   decreased
-                </span>{' '}
+                </ColoredText>{' '}
                 during COVID
               </>
             }

@@ -68,6 +68,10 @@ export const LabelText = styled.p`
   padding: 4px;
 `
 
+export const ColoredText = styled.span`
+  color: ${({ color }) => `${color}`};
+`
+
 export const MapBorderFade = styled.div`
   position: absolute;
   ${({ bottom }) => (bottom ? 'bottom' : 'top')}: 0px;
@@ -117,9 +121,6 @@ export const GraphicContainer = styled.div`
 export const ScrollContainer = styled.div`
   pointer-events: none;
   position: relative;
-  &:nth-child(2) {
-    margin-top: 50vh;
-  }
 `
 
 export const StepWrapper = styled.div`
@@ -127,6 +128,9 @@ export const StepWrapper = styled.div`
   width: 100%;
   //border: 1px dashed lightgray;
   height: 80vh;
+  &:last-child {
+    margin-bottom: 50vh;
+  }
   z-index: 10000;
 `
 
