@@ -53,29 +53,9 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
   if (![...dataByRegion.keys()].length) return null
 
   return (
-    <div>
-      <GraphicContainer>
-        <ScrollContainer>
-          <Scrollama
-            onStepEnter={onStepEnter}
-            onStepExit={onStepExit}
-            progress
-            onStepProgress={onStepProgress}
-            offset={0.5}
-          >
-            {STEPS_DATA.map((stepData, i) => (
-              <Step data={stepData} key={i}>
-                <StepWrapper>
-                  <StepContent>
-                    <p>{stepData.text}</p>
-                  </StepContent>
-                </StepWrapper>
-              </Step>
-            ))}
-          </Scrollama>
-        </ScrollContainer>
-
-        <ScrollVizContainer>
+    <GraphicContainer>
+      <ScrollContainer>
+        <ScrollVizContainer pad>
           {/*TODO: abstract these into their own components*/}
           <div>
             <Subtitle>Counties that grew during COVID</Subtitle>
@@ -116,7 +96,25 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
             </LineChartSection>
           </div>
         </ScrollVizContainer>
-      </GraphicContainer>
-    </div>
+
+        <Scrollama
+          onStepEnter={onStepEnter}
+          onStepExit={onStepExit}
+          progress
+          onStepProgress={onStepProgress}
+          offset={0.5}
+        >
+          {STEPS_DATA.map((stepData, i) => (
+            <Step data={stepData} key={i}>
+              <StepWrapper>
+                <StepContent>
+                  <p>{stepData.text}</p>
+                </StepContent>
+              </StepWrapper>
+            </Step>
+          ))}
+        </Scrollama>
+      </ScrollContainer>
+    </GraphicContainer>
   )
 }

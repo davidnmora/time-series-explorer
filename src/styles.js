@@ -63,6 +63,7 @@ const ScrollVizContainer = styled.div`
   top: 0;
   width: 100%;
   position: sticky;
+  padding: ${(props) => (props.pad ? '36px' : '0')};
   z-index: 0;
 `
 
@@ -80,7 +81,7 @@ const GraphicContainer = styled.div`
 const ScrollContainer = styled.div`
   pointer-events: none;
   position: relative;
-  &:first-child {
+  &:nth-child(2) {
     margin-top: 50vh;
   }
 `

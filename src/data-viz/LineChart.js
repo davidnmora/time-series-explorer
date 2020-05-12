@@ -23,7 +23,7 @@ export const YEAR_COLORS = {
 }
 
 const TREND_COLORS = {
-  Boost: COLORS.sunrise,
+  Boost: 'green',
   Plummet: COLORS.cinnibar,
   Equal: COLORS.bluewood,
 }
@@ -58,7 +58,7 @@ const Line = ({ lineData, dataColumn, stroke, scale, ...rest }) => {
       stroke={getLineColor(lineData, dataColumn)}
       style={{
         fill: 'none',
-        strokeWidth: 3,
+        strokeWidth: 1,
       }}
       {...rest}
     />

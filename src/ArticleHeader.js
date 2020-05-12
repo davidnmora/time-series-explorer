@@ -9,7 +9,10 @@ const ArticleHeader = () => (
     <Headline>
       Exploring COVID-19's impact on Michigan consumer spending
     </Headline>
-    <Subtitle>Scroll ↓</Subtitle>
+    <Subtitle>
+      How COVID is shifting the landscape of rural spending in surprising ways,
+      and what it means for long-term resilience.
+    </Subtitle>
   </>
 )
 
