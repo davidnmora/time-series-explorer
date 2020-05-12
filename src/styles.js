@@ -62,7 +62,7 @@ export const Paragraph = styled.p`
 export const LabelText = styled.p`
   font-weight: 100;
   color: #222;
-  font-size: 8px;
+  font-size: 12px;
   padding: 4px;
 `
 

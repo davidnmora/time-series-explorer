@@ -9,6 +9,7 @@ import {
 } from './styles'
 import { LineChartsWithTitle } from './data-viz/LineChartsWithTitle'
 import { TRENDS } from './useCartoData'
+import { TREND_COLORS } from './data-viz/LineChart'
 
 const STEPS_DATA = [
   {
@@ -51,14 +52,28 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
         <ScrollVizContainer pad>
           <LineChartsWithTitle
             dataByRegion={dataByRegion}
-            title="Counties that grew during COVID"
+            title={
+              <>
+                Counties that{' '}
+                <span style={{ color: TREND_COLORS[TRENDS.boost] }}>grew</span>{' '}
+                during COVID
+              </>
+            }
             trend={TRENDS.boost}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}
           />
           <LineChartsWithTitle
             dataByRegion={dataByRegion}
-            title="Counties that decreased during COVID"
+            title={
+              <>
+                Counties that{' '}
+                <span style={{ color: TREND_COLORS[TRENDS.plummet] }}>
+                  decreased
+                </span>{' '}
+                during COVID
+              </>
+            }
             trend={TRENDS.plummet}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}

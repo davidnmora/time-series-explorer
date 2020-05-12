@@ -22,7 +22,7 @@ export const YEAR_COLORS = {
   2020: COLORS.sanMarino,
 }
 
-const TREND_COLORS = {
+export const TREND_COLORS = {
   Boost: 'green',
   Plummet: COLORS.cinnibar,
   Equal: COLORS.bluewood,
@@ -40,8 +40,8 @@ const getLineColor = (lineData, dataColumn) => {
 }
 
 const DEFAULT_DIMENSIONS = {
-  width: 80,
-  height: 40,
+  width: 144,
+  height: 80,
 }
 
 const Line = ({ lineData, dataColumn, stroke, scale, ...rest }) => {
