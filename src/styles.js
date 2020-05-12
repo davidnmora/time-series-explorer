@@ -36,6 +36,8 @@ export const HeadlineSection = styled.section`
 export const Headline = styled.h1`
   font-weight: 900;
   font-size: 64px;
+  letter-spacing: -1px;
+  line-height: 1.2;
   color: ${CORI_COLORS.navy};
 `
 
@@ -47,7 +49,7 @@ export const Subtitle = styled.p`
 
 export const TextSection = styled.div`
   margin: 0 auto;
-  padding-top: 100px;
+  padding-top: ${({ paddingTop }) => (paddingTop ? `${paddingTop}` : '0')};
   max-width: 600px;
   width: 95%;
 `
