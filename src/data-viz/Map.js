@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ReactMapGL, { FlyToInterpolator, NavigationControl } from 'react-map-gl'
 import { easeQuadInOut } from 'd3-ease'
 import { MAP_LOCATIONS } from './mapLocations'
+import { MapBorderFade } from '../styles'
 
 const MAPBOX_TOKEN =
   'pk.eyJ1IjoicnVyYWxpbm5vIiwiYSI6ImNqeHl0cW0xODBlMm0zY2x0dXltYzRuazUifQ.zZBovoCHzLIW0wCZveEKzA'
@@ -59,7 +60,8 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
       ...newViewport,
     })
   return (
-    <div className="map">
+    <div className="map" style={{ position: 'relative' }}>
+      <MapBorderFade />
       <ReactMapGL
         {...MAP_DEFAULT_SETTINGS}
         {...DEFAULT_VIEWPORT}
@@ -72,6 +74,7 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
           <NavigationControl showCompass={false} />
         </div>
       </ReactMapGL>
+      <MapBorderFade bottom />
     </div>
   )
 }

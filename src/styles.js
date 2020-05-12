@@ -1,13 +1,31 @@
 // import { animated } from 'react-spring'
 import styled, { createGlobalStyle } from 'styled-components'
 
-const GlobalStyle = createGlobalStyle`
+export const CORI_COLORS = {
+  /*main*/
+  wheat: '#f2e1b7',
+  navy: '#092e39',
+
+  /*Gray scale*/
+  lightGray: '#dfdede',
+  mediumGray: '#7d7f7e',
+  black: '#1e1e1e',
+
+  /*colors*/
+  red: '#b62b2c',
+  blue: '#04476e',
+  maroon: '#551817',
+}
+
+export const GlobalStyle = createGlobalStyle`
   body {
     font-family: Rubik, sans-serif;
+    background-color: ${CORI_COLORS.lightGray};
+    color: ${CORI_COLORS.navy};
   }
 `
 
-const HeadlineSection = styled.section`
+export const HeadlineSection = styled.section`
   max-width: 950px;
   width: 95%;
   z-index: 100;
@@ -15,41 +33,59 @@ const HeadlineSection = styled.section`
   margin: 144px auto;
 `
 
-const Headline = styled.h1`
+export const Headline = styled.h1`
   font-weight: 900;
   font-size: 64px;
+  color: ${CORI_COLORS.navy};
 `
 
-const Subtitle = styled.p`
+export const Subtitle = styled.p`
   font-size: 24px;
   font-weight: lighter;
-  color: rgb(136, 136, 136);
+  color: ${CORI_COLORS.black};
 `
 
-const TextSection = styled.div`
+export const TextSection = styled.div`
   margin: 0 auto;
   padding-top: 100px;
   max-width: 600px;
   width: 95%;
 `
 
-const Paragraph = styled.p`
+export const Paragraph = styled.p`
   font-weight: 400;
   color: #222;
   font-size: 22px;
   line-height: 1.6;
 `
 
-const LabelText = styled.p`
+export const LabelText = styled.p`
   font-weight: 100;
   color: #222;
   font-size: 8px;
   padding: 4px;
 `
 
-const SVGContainer = styled.svg``
+export const MapBorderFade = styled.div`
+  position: absolute;
+  ${({ bottom }) => (bottom ? 'bottom' : 'top')}: 0px;
+  left: 0px;
+  width: 100%;
+  height: 36px;
+  
+  background: linear-gradient(${({ bottom }) =>
+    bottom ? '0' : '180'}deg, rgba(223,222,222,1) 0%, rgba(223,222,222,0) 100%);
+  z-index: 100;
+}
 
-const ScrollVizContainer = styled.div`
+
+
+
+`
+
+export const SVGContainer = styled.svg``
+
+export const ScrollVizContainer = styled.div`
   pointer-events: all;
   top: 0;
   width: 100%;
@@ -58,18 +94,18 @@ const ScrollVizContainer = styled.div`
   z-index: 0;
 `
 
-const LineChartSection = styled.div`
+export const LineChartSection = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
 
-const GraphicContainer = styled.div`
+export const GraphicContainer = styled.div`
   display: flex;
   font-family: Rubik, sans-serif;
   justify-content: space-between;
 `
 
-const ScrollContainer = styled.div`
+export const ScrollContainer = styled.div`
   pointer-events: none;
   position: relative;
   &:nth-child(2) {
@@ -77,7 +113,7 @@ const ScrollContainer = styled.div`
   }
 `
 
-const StepWrapper = styled.div`
+export const StepWrapper = styled.div`
   position: relative;
   width: 100%;
   //border: 1px dashed lightgray;
@@ -85,7 +121,7 @@ const StepWrapper = styled.div`
   z-index: 10000;
 `
 
-const StepContent = styled.div`
+export const StepContent = styled.div`
   width: 320px;
   margin: 0 auto;
   
@@ -97,20 +133,3 @@ const StepContent = styled.div`
   background: white;
 }
 `
-
-export {
-  GlobalStyle,
-  HeadlineSection,
-  Headline,
-  Subtitle,
-  TextSection,
-  Paragraph,
-  LabelText,
-  SVGContainer,
-  ScrollVizContainer,
-  LineChartSection,
-  GraphicContainer,
-  ScrollContainer,
-  StepWrapper,
-  StepContent,
-}

@@ -55,7 +55,7 @@ export const MapScrollytelling = () => {
           onStepExit={onStepExit}
           progress
           onStepProgress={onStepProgress}
-          offset={0.5}
+          offset={0.7}
         >
           {STEPS_DATA.map((stepData, i) => (
             <Step data={stepData} key={i}>
