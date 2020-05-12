@@ -7,31 +7,22 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const NavBarContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  //position: fixed;
-  //top: 0;
-  //right: 0;
-  width: 100%;
-  z-index: auto;
-  font-family: Rubik, sans-serif;
-  font-size: 20px;
-  padding: 20px;
-  background-color: white;
+const HeadlineSection = styled.section`
+  max-width: 950px;
+  width: 95%;
+  z-index: 100;
+  position: relative;
+  margin: 144px auto;
 `
 
 const Headline = styled.h1`
   font-weight: 900;
-  text-align: center;
-  font-size: 48px;
-  margin: 110px 0px 10px;
+  font-size: 64px;
 `
 
 const Subtitle = styled.p`
-  margin: 0px;
-  //text-align: center;
   font-size: 24px;
+  font-weight: lighter;
   color: rgb(136, 136, 136);
 `
 
@@ -109,7 +100,7 @@ const StepContent = styled.div`
 
 export {
   GlobalStyle,
-  NavBarContainer,
+  HeadlineSection,
   Headline,
   Subtitle,
   TextSection,
