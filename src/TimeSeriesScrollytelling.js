@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
+import { Scrollama, Step } from 'react-scrollama'
 import {
   ScrollVizContainer,
   GraphicContainer,
   ScrollContainer,
   StepWrapper,
   StepContent,
-  LineChartSection,
-  Subtitle,
 } from './styles'
-import { Scrollama, Step } from 'react-scrollama'
-import RegionDataSection from './data-viz/RegionDataSection'
-import { COVID_FIELDS, TRENDS } from './useCartoData'
+import { LineChartsWithTitle } from './data-viz/LineChartsWithTitle'
+import { TRENDS } from './useCartoData'
 
 const STEPS_DATA = [
   {
@@ -27,11 +25,6 @@ const STEPS_DATA = [
     ruralPercentLowerBound: 50,
   },
 ]
-
-const dataByRegionFilter = (dataByRegion, filterField, match) =>
-  [...dataByRegion.keys()].filter(
-    (regionId) => dataByRegion.get(regionId).get(2020)[0][filterField] === match
-  )
 
 export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
   const [state, setState] = useState({ data: STEPS_DATA[0] })
@@ -56,45 +49,20 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
     <GraphicContainer>
       <ScrollContainer>
         <ScrollVizContainer pad>
-          {/*TODO: abstract these into their own components*/}
-          <div>
-            <Subtitle>Counties that grew during COVID</Subtitle>
-            <LineChartSection>
-              {dataByRegionFilter(
-                dataByRegion,
-                COVID_FIELDS.TOTAL_SPEND_COVID_TREND,
-                TRENDS.boost
-              ).map((regionId) => (
-                <RegionDataSection
-                  key={regionId}
-                  visibleYears={state.data.visibleYears}
-                  regionDataByYear={dataByRegion.get(regionId)}
-                  ruralPercentLowerBound={
-                    state.data.ruralPercentLowerBound || 0
-                  }
-                />
-              ))}
-            </LineChartSection>
-          </div>
-          <div>
-            <Subtitle>Counties that decreased during COVID</Subtitle>
-            <LineChartSection>
-              {dataByRegionFilter(
-                dataByRegion,
-                COVID_FIELDS.TOTAL_SPEND_COVID_TREND,
-                TRENDS.plummet
-              ).map((regionId) => (
-                <RegionDataSection
-                  key={regionId}
-                  visibleYears={state.data.visibleYears}
-                  regionDataByYear={dataByRegion.get(regionId)}
-                  ruralPercentLowerBound={
-                    state.data.ruralPercentLowerBound || 0
-                  }
-                />
-              ))}
-            </LineChartSection>
-          </div>
+          <LineChartsWithTitle
+            dataByRegion={dataByRegion}
+            title="Counties that grew during COVID"
+            trend={TRENDS.boost}
+            ruralPercentLowerBound={state.data.ruralPercentLowerBound}
+            visibleYears={state.data.visibleYears}
+          />
+          <LineChartsWithTitle
+            dataByRegion={dataByRegion}
+            title="Counties that decreased during COVID"
+            trend={TRENDS.plummet}
+            ruralPercentLowerBound={state.data.ruralPercentLowerBound}
+            visibleYears={state.data.visibleYears}
+          />
         </ScrollVizContainer>
 
         <Scrollama

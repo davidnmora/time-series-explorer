@@ -86,12 +86,19 @@ export const MapBorderFade = styled.div`
 export const SVGContainer = styled.svg``
 
 export const ScrollVizContainer = styled.div`
-  pointer-events: all;
+  position: sticky;
   top: 0;
   width: 100%;
-  position: sticky;
-  padding: ${(props) => (props.pad ? '36px' : '0')};
+  pointer-events: all;
+
+  display: flex;
+
+  padding: ${({ pad }) => (pad ? '36px' : '0')};
   z-index: 0;
+`
+
+export const LineChartsWithTitleContainer = styled.div`
+  margin: 36px;
 `
 
 export const LineChartSection = styled.div`

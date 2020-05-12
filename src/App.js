@@ -16,12 +16,9 @@ function App() {
     <div className="App">
       <ArticleHeader />
 
-      <MapScrollytelling />
-
-      <TextAreaDemo />
-
       <TimeSeriesScrollytelling dataByRegion={dataByRegion} />
-
+      <TextAreaDemo />
+      <MapScrollytelling />
       <TextAreaDemo />
     </div>
   )
