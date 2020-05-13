@@ -12,7 +12,22 @@ import { LineChartsWithTitle } from './data-viz/LineChartsWithTitle'
 import { TRENDS } from './useCartoData'
 import { TREND_COLORS, YEAR_COLORS } from './data-viz/LineChart'
 
+const BLANK_STARTING_STEP = {
+  visibleYears: [],
+  text: '',
+}
+
 const STEPS_DATA = [
+  {
+    visibleYears: [2018],
+    text: (
+      <>
+        This is the overall consumer spending index across{' '}
+        <ColoredText color={YEAR_COLORS['2018']}>2018</ColoredText> and from
+        January to December.
+      </>
+    ),
+  },
   {
     visibleYears: [2018, 2019],
     text: (
@@ -52,7 +67,7 @@ const STEPS_DATA = [
 ]
 
 export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
-  const [state, setState] = useState({ data: STEPS_DATA[0] })
+  const [state, setState] = useState({ data: BLANK_STARTING_STEP })
   const [progress, setProgress] = useState(0)
 
   const onStepEnter = ({ element, data }) => {

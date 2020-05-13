@@ -14,6 +14,8 @@ const COLORS = {
   bluewood: '#2F3A56',
   cinnibar: '#E2474B',
   sunrise: '#dee45e',
+
+  greenApple: '#13c513',
 }
 
 export const YEAR_COLORS = {
@@ -23,7 +25,7 @@ export const YEAR_COLORS = {
 }
 
 export const TREND_COLORS = {
-  Boost: 'green',
+  Boost: COLORS.greenApple,
   Plummet: COLORS.cinnibar,
   // Equal: COLORS.bluewood,
 }

@@ -29,10 +29,6 @@ export const TRENDS = {
   plummet: 'Plummet',
 }
 
-// Created columns
-export const GROUP_ID = 'groupId'
-export const RENDER_KEY = 'renderKey'
-
 const formatData = (fetchedData) => {
   return d3group(
     fetchedData,
