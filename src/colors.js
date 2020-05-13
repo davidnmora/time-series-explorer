@@ -21,3 +21,18 @@ export const TREND_COLORS = {
   Plummet: COLORS.cinnibar,
   // Equal: COLORS.bluewood,
 }
+export const CORI_COLORS = {
+  /*main*/
+  wheat: '#f2e1b7',
+  navy: '#092e39',
+
+  /*Gray scale*/
+  lightGray: '#dfdede',
+  mediumGray: '#7d7f7e',
+  black: '#1e1e1e',
+
+  /*colors*/
+  red: '#b62b2c',
+  blue: '#04476e',
+  maroon: '#551817',
+}

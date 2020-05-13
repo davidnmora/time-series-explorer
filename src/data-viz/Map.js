@@ -4,8 +4,10 @@ import { easeQuadInOut } from 'd3-ease'
 import { MAP_LOCATIONS } from './mapLocations'
 import { MapBorderFade } from '../styles'
 
-const MAPBOX_TOKEN =
+const MAPBOX_API_KEY =
   'pk.eyJ1IjoicnVyYWxpbm5vIiwiYSI6ImNqeHl0cW0xODBlMm0zY2x0dXltYzRuazUifQ.zZBovoCHzLIW0wCZveEKzA'
+
+const MAPBOX_STYLE_URL = 'mapbox://styles/ruralinno/cka5wv42k00361ipehpyhe6v7'
 
 const MAP_PAN_TRANSITION_DURATION = 4000
 const VIEWPORT_TRANSITION_PROPERTIES = {
@@ -67,8 +69,8 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
         {...DEFAULT_VIEWPORT}
         {...viewport}
         onViewportChange={handleViewportChange}
-        mapboxApiAccessToken={MAPBOX_TOKEN}
-        mapStyle={'mapbox://styles/ruralinno/cjxytxnul151q1cq6u96niqs2'}
+        mapboxApiAccessToken={MAPBOX_API_KEY}
+        mapStyle={MAPBOX_STYLE_URL}
       >
         <div style={navStyle}>
           <NavigationControl showCompass={false} />

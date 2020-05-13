@@ -14,10 +14,10 @@ export const MAP_LOCATIONS = {
     bearing: -0.23,
   },
   isabella: {
-    longitude: -86.59771,
-    latitude: 45.89757,
-    zoom: 14.21,
+    longitude: -84.77129,
+    latitude: 43.60072,
+    zoom: 13.62,
     pitch: 60.0,
-    bearing: -77.6,
+    bearing: 113.6,
   },
 }
