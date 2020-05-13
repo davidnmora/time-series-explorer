@@ -9,6 +9,7 @@ import {
   IntroText,
   PostLineChartsText,
   GrandTraverseImageAndText,
+  IsabellaImageAndText,
 } from './TextArea'
 import { MapScrollytelling } from './MapScrollytelling'
 
@@ -21,13 +22,16 @@ function App() {
   return (
     <div className="App">
       <ArticleHeader />
-      <IntroText paddingTop={'0'} />
+
+      <IntroText verticalPadding={'0'} />
       <TimeSeriesScrollytelling dataByRegion={dataByRegion} />
       <PostLineChartsText />
-      <GrandTraverseImageAndText />
-      <MapScrollytelling />
-      <ConclusionText />
 
+      <GrandTraverseImageAndText />
+      <IsabellaImageAndText />
+      <MapScrollytelling />
+
+      <ConclusionText />
       <Footer />
     </div>
   )

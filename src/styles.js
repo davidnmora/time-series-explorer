@@ -34,7 +34,9 @@ export const Subtitle = styled.p`
 
 export const TextSection = styled.div`
   margin: 0 auto;
-  padding-top: ${({ paddingTop }) => (paddingTop ? `${paddingTop}` : '0')};
+  padding: ${({ verticalPadding }) =>
+      verticalPadding ? `${verticalPadding}` : '0'}
+    0;
   max-width: 600px;
   width: 95%;
 `

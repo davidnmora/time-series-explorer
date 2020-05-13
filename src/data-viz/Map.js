@@ -7,7 +7,8 @@ import { MapBorderFade } from '../styles'
 const MAPBOX_API_KEY =
   'pk.eyJ1IjoicnVyYWxpbm5vIiwiYSI6ImNqeHl0cW0xODBlMm0zY2x0dXltYzRuazUifQ.zZBovoCHzLIW0wCZveEKzA'
 
-const MAPBOX_STYLE_URL = 'mapbox://styles/ruralinno/cka5wv42k00361ipehpyhe6v7'
+const MAPBOX_STYLE_URL =
+  'mapbox://styles/ruralinno/cka5wv42k00361ipehpyhe6v7/draft' // <- draft cuz it updates quickly
 
 const MAP_PAN_TRANSITION_DURATION = 4000
 const VIEWPORT_TRANSITION_PROPERTIES = {
