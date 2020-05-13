@@ -55,11 +55,11 @@ export const GrandTraverseImageAndText = () => (
 )
 
 export const ConclusionText = () => (
-  <TextSection paddingTop="96px">
+  <TextSection paddingTop="112px">
     <Paragraph>
       Wrapping up, Mastercard's data lets us spot near real-time trends in
-      spending, and the deploy our own rural-focused data to fill in the larger
-      picture.
+      spending, highlighting where to deploy our own rural-focused data to fill
+      in the larger picture.
     </Paragraph>
     <Paragraph>
       This is just the start. We're eager to use data and our on-the-ground

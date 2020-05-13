@@ -80,7 +80,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
               <>
                 Counties that{' '}
                 <ColoredText color={TREND_COLORS[TRENDS.boost]}>
-                  growth
+                  grew
                 </ColoredText>{' '}
                 during COVID
               </>
