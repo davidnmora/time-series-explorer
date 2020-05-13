@@ -1,34 +1,12 @@
 import React from 'react'
 import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
-import { useTransition, animated } from 'react-spring'
+import { animated, useTransition } from 'react-spring'
 import { LabelText, SVGContainer } from '../styles'
 import { COVID_FIELDS } from '../useCartoData'
+import { TREND_COLORS, YEAR_COLORS } from '../colors'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = COVID_FIELDS
-
-const COLORS = {
-  mystic: '#D8E8E8',
-  sinbad: '#A8D0DA',
-  sanMarino: '#406D96',
-  bluewood: '#2F3A56',
-  cinnibar: '#E2474B',
-  sunrise: '#dee45e',
-
-  greenApple: '#13c513',
-}
-
-export const YEAR_COLORS = {
-  2018: COLORS.sinbad,
-  2019: COLORS.bluewood,
-  2020: COLORS.sanMarino,
-}
-
-export const TREND_COLORS = {
-  Boost: COLORS.greenApple,
-  Plummet: COLORS.cinnibar,
-  // Equal: COLORS.bluewood,
-}
 
 const getLineColor = (lineData, dataColumn) => {
   const aPoint = lineData[0]

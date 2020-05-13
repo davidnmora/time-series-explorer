@@ -10,7 +10,8 @@ import {
 } from './styles'
 import { LineChartsWithTitle } from './data-viz/LineChartsWithTitle'
 import { TRENDS } from './useCartoData'
-import { TREND_COLORS, YEAR_COLORS } from './data-viz/LineChart'
+import { YEAR_COLORS } from './colors'
+import { TREND_COLORS } from './colors'
 
 const BLANK_STARTING_STEP = {
   visibleYears: [],
