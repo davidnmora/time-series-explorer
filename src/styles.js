@@ -55,9 +55,9 @@ export const TextSection = styled.div`
 `
 
 export const Paragraph = styled.p`
-  font-weight: 400;
-  color: #222;
-  font-size: 22px;
+  font-weight: 100;
+  color: ${CORI_COLORS.black};
+  font-size: 16px;
   line-height: 1.6;
 `
 
@@ -72,21 +72,24 @@ export const ColoredText = styled.span`
   color: ${({ color }) => `${color}`};
 `
 
+export const FullBleedImage = styled.img`
+  width: 100vw;
+  margin: 36px 0;
+`
+
 export const MapBorderFade = styled.div`
   position: absolute;
   ${({ bottom }) => (bottom ? 'bottom' : 'top')}: 0px;
   left: 0px;
   width: 100%;
   height: 36px;
-  
-  background: linear-gradient(${({ bottom }) =>
-    bottom ? '0' : '180'}deg, rgba(223,222,222,1) 0%, rgba(223,222,222,0) 100%);
+
+  background: linear-gradient(
+    ${({ bottom }) => (bottom ? '0' : '180')}deg,
+    rgba(223, 222, 222, 1) 0%,
+    rgba(223, 222, 222, 0) 100%
+  );
   z-index: 100;
-}
-
-
-
-
 `
 
 export const SVGContainer = styled.svg``
@@ -128,6 +131,9 @@ export const StepWrapper = styled.div`
   width: 100%;
   //border: 1px dashed lightgray;
   height: 80vh;
+  &:nth-child(2) {
+    margin-top: -25vh;
+  }
   &:last-child {
     margin-bottom: 50vh;
   }

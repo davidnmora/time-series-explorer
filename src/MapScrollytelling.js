@@ -17,18 +17,18 @@ const STEPS_DATA = [
   },
   {
     location: MAP_LOCATIONS.traverseCity,
-    text: '... home of Traverse City',
+    text: '... home of Grand Traverse County',
   },
   {
-    location: MAP_LOCATIONS.marquette,
-    text: '... and Marquette!',
+    location: MAP_LOCATIONS.isabella,
+    text: '... and Isabella county.',
     ruralPercentLowerBound: 50,
   },
 ]
 
 export const MapScrollytelling = () => {
   const [state, setState] = useState({ data: STEPS_DATA[0] })
-  const [progress, setProgress] = useState(0)
+  // const [progress, setProgress] = useState(0)
 
   const onStepEnter = ({ element, data }) => {
     element.style.opacity = 1
@@ -40,7 +40,7 @@ export const MapScrollytelling = () => {
   }
 
   const onStepProgress = ({ element, progress }) => {
-    setProgress(progress)
+    // setProgress(progress)
   }
 
   return (
