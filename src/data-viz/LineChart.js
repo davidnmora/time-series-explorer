@@ -8,10 +8,24 @@ import { TREND_COLORS, YEAR_COLORS } from '../colors'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = COVID_FIELDS
 
-const getLineColor = (lineData, dataColumn) => {
+const getLineOpacity = (lineData, dataColumn, visibleYears) => {
   const aPoint = lineData[0]
   const year = aPoint[YEAR_COLUMN]
 
+  const maxYear = Math.max(...visibleYears)
+  const shouldFadePreviousYears = maxYear === 2020 && year < maxYear
+  return shouldFadePreviousYears ? 0.5 : 1
+}
+
+const getLineColor = (lineData, dataColumn, visibleYears) => {
+  const aPoint = lineData[0]
+  const year = aPoint[YEAR_COLUMN]
+
+  // const maxYear = Math.max(...visibleYears)
+  // const shouldFadePreviousYears = maxYear === 2020 && year < maxYear
+  // if (shouldFadePreviousYears) {
+  //   return COLORS.gray
+  // }
   if (year === 2020) {
     const trend = aPoint[dataColumn.trend]
     return TREND_COLORS[trend]
@@ -21,24 +35,22 @@ const getLineColor = (lineData, dataColumn) => {
 
 const DEFAULT_DIMENSIONS = {
   width: 144,
-  height: 80,
+  height: 112,
 }
 
-const Line = ({ lineData, dataColumn, stroke, scale, ...rest }) => {
+const Line = ({ lineData, dataColumn, scale, opacity, ...rest }) => {
   const pathGenerator = d3line()
     .x((d) => scale.x(d[MONTH_COLUMN]))
     .y((d) => scale.y(d[dataColumn.numeric]))
   const path = pathGenerator(lineData)
 
-  // const props = useSpring({ x: , from: { x: 'black' } })
-
   return (
     <animated.path
       d={path}
-      stroke={getLineColor(lineData, dataColumn)}
       style={{
         fill: 'none',
         strokeWidth: 2,
+        opacity,
       }}
       {...rest}
     />
@@ -82,13 +94,15 @@ const LineChart = ({
         height={`${dimensions.height}px`}
         width={`${dimensions.width}px`}
       >
-        <g key="line-group" opacity={1}>
+        <g>
           {transitions.map(({ item, props, key }) => (
             <Line
               key={key}
               dataColumn={dataColumn}
               lineData={item}
               scale={scale}
+              stroke={getLineColor(item, dataColumn, visibleYears)}
+              opacity={getLineOpacity(item, dataColumn, visibleYears)}
               strokeDasharray={dimensions.width}
               {...props}
             />

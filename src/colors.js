@@ -7,11 +7,12 @@ export const COLORS = {
   sunrise: '#dee45e',
 
   greenApple: '#13c513',
+  gray: '#555',
 }
 
 export const YEAR_COLORS = {
   2018: COLORS.sinbad,
-  2019: COLORS.bluewood,
+  2019: COLORS.sunrise,
   2020: COLORS.sanMarino,
 }
 

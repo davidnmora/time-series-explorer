@@ -13,12 +13,12 @@ import { TRENDS } from './useCartoData'
 import { YEAR_COLORS } from './colors'
 import { TREND_COLORS } from './colors'
 
-const BLANK_STARTING_STEP = {
-  visibleYears: [],
-  text: '',
-}
-
 const STEPS_DATA = [
+  {
+    visibleYears: [],
+    text:
+      "Let's explore the yearly changes in consumer spending (relative to the national average) in Michigan counties. We'll focus just on counties who's consumer spending sharply changed in 2020, relative to the national average.",
+  },
   {
     visibleYears: [2018],
     text: (
@@ -54,9 +54,9 @@ const STEPS_DATA = [
     visibleYears: [2018, 2019, 2020],
     text: (
       <>
-        Fading out urban counties, wee see that most relative{' '}
+        Removing urban counties, we see that most relative{' '}
         <ColoredText color={TREND_COLORS[TRENDS.boost]}>growth</ColoredText>{' '}
-        growth happened in rural counties, with two notable exceptions:{' '}
+        happened in rural counties, with two notable exceptions:{' '}
         <ColoredText color={TREND_COLORS[TRENDS.plummet]}>
           Grand Traverse & Isabella county
         </ColoredText>
@@ -68,8 +68,8 @@ const STEPS_DATA = [
 ]
 
 export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
-  const [state, setState] = useState({ data: BLANK_STARTING_STEP })
-  const [progress, setProgress] = useState(0)
+  const [state, setState] = useState({ data: STEPS_DATA[0] })
+  // const [progress, setProgress] = useState(0)
 
   const onStepEnter = ({ element, data }) => {
     element.style.opacity = 1
@@ -81,7 +81,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
   }
 
   const onStepProgress = ({ element, progress }) => {
-    setProgress(progress)
+    // setProgress(progress)
   }
 
   if (![...dataByRegion.keys()].length) return null
@@ -98,7 +98,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
                 <ColoredText color={TREND_COLORS[TRENDS.boost]}>
                   grew
                 </ColoredText>{' '}
-                during COVID
+                during COVID-19
               </>
             }
             trend={TRENDS.boost}
@@ -113,7 +113,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
                 <ColoredText color={TREND_COLORS[TRENDS.plummet]}>
                   decreased
                 </ColoredText>{' '}
-                during COVID
+                during COVID-19
               </>
             }
             trend={TRENDS.plummet}
