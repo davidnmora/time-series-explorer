@@ -3,6 +3,7 @@ import ReactMapGL, { FlyToInterpolator, NavigationControl } from 'react-map-gl'
 import { easeQuadInOut } from 'd3-ease'
 import { MAP_LOCATIONS } from './mapLocations'
 import { MapBorderFade } from '../styles'
+import { useResizeListener } from './useResizeListener'
 
 const MAPBOX_API_KEY =
   'pk.eyJ1IjoicnVyYWxpbm5vIiwiYSI6ImNqeHl0cW0xODBlMm0zY2x0dXltYzRuazUifQ.zZBovoCHzLIW0wCZveEKzA'
@@ -19,8 +20,8 @@ const VIEWPORT_TRANSITION_PROPERTIES = {
 
 const DEFAULT_VIEWPORT = {
   ...VIEWPORT_TRANSITION_PROPERTIES,
-  width: '100vw',
-  height: '100vh',
+  width: window.innerWidth,
+  height: window.innerHeight,
 }
 
 export const MAP_DEFAULT_SETTINGS = {
@@ -57,11 +58,18 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
     [location, setViewport]
   )
 
-  const handleViewportChange = (newViewport) =>
+  const handleViewportChange = (newViewport = {}) =>
     setViewport({
       ...DEFAULT_VIEWPORT,
+      ...viewport,
       ...newViewport,
+      width: window.innerWidth,
+      height: window.innerHeight,
     })
+
+  const resizeListener = () => handleViewportChange()
+  useResizeListener(resizeListener, [viewport, setViewport])
+
   return (
     <div className="map" style={{ position: 'relative' }}>
       <MapBorderFade />
