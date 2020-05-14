@@ -80,6 +80,8 @@ const LineChart = ({
         strokeOpacity: 1,
       },
       leave: { strokeOpacity: 0 },
+      friction: 500,
+      mass: 500,
     }
   )
   const scale = {
