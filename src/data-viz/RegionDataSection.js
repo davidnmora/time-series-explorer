@@ -38,6 +38,7 @@ const RegionDataSection = ({
         {dataColumns.map((dataColumn) => (
           <LineChart
             key={`${regionName}-${dataColumn.numeric}`}
+            regionName={regionName}
             dataColumn={dataColumn}
             visibleYears={visibleYears}
             regionDataByYear={regionDataByYear}

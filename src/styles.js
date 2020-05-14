@@ -79,7 +79,11 @@ export const MapBorderFade = styled.div`
   z-index: 100;
 `
 
-export const SVGContainer = styled.svg``
+export const SVGContainer = styled.svg`
+  position: absolute;
+  top: 0;
+  left: 0;
+`
 
 export const ScrollVizContainer = styled.div`
   position: sticky;

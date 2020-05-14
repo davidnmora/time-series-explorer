@@ -5,6 +5,7 @@ import { animated, useTransition } from 'react-spring'
 import { LabelText, SVGContainer } from '../styles'
 import { COVID_FIELDS } from '../useCartoData'
 import { TREND_COLORS, YEAR_COLORS } from '../colors'
+import { WikipediaImage } from './WikipediaImage'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = COVID_FIELDS
 
@@ -58,6 +59,7 @@ const Line = ({ lineData, dataColumn, scale, opacity, ...rest }) => {
 }
 
 const LineChart = ({
+  regionName,
   dataColumn,
   visibleYears,
   regionDataByYear,
@@ -90,8 +92,12 @@ const LineChart = ({
   }
 
   return (
-    <div>
-      {title && <LabelText>{dataColumn.numeric.replace(/_/g, ' ')}</LabelText>}
+    <div style={{ overflow: 'hidden', position: 'relative', ...dimensions }}>
+      <WikipediaImage
+        {...dimensions}
+        regionName={regionName}
+        isVisible={visibleYears.length === 0}
+      />
       <SVGContainer
         height={`${dimensions.height}px`}
         width={`${dimensions.width}px`}
