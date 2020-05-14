@@ -13,10 +13,12 @@ import {
 } from './TextArea'
 import { MapScrollytelling } from './MapScrollytelling'
 
+const COVID_FIELDS_ARRAY = Object.values(COVID_FIELDS)
+
 function App() {
   const dataByRegion = useCartoData(
     CARTO_TABLES.MRLI_TIME_SERIES,
-    Object.values(COVID_FIELDS)
+    COVID_FIELDS_ARRAY
   )
 
   return (

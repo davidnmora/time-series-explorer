@@ -49,7 +49,7 @@ const useCartoData = (cartoTableName, fields) => {
     ).then((fetchedData) => {
       setData(formatData(fetchedData))
     })
-  }, [])
+  }, [cartoTableName, fields])
 
   return data
 }

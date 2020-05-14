@@ -58,17 +58,22 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
     [location, setViewport]
   )
 
-  const handleViewportChange = (newViewport = {}) =>
-    setViewport({
-      ...DEFAULT_VIEWPORT,
-      ...viewport,
-      ...newViewport,
-      width: window.innerWidth,
-      height: window.innerHeight,
-    })
+  const handleViewportChange = useCallback(
+    (newViewport = {}) =>
+      setViewport({
+        ...DEFAULT_VIEWPORT,
+        ...viewport,
+        ...newViewport,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      }),
+    [viewport]
+  )
 
-  const resizeListener = useCallback(() => handleViewportChange(), [])
-  useResizeListener(resizeListener, [resizeListener])
+  const resizeListener = useCallback(() => handleViewportChange(), [
+    handleViewportChange,
+  ])
+  useResizeListener(resizeListener)
 
   return (
     <div className="map" style={{ position: 'relative' }}>
