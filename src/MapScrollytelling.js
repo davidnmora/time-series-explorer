@@ -28,7 +28,6 @@ const STEPS_DATA = [
 
 export const MapScrollytelling = () => {
   const [state, setState] = useState({ data: STEPS_DATA[0] })
-  // const [progress, setProgress] = useState(0)
 
   const onStepEnter = ({ element, data }) => {
     element.style.opacity = 1
@@ -37,10 +36,6 @@ export const MapScrollytelling = () => {
 
   const onStepExit = ({ element }) => {
     element.style.opacity = 0.7
-  }
-
-  const onStepProgress = ({ element, progress }) => {
-    // setProgress(progress)
   }
 
   return (
@@ -53,8 +48,6 @@ export const MapScrollytelling = () => {
         <Scrollama
           onStepEnter={onStepEnter}
           onStepExit={onStepExit}
-          progress
-          onStepProgress={onStepProgress}
           offset={0.7}
         >
           {STEPS_DATA.map((stepData, i) => (
@@ -62,9 +55,6 @@ export const MapScrollytelling = () => {
               <StepWrapper>
                 <StepContent>
                   <p>{stepData.text}</p>
-                  {/*{stepData === state.data && (*/}
-                  {/*<p>{Math.round(progress * 100)}%</p>*/}
-                  {/*)}*/}
                 </StepContent>
               </StepWrapper>
             </Step>

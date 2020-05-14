@@ -69,7 +69,6 @@ const STEPS_DATA = [
 
 export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
   const [state, setState] = useState({ data: STEPS_DATA[0] })
-  // const [progress, setProgress] = useState(0)
 
   const onStepEnter = ({ element, data }) => {
     element.style.opacity = 1
@@ -78,10 +77,6 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
 
   const onStepExit = ({ element }) => {
     element.style.opacity = 0.7
-  }
-
-  const onStepProgress = ({ element, progress }) => {
-    // setProgress(progress)
   }
 
   if (![...dataByRegion.keys()].length) return null
@@ -125,8 +120,6 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
         <Scrollama
           onStepEnter={onStepEnter}
           onStepExit={onStepExit}
-          progress
-          onStepProgress={onStepProgress}
           offset={0.5}
         >
           {STEPS_DATA.map((stepData, i) => (
