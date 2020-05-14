@@ -79,6 +79,14 @@ export const MapBorderFade = styled.div`
   z-index: 100;
 `
 
+export const CountyImage = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  transition: opacity 1000ms;
+`
+
 export const SVGContainer = styled.svg`
   position: absolute;
   top: 0;
