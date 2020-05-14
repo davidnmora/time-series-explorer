@@ -96,7 +96,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
                 during COVID-19
               </>
             }
-            subtitle="Counties selected based on a significant decrease in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
+            subtitle="Counties selected based on a significant increase in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
             trend={TRENDS.boost}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}
@@ -112,7 +112,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
                 during COVID-19
               </>
             }
-            subtitle="Counties selected based on a significant increase in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
+            subtitle="Counties selected based on a significant decrease in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
             trend={TRENDS.plummet}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}
