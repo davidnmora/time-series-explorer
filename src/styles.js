@@ -28,8 +28,9 @@ export const Headline = styled.h1`
 
 export const Subtitle = styled.p`
   font-size: 24px;
-  font-weight: lighter;
+  font-weight: 400;
   color: ${CORI_COLORS.black};
+  ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom};`}
 `
 
 export const TextSection = styled.div`
@@ -48,11 +49,11 @@ export const Paragraph = styled.p`
   line-height: 1.6;
 `
 
-export const LabelText = styled.p`
+export const LabelText = styled.span`
   font-weight: 100;
-  color: #222;
-  font-size: 12px;
-  padding: 4px;
+  color: ${({ gray }) => (gray ? CORI_COLORS.mediumGray : CORI_COLORS.black)};
+  font-size: ${({ gray }) => (gray ? '11' : '12')}px;
+  padding-right: 4px;
 `
 
 export const ColoredText = styled.span`

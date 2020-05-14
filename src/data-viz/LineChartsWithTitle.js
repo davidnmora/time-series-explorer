@@ -3,6 +3,7 @@ import {
   LineChartsWithTitleContainer,
   LineChartSection,
   Subtitle,
+  LabelText,
 } from '../styles'
 import { COVID_FIELDS } from '../useCartoData'
 import RegionDataSection from './RegionDataSection'
@@ -15,12 +16,14 @@ const dataByRegionFilter = (dataByRegion, filterField, match) =>
 export const LineChartsWithTitle = ({
   dataByRegion,
   title,
+  subtitle,
   trend,
   visibleYears,
   ruralPercentLowerBound,
 }) => (
   <LineChartsWithTitleContainer>
-    <Subtitle>{title}</Subtitle>
+    <Subtitle marginBottom="0">{title}</Subtitle>
+    <LabelText gray>{subtitle}</LabelText>
     <LineChartSection>
       {dataByRegionFilter(
         dataByRegion,

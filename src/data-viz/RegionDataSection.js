@@ -2,6 +2,7 @@ import React from 'react'
 import LineChart from './LineChart'
 import { LabelText } from '../styles'
 import { COVID_FIELDS } from '../useCartoData'
+import { totalPopulation2017 } from './michiganCountyWikipediaData'
 
 const {
   DISPLAY_NAME_COLUMN,
@@ -32,8 +33,9 @@ const RegionDataSection = ({
   const regionName = aYearDatum[DISPLAY_NAME_COLUMN]
   const show = aYearDatum[RURAL_PERCENTAGE_COLUMN] >= ruralPercentLowerBound
   return (
-    <div style={{ opacity: show ? '1' : '0.1' }}>
+    <div style={{ opacity: show ? '1' : '0.1', paddingTop: 12 }}>
       <LabelText>{regionName}</LabelText>
+      <LabelText gray>{totalPopulation2017(regionName)}</LabelText>
       <div style={{ display: 'flex' }}>
         {dataColumns.map((dataColumn) => (
           <LineChart
