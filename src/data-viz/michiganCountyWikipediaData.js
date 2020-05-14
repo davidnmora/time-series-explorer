@@ -1,4 +1,7 @@
-export const michiganCountyWikipediaData = {
+export const wikipediaURL = (regionName) =>
+  michiganCountyWikipediaData[`${regionName} County`].image
+
+const michiganCountyWikipediaData = {
   'Chippewa County': {
     wikipedia: 'https://en.wikipedia.org/wiki/Chippewa_County,_Michigan',
     image:

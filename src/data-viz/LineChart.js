@@ -2,10 +2,10 @@ import React from 'react'
 import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
 import { animated, useTransition } from 'react-spring'
-import { LabelText, SVGContainer } from '../styles'
+import { SVGContainer, WikipediaImage } from '../styles'
 import { COVID_FIELDS } from '../useCartoData'
 import { TREND_COLORS, YEAR_COLORS } from '../colors'
-import { WikipediaImage } from './WikipediaImage'
+import { wikipediaURL } from './michiganCountyWikipediaData'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = COVID_FIELDS
 
@@ -94,9 +94,9 @@ const LineChart = ({
   return (
     <div style={{ overflow: 'hidden', position: 'relative', ...dimensions }}>
       <WikipediaImage
-        {...dimensions}
-        regionName={regionName}
+        src={wikipediaURL(regionName)}
         isVisible={visibleYears.length === 0}
+        alt="Prominent location in the county pulled from Wikipedia"
       />
       <SVGContainer
         height={`${dimensions.height}px`}

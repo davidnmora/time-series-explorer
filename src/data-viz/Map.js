@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import ReactMapGL, { FlyToInterpolator, NavigationControl } from 'react-map-gl'
 import { easeQuadInOut } from 'd3-ease'
 import { MAP_LOCATIONS } from './mapLocations'
@@ -67,8 +67,8 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
       height: window.innerHeight,
     })
 
-  const resizeListener = () => handleViewportChange()
-  useResizeListener(resizeListener, [viewport, setViewport])
+  const resizeListener = useCallback(() => handleViewportChange(), [])
+  useResizeListener(resizeListener, [resizeListener])
 
   return (
     <div className="map" style={{ position: 'relative' }}>

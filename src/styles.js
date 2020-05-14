@@ -79,7 +79,7 @@ export const MapBorderFade = styled.div`
   z-index: 100;
 `
 
-export const CountyImage = styled.img`
+export const WikipediaImage = styled.img`
   height: 100%;
   width: 100%;
   object-fit: cover;
