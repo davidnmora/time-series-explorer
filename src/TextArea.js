@@ -25,6 +25,8 @@ export const IntroText = ({ verticalPadding }) => (
       index of every county in Michigan which experienced a significant change
       in 2020.
     </Paragraph>
+
+    <div>Scroll to advance the story ↓ </div>
   </TextSection>
 )
 

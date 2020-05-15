@@ -122,7 +122,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
         <Scrollama
           onStepEnter={onStepEnter}
           onStepExit={onStepExit}
-          offset={0.5}
+          offset={0.7}
         >
           {STEPS_DATA.map((stepData, i) => (
             <Step data={stepData} key={i}>
