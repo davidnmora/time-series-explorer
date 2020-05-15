@@ -1,6 +1,6 @@
 import React from 'react'
-import { HeadlineSection, Headline, Subtitle } from './styles'
-import mastercardLogo from './mastercard-logo.png'
+import { HeadlineSection, Headline, Subtitle } from '../general-ui/styles'
+import mastercardLogo from '../images/mastercard-logo.png'
 
 const ArticleHeader = () => (
   <>

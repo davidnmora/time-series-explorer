@@ -1,7 +1,7 @@
 import React from 'react'
 import LineChart from './LineChart'
-import { LabelText } from '../styles'
-import { COVID_FIELDS } from '../useCartoData'
+import { LabelText } from '../general-ui/styles'
+import { COVID_FIELDS } from '../data/useCartoData'
 import { totalPopulation2017 } from './michiganCountyWikipediaData'
 
 const {

@@ -7,11 +7,11 @@ import {
   StepWrapper,
   StepContent,
   ColoredText,
-} from './styles'
-import { LineChartsWithTitle } from './data-viz/LineChartsWithTitle'
-import { TRENDS } from './useCartoData'
-import { YEAR_COLORS } from './colors'
-import { TREND_COLORS } from './colors'
+} from '../general-ui/styles'
+import { LineChartsWithTitle } from '../data-viz/LineChartsWithTitle'
+import { TRENDS } from '../data/useCartoData'
+import { YEAR_COLORS } from '../general-ui/colors'
+import { TREND_COLORS } from '../general-ui/colors'
 
 const STEPS_DATA = [
   {

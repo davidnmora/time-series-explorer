@@ -5,10 +5,10 @@ import {
   ScrollContainer,
   StepWrapper,
   StepContent,
-} from './styles'
+} from '../general-ui/styles'
 import { Scrollama, Step } from 'react-scrollama'
-import { Map } from './data-viz/Map'
-import { MAP_LOCATIONS } from './data-viz/mapLocations'
+import { Map } from '../data-viz/Map'
+import { MAP_LOCATIONS } from '../data-viz/mapLocations'
 
 const STEPS_DATA = [
   {

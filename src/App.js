@@ -1,17 +1,17 @@
 import React from 'react'
 import 'antd/dist/antd.css'
-import { TimeSeriesScrollytelling } from './TimeSeriesScrollytelling'
-import useCartoData, { CARTO_TABLES, COVID_FIELDS } from './useCartoData'
-import ArticleHeader from './ArticleHeader'
-import { Footer } from './Footer'
+import { TimeSeriesScrollytelling } from './article-components/TimeSeriesScrollytelling'
+import useCartoData, { CARTO_TABLES, COVID_FIELDS } from './data/useCartoData'
+import ArticleHeader from './article-components/ArticleHeader'
+import { Footer } from './article-components/Footer'
 import {
   ConclusionText,
   IntroText,
   PostLineChartsText,
   GrandTraverseImageAndText,
   IsabellaImageAndText,
-} from './TextArea'
-import { MapScrollytelling } from './MapScrollytelling'
+} from './article-components/TextSections'
+import { MapScrollytelling } from './article-components/MapScrollytelling'
 
 const COVID_FIELDS_ARRAY = Object.values(COVID_FIELDS)
 

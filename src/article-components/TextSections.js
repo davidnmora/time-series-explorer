@@ -1,4 +1,9 @@
-import { Subtitle, Paragraph, TextSection, FullBleedImage } from './styles'
+import {
+  Subtitle,
+  Paragraph,
+  TextSection,
+  FullBleedImage,
+} from '../general-ui/styles'
 import React from 'react'
 
 const TRAVERSE_CITY_IMAGE =

@@ -1,7 +1,7 @@
 import React from 'react'
-import { TextSection } from './styles'
-import mastercardLogo from './mastercard-logo.png'
-import coriLogo from './cori-logo-black.png'
+import { TextSection } from '../general-ui/styles'
+import mastercardLogo from '../images/mastercard-logo.png'
+import coriLogo from '../images/cori-logo-black.png'
 
 export const Footer = () => (
   <TextSection style={{ height: 160 }}>

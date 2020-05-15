@@ -2,7 +2,7 @@ import { hot } from 'react-hot-loader/root'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import { GlobalStyle } from './styles'
+import { GlobalStyle } from './general-ui/styles'
 
 const HotReloadingApp = hot(() => (
   <>

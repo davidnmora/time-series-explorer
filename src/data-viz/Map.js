@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import ReactMapGL, { FlyToInterpolator, NavigationControl } from 'react-map-gl'
 import { easeQuadInOut } from 'd3-ease'
 import { MAP_LOCATIONS } from './mapLocations'
-import { MapBorderFade } from '../styles'
+import { MapBorderFade } from '../general-ui/styles'
 import { useResizeListener } from './useResizeListener'
 
 const MAPBOX_API_KEY =
