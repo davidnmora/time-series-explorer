@@ -1,5 +1,6 @@
 import React from 'react'
 import 'antd/dist/antd.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import { TimeSeriesScrollytelling } from './article-components/TimeSeriesScrollytelling'
 import useCartoData, { CARTO_TABLES, COVID_FIELDS } from './data/useCartoData'
 import ArticleHeader from './article-components/ArticleHeader'
