@@ -1,3 +1,15 @@
+# Interactive "scrollytelling article" for mastercard.
+
+Pretty run-of-the-mill React app: styled-components (see ya, `*.css` files!), purely functional components with hooks, prettier auto linting.
+
+Specific libraries:
+* react-scrollama
+* mapbox
+* some declarative, low level dataviz generation using non-DOM D3 utils
+* gh-pages deploy
+
+# TLDR All you need: `yarn install`, `yarn start`, `yarn deploy` (for gh-pages)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
