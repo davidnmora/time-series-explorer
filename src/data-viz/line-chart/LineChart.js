@@ -2,10 +2,10 @@ import React from 'react'
 import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
 import { animated, useTransition } from 'react-spring'
-import { SVGContainer, WikipediaImage } from '../general-ui/styles'
-import { COVID_FIELDS } from '../data/useCartoData'
-import { TREND_COLORS, YEAR_COLORS } from '../general-ui/colors'
-import { wikipediaURL } from './michiganCountyWikipediaData'
+import { SVGContainer, WikipediaImage } from '../../general-ui/styles'
+import { COVID_FIELDS } from '../../data/useCartoData'
+import { TREND_COLORS, YEAR_COLORS } from '../../general-ui/colors'
+import { wikipediaURL } from '../../data/michiganCountyWikipediaData'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = COVID_FIELDS
 

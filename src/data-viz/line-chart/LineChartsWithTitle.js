@@ -4,8 +4,8 @@ import {
   LineChartSection,
   Subtitle,
   LabelText,
-} from '../general-ui/styles'
-import { COVID_FIELDS } from '../data/useCartoData'
+} from '../../general-ui/styles'
+import { COVID_FIELDS } from '../../data/useCartoData'
 import RegionDataSection from './RegionDataSection'
 
 const dataByRegionFilter = (dataByRegion, filterField, match) =>

@@ -8,7 +8,7 @@ import {
   StepContent,
   ColoredText,
 } from '../general-ui/styles'
-import { LineChartsWithTitle } from '../data-viz/LineChartsWithTitle'
+import { LineChartsWithTitle } from '../data-viz/line-chart/LineChartsWithTitle'
 import { TRENDS } from '../data/useCartoData'
 import { YEAR_COLORS } from '../general-ui/colors'
 import { TREND_COLORS } from '../general-ui/colors'
