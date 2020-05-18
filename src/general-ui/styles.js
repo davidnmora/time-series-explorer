@@ -16,6 +16,9 @@ export const HeadlineSection = styled.section`
   z-index: 100;
   position: relative;
   margin: 144px auto;
+  @media only screen and (max-width: 800px) {
+    margin: 24px auto;
+  }
 `
 
 export const Headline = styled.h1`
@@ -24,6 +27,10 @@ export const Headline = styled.h1`
   letter-spacing: -1px;
   line-height: 1.2;
   color: ${CORI_COLORS.navy};
+
+  @media only screen and (max-width: 800px) {
+    font-size: 36px;
+  }
 `
 
 export const Subtitle = styled.p`
@@ -31,6 +38,10 @@ export const Subtitle = styled.p`
   font-weight: 400;
   color: ${CORI_COLORS.black};
   ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom};`}
+
+  @media only screen and (max-width: 800px) {
+    font-size: 16px;
+  }
 `
 
 export const TextSection = styled.div`
@@ -38,6 +49,9 @@ export const TextSection = styled.div`
   padding: ${({ verticalPadding }) =>
       verticalPadding ? `${verticalPadding}` : '0'}
     0;
+  @media only screen and (max-width: 800px) {
+    padding: 12px 0;
+  }
   max-width: 600px;
   width: 95%;
 `
@@ -103,11 +117,17 @@ export const ScrollVizContainer = styled.div`
   display: flex;
 
   padding: ${({ pad }) => (pad ? '36px' : '0')};
+  @media only screen and (max-width: 800px) {
+    padding: 0;
+  }
   z-index: 0;
 `
 
 export const LineChartsWithTitleContainer = styled.div`
   margin: 36px;
+  @media only screen and (max-width: 800px) {
+    margin: 0;
+  }
 `
 
 export const LineChartSection = styled.div`
@@ -124,6 +144,7 @@ export const GraphicContainer = styled.div`
 export const ScrollContainer = styled.div`
   pointer-events: none;
   position: relative;
+  ${({ width }) => (width ? `width: ${width}; margin: auto;` : '')}
 `
 
 export const StepWrapper = styled.div`
@@ -150,5 +171,11 @@ export const StepContent = styled.div`
   border: 1px solid #d0cccc;
   
   background: white;
+  
+  @media only screen and (max-width: 800px) {
+    width: 90vw;
+    margin: 0;
+    margin-left: 5vw;
+  }
 }
 `

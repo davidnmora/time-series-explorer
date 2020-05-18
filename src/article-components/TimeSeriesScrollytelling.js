@@ -83,7 +83,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
 
   return (
     <GraphicContainer>
-      <ScrollContainer>
+      <ScrollContainer width="95vw">
         <ScrollVizContainer pad>
           <LineChartsWithTitle
             dataByRegion={dataByRegion}

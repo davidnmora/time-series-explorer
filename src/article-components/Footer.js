@@ -8,12 +8,12 @@ export const Footer = () => (
     <img
       src={mastercardLogo}
       alt="MasterCard Center for Inclusive Growth"
-      style={{ width: 240, marginRight: 72 }}
+      style={{ width: 240, marginRight: 72, padding: 8 }}
     />
     <img
       src={coriLogo}
       alt="Center on Rural Innovation"
-      style={{ width: 180 }}
+      style={{ width: 180, padding: 8 }}
     />
   </TextSection>
 )

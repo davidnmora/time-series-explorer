@@ -25,13 +25,13 @@ const DEFAULT_VIEWPORT = {
 }
 
 export const MAP_DEFAULT_SETTINGS = {
-  dragPan: true,
+  dragPan: false,
   dragRotate: false,
   scrollZoom: false,
   touchZoom: false,
-  touchRotate: true,
+  touchRotate: false,
   keyboard: false,
-  doubleClickZoom: true,
+  doubleClickZoom: false,
   minZoom: 3,
   maxZoom: 24, // Note: this IS the maximum possible zoom
 }
