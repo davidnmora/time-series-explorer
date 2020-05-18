@@ -31,7 +31,9 @@ export const IntroText = ({ verticalPadding }) => (
       in 2020.
     </Paragraph>
 
-    <div>Scroll to advance the story ↓ </div>
+    <div style={{ textAlign: 'center', marginTop: 24 }}>
+      Scroll to advance the story ↓{' '}
+    </div>
   </TextSection>
 )
 

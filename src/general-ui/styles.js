@@ -153,7 +153,7 @@ export const StepWrapper = styled.div`
   //border: 1px dashed lightgray;
   height: 80vh;
   &:nth-child(2) {
-    margin-top: -25vh;
+    margin-top: -75vh;
   }
   &:last-child {
     margin-bottom: 50vh;
