@@ -9,14 +9,16 @@ const useCartoData = (
 ) => {
   const [data, setData] = useState([])
 
-  useEffect(() => {
-    DataFetcher.fetchSQL(
+  useEffect(async () => {
+    const fetchedData = await DataFetcher.fetchSQL(
       cartoTableName,
       fields,
       sqlFilter
-    ).then((fetchedData) =>
-      setData(dataFormatter ? dataFormatter(fetchedData) : fetchedData)
     )
+    const formattedData = dataFormatter
+      ? dataFormatter(fetchedData)
+      : fetchedData
+    setData(formattedData)
   }, [cartoTableName, fields, dataFormatter, sqlFilter])
 
   return data
