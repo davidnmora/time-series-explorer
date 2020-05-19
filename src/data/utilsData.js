@@ -1,5 +1,6 @@
 import { group as d3group, mean, rollups } from 'd3-array'
 import config from '../config'
+import { YEAR_COLORS } from '../general-ui/colors'
 
 export const round = (num, decimalPlaces) => {
   return +Number(num).toFixed(decimalPlaces)
@@ -52,6 +53,7 @@ const stateAverageByField = (fetchedData) => {
   return unformattedAverage.map(([year, yearData]) => ({
     id: year,
     data: yearData.map(([x, y]) => ({ x, y })),
+    color: YEAR_COLORS[year],
   }))
 }
 

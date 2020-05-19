@@ -1,10 +1,15 @@
 import React from 'react'
 import { ResponsiveLine } from '@nivo/line'
 
-export const StateLevelTimeSeriesChart = ({ data, xLabel, yLabel }) => (
-  <div style={{ height: 400, width: 600 }}>
+export const StateLevelTimeSeriesChart = ({
+  data,
+  visibleYears,
+  xLabel,
+  yLabel,
+}) => (
+  <div style={{ height: '80vh', width: '80vw', margin: 'auto' }}>
     <ResponsiveLine
-      data={data}
+      data={data.filter(({ id }) => visibleYears.includes(id))}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: 'point' }}
       yScale={{
@@ -34,7 +39,7 @@ export const StateLevelTimeSeriesChart = ({ data, xLabel, yLabel }) => (
         legendOffset: -40,
         legendPosition: 'middle',
       }}
-      colors={{ scheme: 'nivo' }}
+      colors={(d) => d.color}
       pointSize={10}
       pointColor={{ theme: 'background' }}
       pointBorderWidth={2}

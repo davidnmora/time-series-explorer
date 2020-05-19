@@ -74,8 +74,6 @@ const STEPS_DATA = [
   },
 ]
 
-const COUNTY_FIELDS_ARRAY = Object.values(config.cartoData.COUNTY_FIELDS)
-
 export const StateLevelTimeSeriesScrollytelling = ({
   stateMonthlyAveragesByYear,
 }) => {
@@ -101,9 +99,9 @@ export const StateLevelTimeSeriesScrollytelling = ({
     <GraphicContainer>
       <ScrollContainer width="95vw">
         <ScrollVizContainer pad>
-          <div>Hi, folks!</div>
           <StateLevelTimeSeriesChart
             data={stateMonthlyAveragesByYear}
+            visibleYears={state.data.visibleYears}
             xLabel="Month"
             yLabel="Average total spend"
           />

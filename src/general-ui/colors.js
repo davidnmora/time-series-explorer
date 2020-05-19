@@ -13,7 +13,7 @@ export const COLORS = {
 export const YEAR_COLORS = {
   2018: COLORS.sinbad,
   2019: COLORS.sanMarino,
-  // 2020: COLORS.sanMarino,
+  2020: COLORS.cinnibar,
 }
 
 export const TREND_COLORS = {
