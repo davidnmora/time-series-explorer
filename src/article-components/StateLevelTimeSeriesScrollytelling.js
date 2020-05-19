@@ -102,7 +102,11 @@ export const StateLevelTimeSeriesScrollytelling = ({
       <ScrollContainer width="95vw">
         <ScrollVizContainer pad>
           <div>Hi, folks!</div>
-          <StateLevelTimeSeriesChart data={stateMonthlyAveragesByYear} />
+          <StateLevelTimeSeriesChart
+            data={stateMonthlyAveragesByYear}
+            xLabel="Month"
+            yLabel="Average total spend"
+          />
         </ScrollVizContainer>
 
         <Scrollama
