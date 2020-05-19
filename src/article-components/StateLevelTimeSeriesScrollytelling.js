@@ -8,11 +8,10 @@ import {
   StepContent,
   ColoredText,
 } from '../general-ui/styles'
-import { LineChartsWithTitle } from '../data-viz/line-chart/LineChartsWithTitle'
+import { StateLevelTimeSeriesChart } from '../data-viz/state-level-time-series-chart/StateLevelTimeSeriesChart'
 import config from '../config'
 import { YEAR_COLORS } from '../general-ui/colors'
 import { TREND_COLORS } from '../general-ui/colors'
-import useCartoData from '../data/useCartoData'
 
 const STEPS_DATA = [
   {
@@ -77,12 +76,14 @@ const STEPS_DATA = [
 
 const COUNTY_FIELDS_ARRAY = Object.values(config.cartoData.COUNTY_FIELDS)
 
-export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
-  const supplementaryCountyData = useCartoData(
-    config.cartoData.COUNTY_TABLE,
-    COUNTY_FIELDS_ARRAY,
-    `WHERE  st_stusps = '${config.cartoData.ABBREV_STATE_NAME}'`
-  )
+export const StateLevelTimeSeriesScrollytelling = ({
+  stateMonthlyAveragesByYear,
+}) => {
+  // const supplementaryCountyData = useCartoData(
+  //   config.cartoData.COUNTY_TABLE,
+  //   COUNTY_FIELDS_ARRAY,
+  //   `WHERE  st_stusps = '${config.cartoData.ABBREV_STATE_NAME}'`
+  // )
   const [state, setState] = useState({ data: STEPS_DATA[0] })
 
   const onStepEnter = ({ element, data }) => {
@@ -94,50 +95,14 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
     element.style.opacity = 0.7
   }
 
-  if (!dataByRegion || ![...dataByRegion.keys()].length) return null
+  if (!stateMonthlyAveragesByYear) return null
 
   return (
     <GraphicContainer>
       <ScrollContainer width="95vw">
         <ScrollVizContainer pad>
-          <LineChartsWithTitle
-            supplementaryCountyData={supplementaryCountyData}
-            dataByRegion={dataByRegion}
-            title={
-              <>
-                Counties that{' '}
-                <ColoredText
-                  color={TREND_COLORS[config.cartoData.trends.boost]}
-                >
-                  grew
-                </ColoredText>{' '}
-                during COVID-19
-              </>
-            }
-            subtitle="Counties selected based on a significant increase in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
-            trend={config.cartoData.trends.boost}
-            ruralPercentLowerBound={state.data.ruralPercentLowerBound}
-            visibleYears={state.data.visibleYears}
-          />
-          <LineChartsWithTitle
-            supplementaryCountyData={supplementaryCountyData}
-            dataByRegion={dataByRegion}
-            title={
-              <>
-                Counties that{' '}
-                <ColoredText
-                  color={TREND_COLORS[config.cartoData.trends.plummet]}
-                >
-                  decreased
-                </ColoredText>{' '}
-                during COVID-19
-              </>
-            }
-            subtitle="Counties selected based on a significant decrease in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
-            trend={config.cartoData.trends.plummet}
-            ruralPercentLowerBound={state.data.ruralPercentLowerBound}
-            visibleYears={state.data.visibleYears}
-          />
+          <div>Hi, folks!</div>
+          <StateLevelTimeSeriesChart data={stateMonthlyAveragesByYear} />
         </ScrollVizContainer>
 
         <Scrollama

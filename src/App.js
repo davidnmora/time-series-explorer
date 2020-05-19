@@ -2,6 +2,7 @@ import React from 'react'
 import 'antd/dist/antd.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { TimeSeriesScrollytelling } from './article-components/TimeSeriesScrollytelling'
+import { StateLevelTimeSeriesScrollytelling } from './article-components/StateLevelTimeSeriesScrollytelling'
 import useCartoData from './data/useCartoData'
 import ArticleHeader from './article-components/ArticleHeader'
 import { Footer } from './article-components/Footer'
@@ -14,16 +15,17 @@ import {
 } from './article-components/TextSections'
 import { MapScrollytelling } from './article-components/MapScrollytelling'
 import config from './config'
-import { nestDataByRegionAndYear } from './data/utilsData'
+import { getShapedDataSets } from './data/utilsData'
 
 const MRLI_FIELDS_ARRAY = Object.values(config.cartoData.MRLI_FIELDS)
 
 function App() {
-  const dataByRegion = useCartoData(
+  const { dataByRegion, stateMonthlyAveragesByYear } = useCartoData(
     config.cartoData.MRLI_TIME_SERIES_TABLE,
     MRLI_FIELDS_ARRAY,
     `ORDER BY ${config.cartoData.MRLI_FIELDS.MONTH_COLUMN}`,
-    nestDataByRegionAndYear
+    getShapedDataSets,
+    {}
   )
 
   return (
@@ -31,6 +33,11 @@ function App() {
       <ArticleHeader />
 
       <IntroText verticalPadding={'0'} />
+
+      <StateLevelTimeSeriesScrollytelling
+        stateMonthlyAveragesByYear={stateMonthlyAveragesByYear}
+      />
+
       <TimeSeriesScrollytelling dataByRegion={dataByRegion} />
       <PostLineChartsText />
 
