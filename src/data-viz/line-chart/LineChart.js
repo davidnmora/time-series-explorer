@@ -5,7 +5,7 @@ import { animated, useTransition } from 'react-spring'
 import { SVGContainer, WikipediaImage } from '../../general-ui/styles'
 import config from '../../config'
 import { TREND_COLORS, YEAR_COLORS } from '../../general-ui/colors'
-import { wikipediaURL } from '../../data/michiganCountyWikipediaData'
+import { wikipediaThumbnailURL } from '../../data/utilsData'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = config.cartoData.MRLI_FIELDS
 
@@ -59,6 +59,7 @@ const Line = ({ lineData, dataColumn, scale, opacity, ...rest }) => {
 }
 
 const LineChart = ({
+  supplementaryCountyData,
   regionName,
   dataColumn,
   visibleYears,
@@ -94,7 +95,7 @@ const LineChart = ({
   return (
     <div style={{ overflow: 'hidden', position: 'relative', ...dimensions }}>
       <WikipediaImage
-        src={wikipediaURL(regionName)}
+        src={wikipediaThumbnailURL(regionName, supplementaryCountyData)}
         isVisible={visibleYears.length === 0}
         alt="Prominent location in the county pulled from Wikipedia"
       />

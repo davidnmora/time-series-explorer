@@ -12,6 +12,7 @@ import { LineChartsWithTitle } from '../data-viz/line-chart/LineChartsWithTitle'
 import config from '../config'
 import { YEAR_COLORS } from '../general-ui/colors'
 import { TREND_COLORS } from '../general-ui/colors'
+import useCartoData from '../data/useCartoData'
 
 const STEPS_DATA = [
   {
@@ -74,7 +75,14 @@ const STEPS_DATA = [
   },
 ]
 
+const COUNTY_FIELDS_ARRAY = Object.values(config.cartoData.COUNTY_FIELDS)
+
 export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
+  const supplementaryCountyData = useCartoData(
+    config.cartoData.COUNTY_TABLE,
+    COUNTY_FIELDS_ARRAY,
+    `WHERE  st_stusps = '${config.cartoData.ABBREV_STATE_NAME}'`
+  )
   const [state, setState] = useState({ data: STEPS_DATA[0] })
 
   const onStepEnter = ({ element, data }) => {
@@ -93,6 +101,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
       <ScrollContainer width="95vw">
         <ScrollVizContainer pad>
           <LineChartsWithTitle
+            supplementaryCountyData={supplementaryCountyData}
             dataByRegion={dataByRegion}
             title={
               <>
@@ -111,6 +120,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
             visibleYears={state.data.visibleYears}
           />
           <LineChartsWithTitle
+            supplementaryCountyData={supplementaryCountyData}
             dataByRegion={dataByRegion}
             title={
               <>

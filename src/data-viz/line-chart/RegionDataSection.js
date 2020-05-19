@@ -2,7 +2,7 @@ import React from 'react'
 import LineChart from './LineChart'
 import { LabelText } from '../../general-ui/styles'
 import config from '../../config'
-import { totalPopulation2017 } from '../../data/michiganCountyWikipediaData'
+import { totalPopulation } from '../../data/utilsData'
 
 const {
   DISPLAY_NAME_COLUMN,
@@ -22,6 +22,7 @@ const DATA_COLUMNS = [
 ]
 
 const RegionDataSection = ({
+  supplementaryCountyData,
   regionDataByYear,
   dataColumns = DATA_COLUMNS,
   visibleYears = null,
@@ -35,11 +36,14 @@ const RegionDataSection = ({
   return (
     <div style={{ opacity: show ? '1' : '0.1', paddingTop: 12 }}>
       <LabelText>{regionName}</LabelText>
-      <LabelText gray>{totalPopulation2017(regionName)}</LabelText>
+      <LabelText gray>
+        {totalPopulation(regionName, supplementaryCountyData)}
+      </LabelText>
       <div style={{ display: 'flex' }}>
         {dataColumns.map((dataColumn) => (
           <LineChart
             key={`${regionName}-${dataColumn.numeric}`}
+            supplementaryCountyData={supplementaryCountyData}
             regionName={regionName}
             dataColumn={dataColumn}
             visibleYears={visibleYears}

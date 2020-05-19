@@ -4,6 +4,7 @@
     "MAPBOX_STYLE_URL": "mapbox://styles/ruralinno/cka5wv42k00361ipehpyhe6v7/draft"
   },
   "cartoData": {
+    "ABBREV_STATE_NAME": "MI",
     "MRLI_TIME_SERIES_TABLE": "mrli_county_time_series",
     "MRLI_FIELDS": {
       "MONTH_COLUMN": "month",
@@ -22,6 +23,12 @@
       "boost": "Boost",
       "equal": "Equal",
       "plummet": "Plummet"
+    },
+    "COUNTY_TABLE": "attr_county_2018",
+    "COUNTY_FIELDS": {
+      "THUMBNAIL": "thumb",
+      "NAME": "name",
+      "TOTAL_POPULATION": "total_population_2018"
     }
   }
 }

@@ -109,17 +109,12 @@ export const SVGContainer = styled.svg`
 `
 
 export const ScrollVizContainer = styled.div`
+  display: flex;
   position: sticky;
   top: 0;
   width: 100%;
   pointer-events: all;
 
-  display: flex;
-
-  padding: ${({ pad }) => (pad ? '36px' : '0')};
-  @media only screen and (max-width: 800px) {
-    padding: 0;
-  }
   z-index: 0;
 `
 

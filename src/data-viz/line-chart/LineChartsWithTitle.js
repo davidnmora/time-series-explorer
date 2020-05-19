@@ -14,6 +14,7 @@ const dataByRegionFilter = (dataByRegion, filterField, match) =>
   )
 
 export const LineChartsWithTitle = ({
+  supplementaryCountyData,
   dataByRegion,
   title,
   subtitle,
@@ -32,6 +33,7 @@ export const LineChartsWithTitle = ({
       ).map((regionId) => (
         <RegionDataSection
           key={regionId}
+          supplementaryCountyData={supplementaryCountyData}
           visibleYears={visibleYears}
           regionDataByYear={dataByRegion.get(regionId)}
           ruralPercentLowerBound={ruralPercentLowerBound || 0}

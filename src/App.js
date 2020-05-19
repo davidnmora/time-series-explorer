@@ -14,13 +14,16 @@ import {
 } from './article-components/TextSections'
 import { MapScrollytelling } from './article-components/MapScrollytelling'
 import config from './config'
+import { nestDataByRegionAndYear } from './data/utilsData'
 
 const MRLI_FIELDS_ARRAY = Object.values(config.cartoData.MRLI_FIELDS)
 
 function App() {
   const dataByRegion = useCartoData(
     config.cartoData.MRLI_TIME_SERIES_TABLE,
-    MRLI_FIELDS_ARRAY
+    MRLI_FIELDS_ARRAY,
+    `ORDER BY ${config.cartoData.MRLI_FIELDS.MONTH_COLUMN}`,
+    nestDataByRegionAndYear
   )
 
   return (

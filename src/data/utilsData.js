@@ -1,3 +1,6 @@
+import { group as d3group } from 'd3-array'
+import config from '../config'
+
 export const round = (num, decimalPlaces) => {
   return +Number(num).toFixed(decimalPlaces)
 }
@@ -30,3 +33,25 @@ export const smartDisplayValue = (num, min, max) => {
 
   return val
 }
+
+export const nestDataByRegionAndYear = (fetchedData) => {
+  return d3group(
+    fetchedData,
+    (d) => d[config.cartoData.MRLI_FIELDS.REGION_COLUMN],
+    (d) => d[config.cartoData.MRLI_FIELDS.YEAR_COLUMN]
+  )
+}
+const getRegion = (regionName, supplementaryCountyData) =>
+  supplementaryCountyData.find(({ name }) => name === regionName) || {}
+
+export const wikipediaThumbnailURL = (regionName, supplementaryCountyData) =>
+  getRegion(regionName, supplementaryCountyData)[
+    config.cartoData.COUNTY_FIELDS.THUMBNAIL
+  ]
+
+export const totalPopulation = (regionName, supplementaryCountyData) =>
+  smartDisplayValue(
+    getRegion(regionName, supplementaryCountyData)[
+      config.cartoData.COUNTY_FIELDS.TOTAL_POPULATION
+    ]
+  )
