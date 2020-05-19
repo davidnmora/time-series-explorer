@@ -1,5 +1,25 @@
 # Interactive "scrollytelling article" for mastercard.
 
+# For non-web developers:
+
+This app isn't perfectly setup for non-dev editing, but at least some substantial efforts were made to ensure commonly editable things can be changed without too much trouble.
+
+## How to change...
+### **The MRLI data stuff or Mapbox**: 
+Edit `src/config.json`. From there, you can search some of the data names if you want to see how they're being used in the app.
+
+If interested, the actual API call is made via `useCartoData`, which itself relies on `DataFetcher.js`, a JS helper class used throughout CORI's projects for API calls to CARTO.
+
+### **Text / content / order**:
+Open `src/App.js`. From there you'll see the exact high level react components that make up the sections of the app, in order.
+
+You can rearrange, delete, or visit their individual files to understand each one more.
+
+The easiest file to edit is going to be `src/article-components/TextSections.js` which contains each of the text sections, such as `IntroText`.
+
+
+# For web developers:
+
 Pretty run-of-the-mill React app: styled-components (see ya, `*.css` files!), purely functional components with hooks, prettier auto linting.
 
 Specific libraries:

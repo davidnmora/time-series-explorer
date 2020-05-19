@@ -2,7 +2,7 @@ import React from 'react'
 import 'antd/dist/antd.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { TimeSeriesScrollytelling } from './article-components/TimeSeriesScrollytelling'
-import useCartoData, { CARTO_TABLES, COVID_FIELDS } from './data/useCartoData'
+import useCartoData from './data/useCartoData'
 import ArticleHeader from './article-components/ArticleHeader'
 import { Footer } from './article-components/Footer'
 import {
@@ -13,13 +13,14 @@ import {
   IsabellaImageAndText,
 } from './article-components/TextSections'
 import { MapScrollytelling } from './article-components/MapScrollytelling'
+import config from './config'
 
-const COVID_FIELDS_ARRAY = Object.values(COVID_FIELDS)
+const MRLI_FIELDS_ARRAY = Object.values(config.cartoData.MRLI_FIELDS)
 
 function App() {
   const dataByRegion = useCartoData(
-    CARTO_TABLES.MRLI_TIME_SERIES,
-    COVID_FIELDS_ARRAY
+    config.cartoData.MRLI_TIME_SERIES_TABLE,
+    MRLI_FIELDS_ARRAY
   )
 
   return (

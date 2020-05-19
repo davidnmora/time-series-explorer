@@ -1,7 +1,7 @@
 import React from 'react'
 import LineChart from './LineChart'
 import { LabelText } from '../../general-ui/styles'
-import { COVID_FIELDS } from '../../data/useCartoData'
+import config from '../../config'
 import { totalPopulation2017 } from '../../data/michiganCountyWikipediaData'
 
 const {
@@ -13,7 +13,7 @@ const {
   // TOTAL_SPEND_EATING,
   // TOTAL_SPEND_GROCERY,
   RURAL_PERCENTAGE_COLUMN,
-} = COVID_FIELDS
+} = config.cartoData.MRLI_FIELDS
 
 const DATA_COLUMNS = [
   { numeric: TOTAL_SPEND_COLUMN, trend: TOTAL_SPEND_COVID_TREND },

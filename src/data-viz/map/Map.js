@@ -4,12 +4,7 @@ import { easeQuadInOut } from 'd3-ease'
 import { MAP_LOCATIONS } from './mapLocations'
 import { MapBorderFade } from '../../general-ui/styles'
 import { useResizeListener } from './useResizeListener'
-
-const MAPBOX_API_KEY =
-  'pk.eyJ1IjoicnVyYWxpbm5vIiwiYSI6ImNqeHl0cW0xODBlMm0zY2x0dXltYzRuazUifQ.zZBovoCHzLIW0wCZveEKzA'
-
-const MAPBOX_STYLE_URL =
-  'mapbox://styles/ruralinno/cka5wv42k00361ipehpyhe6v7/draft' // <- draft cuz it updates quickly
+import config from '../../config'
 
 const MAP_PAN_TRANSITION_DURATION = 4000
 const VIEWPORT_TRANSITION_PROPERTIES = {
@@ -83,8 +78,8 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
         {...DEFAULT_VIEWPORT}
         {...viewport}
         onViewportChange={handleViewportChange}
-        mapboxApiAccessToken={MAPBOX_API_KEY}
-        mapStyle={MAPBOX_STYLE_URL}
+        mapboxApiAccessToken={config.map.MAPBOX_API_KEY}
+        mapStyle={config.map.MAPBOX_STYLE_URL}
       >
         <div style={navStyle}>
           <NavigationControl showCompass={false} />

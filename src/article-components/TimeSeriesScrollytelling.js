@@ -9,7 +9,7 @@ import {
   ColoredText,
 } from '../general-ui/styles'
 import { LineChartsWithTitle } from '../data-viz/line-chart/LineChartsWithTitle'
-import { TRENDS } from '../data/useCartoData'
+import config from '../config'
 import { YEAR_COLORS } from '../general-ui/colors'
 import { TREND_COLORS } from '../general-ui/colors'
 
@@ -44,8 +44,13 @@ const STEPS_DATA = [
     text: (
       <>
         As COVID struck, counties saw unprecedented relative{' '}
-        <ColoredText color={TREND_COLORS[TRENDS.boost]}>growth</ColoredText> and{' '}
-        <ColoredText color={TREND_COLORS[TRENDS.plummet]}>decrease</ColoredText>
+        <ColoredText color={TREND_COLORS[config.cartoData.trends.boost]}>
+          growth
+        </ColoredText>{' '}
+        and{' '}
+        <ColoredText color={TREND_COLORS[config.cartoData.trends.plummet]}>
+          decrease
+        </ColoredText>
         .
       </>
     ),
@@ -55,9 +60,11 @@ const STEPS_DATA = [
     text: (
       <>
         Removing urban counties, we see that most relative{' '}
-        <ColoredText color={TREND_COLORS[TRENDS.boost]}>growth</ColoredText>{' '}
+        <ColoredText color={TREND_COLORS[config.cartoData.trends.boost]}>
+          growth
+        </ColoredText>{' '}
         happened in rural counties, with two notable exceptions:{' '}
-        <ColoredText color={TREND_COLORS[TRENDS.plummet]}>
+        <ColoredText color={TREND_COLORS[config.cartoData.trends.plummet]}>
           Grand Traverse & Isabella county
         </ColoredText>
         .
@@ -90,14 +97,16 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
             title={
               <>
                 Counties that{' '}
-                <ColoredText color={TREND_COLORS[TRENDS.boost]}>
+                <ColoredText
+                  color={TREND_COLORS[config.cartoData.trends.boost]}
+                >
                   grew
                 </ColoredText>{' '}
                 during COVID-19
               </>
             }
             subtitle="Counties selected based on a significant increase in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
-            trend={TRENDS.boost}
+            trend={config.cartoData.trends.boost}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}
           />
@@ -106,14 +115,16 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
             title={
               <>
                 Counties that{' '}
-                <ColoredText color={TREND_COLORS[TRENDS.plummet]}>
+                <ColoredText
+                  color={TREND_COLORS[config.cartoData.trends.plummet]}
+                >
                   decreased
                 </ColoredText>{' '}
                 during COVID-19
               </>
             }
             subtitle="Counties selected based on a significant decrease in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
-            trend={TRENDS.plummet}
+            trend={config.cartoData.trends.plummet}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}
           />
