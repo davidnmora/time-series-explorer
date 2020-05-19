@@ -142,7 +142,7 @@ export const GraphicContainer = styled.div`
 `
 
 export const ScrollContainer = styled.div`
-  pointer-events: none;
+  //pointer-events: none; <- Todo: enable this so users can interact with the map. However, freezes touch screens (!?)
   position: relative;
   ${({ width }) => (width ? `width: ${width}; margin: auto;` : '')}
 `

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import ReactMapGL, { FlyToInterpolator, NavigationControl } from 'react-map-gl'
+import ReactMapGL, {
+  FlyToInterpolator /*NavigationControl*/,
+} from 'react-map-gl'
 import { easeQuadInOut } from 'd3-ease'
 import { MAP_LOCATIONS } from './mapLocations'
 import { MapBorderFade } from '../../general-ui/styles'
@@ -82,7 +84,7 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
         mapStyle={config.map.MAPBOX_STYLE_URL}
       >
         <div style={navStyle}>
-          <NavigationControl showCompass={false} />
+          {/*<NavigationControl showCompass={false} />*/}
         </div>
       </ReactMapGL>
       <MapBorderFade bottom />
