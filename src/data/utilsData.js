@@ -51,8 +51,8 @@ const stateAverageByField = (fetchedData) => {
     (d) => d.month
   )
   return unformattedAverage.map(([year, yearData]) => ({
-    id: year,
-    data: yearData.map(([x, y]) => ({ x, y })),
+    title: year,
+    coordinates: yearData.map(([xVal, yVal]) => ({ xVal, yVal })),
     color: YEAR_COLORS[year],
   }))
 }
