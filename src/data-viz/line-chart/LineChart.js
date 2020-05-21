@@ -57,10 +57,10 @@ const LineChart = ({
   regionDataByYear,
 }) => {
   const screenWidth = window.innerWidth
-  const chartWidth = Math.min(screenWidth * 0.12, MAX_CHART_WIDTH)
+  const chartWidth = Math.min(screenWidth * 0.1, MAX_CHART_WIDTH)
   const dimensions = {
     width: chartWidth,
-    height: chartWidth * 0.75,
+    height: chartWidth * 0.85,
   }
 
   const _regionDataByYear = [...regionDataByYear.values()].filter(
