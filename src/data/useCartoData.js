@@ -5,9 +5,10 @@ const useCartoData = (
   cartoTableName,
   fields,
   sqlFilter = '',
-  dataFormatter = null
+  dataFormatter = null,
+  defaultValue = []
 ) => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState(defaultValue)
 
   useEffect(() => {
     DataFetcher.fetchSQL(cartoTableName, fields, sqlFilter).then(

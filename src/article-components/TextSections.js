@@ -23,12 +23,28 @@ export const IntroText = ({ verticalPadding }) => (
     </Paragraph>
     <Paragraph>
       With support and data from Mastercard, we're able to take a near real-time
-      look at these questions play out across Michigan.
+      look at how these questions play out across Michigan.
     </Paragraph>
     <Paragraph>
       To begin, let's take a big picture look at the overall consumer spending
-      index of every county in Michigan which experienced a significant change
-      in 2020.
+      at a state level for 2018 and 2019, then compare that to COVID-19's impact
+      on 2020.
+    </Paragraph>
+
+    <div style={{ textAlign: 'center', marginTop: 24 }}>
+      Scroll to advance the story ↓{' '}
+    </div>
+  </TextSection>
+)
+
+export const TransitionOutOfStateWideChartText = ({ verticalPadding }) => (
+  <TextSection verticalPadding={verticalPadding}>
+    <Paragraph>
+      However, when you look at counties, trends vary widely.
+    </Paragraph>
+    <Paragraph>
+      To understand this variance, let's contrast counties who've experienced a
+      significant growth or decrease in 2020, relative to the national average.
     </Paragraph>
 
     <div style={{ textAlign: 'center', marginTop: 24 }}>

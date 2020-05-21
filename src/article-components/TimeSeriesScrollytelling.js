@@ -94,7 +94,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
     element.style.opacity = 0.7
   }
 
-  if (![...dataByRegion.keys()].length) return null
+  if (!dataByRegion || ![...dataByRegion.keys()].length) return null
 
   return (
     <GraphicContainer>
