@@ -102,6 +102,22 @@ export const WikipediaImage = styled.img`
   transition: opacity 1000ms;
 `
 
+export const StateLevelTimeSeriesChartContainer = styled.div`
+  height: 90vh;
+  width: 90vw;
+  max-width: 800px;
+  margin: 24px auto;
+
+  & .tick-line {
+    opacity: 0.2;
+  }
+  & .stay-at-home-order .annotation-subject path {
+    fill: ${CORI_COLORS.maroon};
+    fill-opacity: 0.2;
+    stroke: none;
+  }
+`
+
 export const SVGContainer = styled.svg`
   position: absolute;
   top: 0;
@@ -152,6 +168,14 @@ export const StepWrapper = styled.div`
   }
   &:last-child {
     margin-bottom: 50vh;
+  }
+  @media only screen and (max-width: 800px) {
+    &:nth-child(2) {
+      margin-top: -90vh;
+    }
+    &:last-child {
+      margin-bottom: 30vh;
+    }
   }
   z-index: 10000;
 `

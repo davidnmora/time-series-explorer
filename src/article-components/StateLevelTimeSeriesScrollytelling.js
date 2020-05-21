@@ -9,16 +9,13 @@ import {
   ColoredText,
 } from '../general-ui/styles'
 import { StateLevelTimeSeriesChart } from '../data-viz/state-level-time-series-chart/StateLevelTimeSeriesChart'
-import config from '../config'
 import { YEAR_COLORS } from '../general-ui/colors'
-import { TREND_COLORS } from '../general-ui/colors'
+import {
+  FIRST_CASE,
+  STAY_AT_HOME_ORDER,
+} from '../data-viz/state-level-time-series-chart/chartAnnotations'
 
 const STEPS_DATA = [
-  {
-    visibleYears: [],
-    text:
-      "Let's explore the yearly changes in consumer spending (relative to the national average) in Michigan counties. We'll focus just on counties who's consumer spending sharply changed in 2020, relative to the national average.",
-  },
   {
     visibleYears: [2018],
     text: (
@@ -33,7 +30,7 @@ const STEPS_DATA = [
     visibleYears: [2018, 2019],
     text: (
       <>
-        Overall consumer spending changed little between{' '}
+        Overall consumer spending grew between{' '}
         <ColoredText color={YEAR_COLORS['2018']}>2018</ColoredText> and{' '}
         <ColoredText color={YEAR_COLORS['2019']}>2019</ColoredText>.
       </>
@@ -41,36 +38,20 @@ const STEPS_DATA = [
   },
   {
     visibleYears: [2018, 2019, 2020],
+    chartAnnotations: [FIRST_CASE],
     text: (
       <>
-        As COVID struck, counties saw unprecedented relative{' '}
-        <ColoredText color={TREND_COLORS[config.cartoData.trends.boost]}>
-          growth
-        </ColoredText>{' '}
-        and{' '}
-        <ColoredText color={TREND_COLORS[config.cartoData.trends.plummet]}>
-          decrease
-        </ColoredText>
-        .
+        But, as COVID struck in{' '}
+        <ColoredText color={YEAR_COLORS['2020']}>2020</ColoredText>, Michigan
+        saw unprecedented drop in spending relative to the national average.
       </>
     ),
   },
   {
     visibleYears: [2018, 2019, 2020],
-    text: (
-      <>
-        Removing urban counties, we see that most relative{' '}
-        <ColoredText color={TREND_COLORS[config.cartoData.trends.boost]}>
-          growth
-        </ColoredText>{' '}
-        happened in rural counties, with two notable exceptions:{' '}
-        <ColoredText color={TREND_COLORS[config.cartoData.trends.plummet]}>
-          Grand Traverse & Isabella county
-        </ColoredText>
-        .
-      </>
-    ),
-    ruralPercentLowerBound: 50,
+    chartAnnotations: [FIRST_CASE, STAY_AT_HOME_ORDER],
+    text:
+      'Between March 24th and May 28th, Michigan Governor Gretchen Whitmer put in place some of the strictest stay-at-home orders in the nation, further impacting spend.',
   },
 ]
 
@@ -102,6 +83,7 @@ export const StateLevelTimeSeriesScrollytelling = ({
           <StateLevelTimeSeriesChart
             data={stateMonthlyAveragesByYear}
             visibleYears={state.data.visibleYears}
+            chartAnnotations={state.data.chartAnnotations}
             xLabel="Month"
             yLabel="Average total spend"
           />

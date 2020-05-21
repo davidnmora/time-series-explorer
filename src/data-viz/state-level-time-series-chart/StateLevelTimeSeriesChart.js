@@ -1,10 +1,9 @@
 import React from 'react'
 import ResponsiveXYFrame from 'semiotic/lib/ResponsiveXYFrame'
+import { StateLevelTimeSeriesChartContainer } from '../../general-ui/styles'
 
-const frameProps = (xLabel, yLabel) => ({
+const baseFrameProps = (xLabel, yLabel) => ({
   margin: { left: 80, bottom: 90, right: 10, top: 40 },
-  xAccessor: 'xVal',
-  yAccessor: 'yVal',
   lineStyle: (d) => ({
     stroke: d.color,
     strokeWidth: 2,
@@ -20,18 +19,25 @@ const frameProps = (xLabel, yLabel) => ({
       label: { name: xLabel, locationDistance: 55 },
     },
   ],
+
+  responsiveWidth: true,
+  responsiveHeight: true,
 })
 
 export const StateLevelTimeSeriesChart = ({
   data,
   visibleYears,
+  chartAnnotations = [],
   xLabel,
   yLabel,
 }) => (
-  <div style={{ height: '80vh', width: '80vw', margin: 'auto' }}>
+  <StateLevelTimeSeriesChartContainer>
     <ResponsiveXYFrame
-      {...frameProps(xLabel, yLabel)}
+      {...baseFrameProps(xLabel, yLabel)}
+      xAccessor={'xVal'}
+      yAccessor={'yVal'}
+      annotations={chartAnnotations}
       lines={data.filter(({ title }) => visibleYears.includes(title))}
     />
-  </div>
+  </StateLevelTimeSeriesChartContainer>
 )

@@ -12,6 +12,7 @@ import {
   PostLineChartsText,
   GrandTraverseImageAndText,
   IsabellaImageAndText,
+  TransitionOutOfStateWideChartText,
 } from './article-components/TextSections'
 import { MapScrollytelling } from './article-components/MapScrollytelling'
 import config from './config'
@@ -37,6 +38,7 @@ function App() {
       <StateLevelTimeSeriesScrollytelling
         stateMonthlyAveragesByYear={stateMonthlyAveragesByYear}
       />
+      <TransitionOutOfStateWideChartText verticalPadding={'48px'} />
 
       <TimeSeriesScrollytelling dataByRegion={dataByRegion} />
       <PostLineChartsText />
