@@ -111,7 +111,8 @@ export const StateLevelTimeSeriesChartContainer = styled.div`
   height: 90vh;
   width: 90vw;
   max-width: ${MAXIMUM_MOBILE_SIZE};
-  margin: 24px auto;
+  margin: 0 auto;
+  padding-top: 10vh;
 
   & .tick-line {
     opacity: 0.2;
