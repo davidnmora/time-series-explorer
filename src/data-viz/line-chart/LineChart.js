@@ -6,6 +6,7 @@ import { SVGContainer, WikipediaImage } from '../../general-ui/styles'
 import config from '../../config'
 import { TREND_COLORS, YEAR_COLORS } from '../../general-ui/colors'
 import { wikipediaThumbnailURL } from '../../data/utilsData'
+import COUNTY_FALLBACK_IMAGE from '../../images/county-wikipedia-fallback-image.jpg'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = config.cartoData.MRLI_FIELDS
 const MAX_CHART_WIDTH = 144
@@ -48,6 +49,9 @@ const Line = ({ lineData, dataColumn, scale, opacity, ...rest }) => {
     />
   )
 }
+
+const switchToCountyFallbackImage = (error) =>
+  (error.target.src = COUNTY_FALLBACK_IMAGE)
 
 const LineChart = ({
   supplementaryCountyData,
@@ -92,6 +96,7 @@ const LineChart = ({
     <div style={{ overflow: 'hidden', position: 'relative', ...dimensions }}>
       <WikipediaImage
         src={wikipediaThumbnailURL(regionName, supplementaryCountyData)}
+        onError={switchToCountyFallbackImage}
         isVisible={visibleYears.length === 0}
         alt="Prominent location in the county pulled from Wikipedia"
       />
