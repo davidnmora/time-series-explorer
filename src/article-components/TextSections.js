@@ -32,7 +32,7 @@ export const IntroText = ({ verticalPadding }) => (
     </Paragraph>
 
     <div style={{ textAlign: 'center', marginTop: 24 }}>
-      Scroll to advance the story ↓{' '}
+      Scroll to advance the story ↓
     </div>
   </TextSection>
 )
@@ -44,7 +44,7 @@ export const TransitionOutOfStateWideChartText = ({ verticalPadding }) => (
     </Paragraph>
     <Paragraph>
       To understand this variance, let's contrast counties who've experienced a
-      significant growth or decrease in 2020, relative to the national average.
+      significant growth or decrease in 2020.
     </Paragraph>
 
     <div style={{ textAlign: 'center', marginTop: 24 }}>

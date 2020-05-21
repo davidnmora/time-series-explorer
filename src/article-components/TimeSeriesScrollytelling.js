@@ -14,11 +14,14 @@ import { YEAR_COLORS } from '../general-ui/colors'
 import { TREND_COLORS } from '../general-ui/colors'
 import useCartoData from '../data/useCartoData'
 
+const DATA_SUBTITLE =
+  'Data is a total consumer spending index normalized against a fixed, historic, national average.'
+
 const STEPS_DATA = [
   {
     visibleYears: [],
     text:
-      "Let's explore the yearly changes in consumer spending (relative to the national average) in Michigan counties. We'll focus just on counties who's consumer spending sharply changed in 2020, relative to the national average.",
+      "Of Michigan's 83 counties, these 30 experienced significant spending changes.",
   },
   {
     visibleYears: [2018],
@@ -114,7 +117,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
                 during COVID-19
               </>
             }
-            subtitle="Counties selected based on a significant increase in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
+            subtitle={DATA_SUBTITLE}
             trend={config.cartoData.trends.boost}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}
@@ -133,7 +136,7 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
                 during COVID-19
               </>
             }
-            subtitle="Counties selected based on a significant decrease in total consumer spending in 2020 as compared to 2018-2019, as measured on a relative national index."
+            subtitle={DATA_SUBTITLE}
             trend={config.cartoData.trends.plummet}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}
