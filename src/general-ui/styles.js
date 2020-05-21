@@ -1,6 +1,6 @@
-// import { animated } from 'react-spring'
 import styled, { createGlobalStyle } from 'styled-components'
 import { CORI_COLORS } from './colors'
+const MAXIMUM_MOBILE_SIZE = '800px'
 
 export const GlobalStyle = createGlobalStyle`
   body {
@@ -16,7 +16,7 @@ export const HeadlineSection = styled.section`
   z-index: 100;
   position: relative;
   margin: 144px auto;
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: ${MAXIMUM_MOBILE_SIZE}) {
     margin: 24px auto;
   }
 `
@@ -28,7 +28,7 @@ export const Headline = styled.h1`
   line-height: 1.2;
   color: ${CORI_COLORS.navy};
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: ${MAXIMUM_MOBILE_SIZE}) {
     font-size: 36px;
   }
 `
@@ -39,7 +39,7 @@ export const Subtitle = styled.p`
   color: ${CORI_COLORS.black};
   ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom};`}
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: ${MAXIMUM_MOBILE_SIZE}) {
     font-size: 16px;
   }
 `
@@ -49,7 +49,7 @@ export const TextSection = styled.div`
   padding: ${({ verticalPadding }) =>
       verticalPadding ? `${verticalPadding}` : '0'}
     0;
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: ${MAXIMUM_MOBILE_SIZE}) {
     padding: 12px 0;
   }
   max-width: 600px;
@@ -68,6 +68,11 @@ export const LabelText = styled.span`
   color: ${({ gray }) => (gray ? CORI_COLORS.mediumGray : CORI_COLORS.black)};
   font-size: ${({ gray }) => (gray ? '11' : '12')}px;
   padding-right: 4px;
+
+  @media only screen and (max-width: ${MAXIMUM_MOBILE_SIZE}) {
+    font-size: ${({ gray }) => (gray ? '8' : '9')}px;
+    ${({ hideOnMobile }) => (hideOnMobile ? 'display: none;' : '')}
+  }
 `
 
 export const ColoredText = styled.span`
@@ -105,7 +110,7 @@ export const WikipediaImage = styled.img`
 export const StateLevelTimeSeriesChartContainer = styled.div`
   height: 90vh;
   width: 90vw;
-  max-width: 800px;
+  max-width: ${MAXIMUM_MOBILE_SIZE};
   margin: 24px auto;
 
   & .tick-line {
@@ -136,7 +141,7 @@ export const ScrollVizContainer = styled.div`
 
 export const LineChartsWithTitleContainer = styled.div`
   margin: 36px;
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: ${MAXIMUM_MOBILE_SIZE}) {
     margin: 0;
   }
 `
@@ -169,14 +174,6 @@ export const StepWrapper = styled.div`
   &:last-child {
     margin-bottom: 50vh;
   }
-  @media only screen and (max-width: 800px) {
-    &:nth-child(2) {
-      margin-top: -90vh;
-    }
-    &:last-child {
-      margin-bottom: 30vh;
-    }
-  }
   z-index: 10000;
 `
 
@@ -191,10 +188,10 @@ export const StepContent = styled.div`
   
   background: white;
   
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: ${MAXIMUM_MOBILE_SIZE}) {
     width: 90vw;
     margin: 0;
-    margin-left: 5vw;
+    margin-left: 2.5vw;
   }
 }
 `

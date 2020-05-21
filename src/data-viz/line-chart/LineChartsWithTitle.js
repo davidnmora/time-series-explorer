@@ -24,7 +24,9 @@ export const LineChartsWithTitle = ({
 }) => (
   <LineChartsWithTitleContainer>
     <Subtitle marginBottom="0">{title}</Subtitle>
-    <LabelText gray>{subtitle}</LabelText>
+    <LabelText gray hideOnMobile>
+      {subtitle}
+    </LabelText>
     <LineChartSection>
       {dataByRegionFilter(
         dataByRegion,

@@ -8,6 +8,7 @@ import { TREND_COLORS, YEAR_COLORS } from '../../general-ui/colors'
 import { wikipediaThumbnailURL } from '../../data/utilsData'
 
 const { MONTH_COLUMN, YEAR_COLUMN } = config.cartoData.MRLI_FIELDS
+const MAX_CHART_WIDTH = 144
 
 const getLineOpacity = (lineData, dataColumn, visibleYears) => {
   const aPoint = lineData[0]
@@ -18,25 +19,15 @@ const getLineOpacity = (lineData, dataColumn, visibleYears) => {
   return shouldFadePreviousYears ? 0.5 : 1
 }
 
-const getLineColor = (lineData, dataColumn, visibleYears) => {
+const getLineColor = (lineData, dataColumn) => {
   const aPoint = lineData[0]
   const year = aPoint[YEAR_COLUMN]
 
-  // const maxYear = Math.max(...visibleYears)
-  // const shouldFadePreviousYears = maxYear === 2020 && year < maxYear
-  // if (shouldFadePreviousYears) {
-  //   return COLORS.gray
-  // }
   if (year === 2020) {
     const trend = aPoint[dataColumn.trend]
     return TREND_COLORS[trend]
   }
   return YEAR_COLORS[year]
-}
-
-const DEFAULT_DIMENSIONS = {
-  width: 144,
-  height: 112,
 }
 
 const Line = ({ lineData, dataColumn, scale, opacity, ...rest }) => {
@@ -64,9 +55,14 @@ const LineChart = ({
   dataColumn,
   visibleYears,
   regionDataByYear,
-  title = false,
-  dimensions = DEFAULT_DIMENSIONS,
 }) => {
+  const screenWidth = window.innerWidth
+  const chartWidth = Math.min(screenWidth * 0.12, MAX_CHART_WIDTH)
+  const dimensions = {
+    width: chartWidth,
+    height: chartWidth * 0.75,
+  }
+
   const _regionDataByYear = [...regionDataByYear.values()].filter(
     ([aDatum]) => !visibleYears || visibleYears.includes(aDatum[YEAR_COLUMN])
   )
@@ -110,7 +106,7 @@ const LineChart = ({
               dataColumn={dataColumn}
               lineData={item}
               scale={scale}
-              stroke={getLineColor(item, dataColumn, visibleYears)}
+              stroke={getLineColor(item, dataColumn)}
               opacity={getLineOpacity(item, dataColumn, visibleYears)}
               strokeDasharray={dimensions.width}
               {...props}
