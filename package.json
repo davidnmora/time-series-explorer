@@ -1,6 +1,5 @@
 {
   "name": "time-series-explorer",
-  "homepage": "https://ruralinnovation.github.io/time-series-explorer/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
