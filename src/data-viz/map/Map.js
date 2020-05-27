@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
-import produce from 'immer'
 import ReactMapGL, {
   FlyToInterpolator /*NavigationControl*/,
 } from 'react-map-gl'
@@ -51,10 +50,6 @@ const layerOpacityProps = {
   'fill-extrusion': ['fill-extrusion-opacity'],
 }
 
-const getMap = (mapRef) => {
-  return mapRef.current ? mapRef.current.getMap() : null
-}
-
 export const Map = ({
   location = MAP_LOCATIONS.michigan,
   toggledOffLayers = [],
@@ -64,15 +59,13 @@ export const Map = ({
     ...location,
   })
 
-  const mapRef = useRef()
-
   useEffect(
     () =>
       setViewport({
         ...DEFAULT_VIEWPORT,
         ...location,
       }),
-    [location, setViewport]
+    [location, toggledOffLayers, setViewport]
   )
 
   const [mapboxStyleJSON, setMapboxStyleJSON] = useState(null)
@@ -84,22 +77,31 @@ export const Map = ({
       .then(({ data }) => setMapboxStyleJSON(data))
   }, [])
 
-  // useEffect(() => {
-  //   const map = getMap(mapRef)
-  //   debugger
-  //   if (map) {
-  //     map.getStyle().layers.forEach((layer) => {
-  //       const opacityProps = layerOpacityProps[layer.type]
-  //       if (layer.id in toggledOffLayers) {
-  //         // hide
-  //       } else {
-  //         // show
-  //       }
-  //     })
-  //   }
-  //   // toggle layers
-  //   // const layers = map.getStyle().layers
-  // }, [toggledOffLayers])
+  const setOpacity = (opacityProps, layer, opacity) =>
+    opacityProps.reduce(
+      (accumulator, opacityProp) => ({
+        ...accumulator,
+        [opacityProp]: opacity,
+      }),
+      layer.paint
+    )
+
+  useEffect(() => {
+    if (!mapboxStyleJSON) return
+    const layers = mapboxStyleJSON.layers.map((layer) => {
+      const opacityProps = layerOpacityProps[layer.type] || []
+      if (Object.values(config.map.layers).includes(layer.id)) {
+        layer.paint = setOpacity(
+          opacityProps,
+          layer,
+          toggledOffLayers.includes(layer.id) ? 0 : 1
+        )
+      }
+      return layer
+    })
+
+    setMapboxStyleJSON({ ...mapboxStyleJSON, layers })
+  }, [toggledOffLayers, mapboxStyleJSON, setMapboxStyleJSON])
 
   const handleViewportChange = useCallback(
     (newViewport = {}) =>
@@ -127,7 +129,6 @@ export const Map = ({
         {...MAP_DEFAULT_SETTINGS}
         {...DEFAULT_VIEWPORT}
         {...viewport}
-        ref={mapRef}
         onViewportChange={handleViewportChange}
         mapboxApiAccessToken={config.map.MAPBOX_API_KEY}
         mapStyle={mapboxStyleJSON}

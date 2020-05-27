@@ -4,13 +4,9 @@
     "MAPBOX_STYLE_URL": "mapbox://styles/ruralinno/cka5wv42k00361ipehpyhe6v7/draft",
     "MAPBOX_STYLE_ID": "cka5wv42k00361ipehpyhe6v7",
     "layers": {
-      "data": {
-        "BREWERIES": "breweries_poi_factory-8k26fv",
-        "CHILD_CARE": "child_care_centers-bn4p82"
-      },
-      "basemap": {
-        "POI": "poi_label"
-      }
+      "BREWERIES": "Breweries",
+      "CHILD_CARE": "Child Care",
+      "POI": "poi-label"
     }
   },
   "cartoData": {

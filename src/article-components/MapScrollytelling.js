@@ -14,29 +14,56 @@ import config from '../config'
 const STEPS_DATA = [
   {
     location: MAP_LOCATIONS.michigan,
-    text: 'Welcome to Michigan',
+    text: 'Welcome to Michigan!',
     toggledOffLayers: [
-      config.map.layers.data.BREWERIES,
-      config.map.layers.data.CHILD_CARE,
-      config.map.layers.basemap.POI,
+      config.map.layers.BREWERIES,
+      config.map.layers.CHILD_CARE,
+      config.map.layers.POI,
     ],
   },
   {
     location: MAP_LOCATIONS.traverseCity,
-    text: '... home of Grand Traverse County',
+    text: 'This is Traverse City, the heart of Grand Traverse County',
     toggledOffLayers: [
-      config.map.layers.data.BREWERIES,
-      config.map.layers.data.CHILD_CARE,
-      // config.map.layers.basemap.POI,
+      config.map.layers.BREWERIES,
+      config.map.layers.CHILD_CARE,
+      config.map.layers.POI,
+    ],
+  },
+  {
+    location: MAP_LOCATIONS.traverseCity,
+    text: '... and a hotspot for breweries',
+    toggledOffLayers: [
+      // config.map.layers.BREWERIES,
+      config.map.layers.CHILD_CARE,
+      config.map.layers.POI,
+    ],
+  },
+  {
+    location: MAP_LOCATIONS.traverseCity,
+    text: '... and strong childcare to support a thriving workforce',
+    toggledOffLayers: [
+      // config.map.layers.BREWERIES,
+      // config.map.layers.CHILD_CARE,
+      config.map.layers.POI,
     ],
   },
   {
     location: MAP_LOCATIONS.isabella,
-    text: '... and Isabella county.',
+    text: 'Welcome to Isabella County!',
     toggledOffLayers: [
-      // config.map.layers.data.BREWERIES,
-      // config.map.layers.data.CHILD_CARE,
-      config.map.layers.basemap.POI,
+      config.map.layers.BREWERIES,
+      config.map.layers.CHILD_CARE,
+      config.map.layers.POI,
+    ],
+  },
+  {
+    location: MAP_LOCATIONS.isabella,
+    text: '... which sports many POIs.',
+    toggledOffLayers: [
+      // config.map.layers.BREWERIES,
+      // config.map.layers.CHILD_CARE,
+      // config.map.layers.POI,
     ],
   },
 ]
