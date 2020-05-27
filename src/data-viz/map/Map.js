@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
+import axios from 'axios'
+import produce from 'immer'
 import ReactMapGL, {
   FlyToInterpolator /*NavigationControl*/,
 } from 'react-map-gl'
@@ -40,11 +42,29 @@ const navStyle = {
   padding: '10px',
 }
 
-export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
+const layerOpacityProps = {
+  fill: ['fill-opacity'],
+  line: ['line-opacity'],
+  circle: ['circle-opacity', 'circle-stroke-opacity'],
+  symbol: ['icon-opacity', 'text-opacity'],
+  raster: ['raster-opacity'],
+  'fill-extrusion': ['fill-extrusion-opacity'],
+}
+
+const getMap = (mapRef) => {
+  return mapRef.current ? mapRef.current.getMap() : null
+}
+
+export const Map = ({
+  location = MAP_LOCATIONS.michigan,
+  toggledOffLayers = [],
+}) => {
   const [viewport, setViewport] = useState({
     ...DEFAULT_VIEWPORT,
     ...location,
   })
+
+  const mapRef = useRef()
 
   useEffect(
     () =>
@@ -54,6 +74,32 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
       }),
     [location, setViewport]
   )
+
+  const [mapboxStyleJSON, setMapboxStyleJSON] = useState(null)
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.mapbox.com/styles/v1/ruralinno/${config.map.MAPBOX_STYLE_ID}?access_token=${config.map.MAPBOX_API_KEY}`
+      )
+      .then(({ data }) => setMapboxStyleJSON(data))
+  }, [])
+
+  // useEffect(() => {
+  //   const map = getMap(mapRef)
+  //   debugger
+  //   if (map) {
+  //     map.getStyle().layers.forEach((layer) => {
+  //       const opacityProps = layerOpacityProps[layer.type]
+  //       if (layer.id in toggledOffLayers) {
+  //         // hide
+  //       } else {
+  //         // show
+  //       }
+  //     })
+  //   }
+  //   // toggle layers
+  //   // const layers = map.getStyle().layers
+  // }, [toggledOffLayers])
 
   const handleViewportChange = useCallback(
     (newViewport = {}) =>
@@ -72,6 +118,8 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
   ])
   useResizeListener(resizeListener)
 
+  if (!mapboxStyleJSON) return null
+
   return (
     <div className="map" style={{ position: 'relative' }}>
       <MapBorderFade />
@@ -79,9 +127,10 @@ export const Map = ({ location = MAP_LOCATIONS.michigan }) => {
         {...MAP_DEFAULT_SETTINGS}
         {...DEFAULT_VIEWPORT}
         {...viewport}
+        ref={mapRef}
         onViewportChange={handleViewportChange}
         mapboxApiAccessToken={config.map.MAPBOX_API_KEY}
-        mapStyle={config.map.MAPBOX_STYLE_URL}
+        mapStyle={mapboxStyleJSON}
       >
         <div style={navStyle}>
           {/*<NavigationControl showCompass={false} />*/}

@@ -8,6 +8,8 @@ This app isn't perfectly setup for non-dev editing, but at least some substantia
 ### **The MRLI data stuff or Mapbox**: 
 Edit `src/config.json`. From there, you can search some of the data names if you want to see how they're being used in the app.
 
+For Mapbox locations, see `src/data-viz/map/mapLocations.js`, which store locations that are referenced in `src/article-components/MapScrollytelling.js`.
+
 If interested, the actual API call is made via `useCartoData`, which itself relies on `DataFetcher.js`, a JS helper class used throughout CORI's projects for API calls to CARTO.
 
 ### **Text / content / order**:

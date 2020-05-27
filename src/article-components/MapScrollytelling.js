@@ -9,20 +9,35 @@ import {
 import { Scrollama, Step } from 'react-scrollama'
 import { Map } from '../data-viz/map/Map'
 import { MAP_LOCATIONS } from '../data-viz/map/mapLocations'
+import config from '../config'
 
 const STEPS_DATA = [
   {
     location: MAP_LOCATIONS.michigan,
     text: 'Welcome to Michigan',
+    toggledOffLayers: [
+      config.map.layers.data.BREWERIES,
+      config.map.layers.data.CHILD_CARE,
+      config.map.layers.basemap.POI,
+    ],
   },
   {
     location: MAP_LOCATIONS.traverseCity,
     text: '... home of Grand Traverse County',
+    toggledOffLayers: [
+      config.map.layers.data.BREWERIES,
+      config.map.layers.data.CHILD_CARE,
+      // config.map.layers.basemap.POI,
+    ],
   },
   {
     location: MAP_LOCATIONS.isabella,
     text: '... and Isabella county.',
-    ruralPercentLowerBound: 50,
+    toggledOffLayers: [
+      // config.map.layers.data.BREWERIES,
+      // config.map.layers.data.CHILD_CARE,
+      config.map.layers.basemap.POI,
+    ],
   },
 ]
 
@@ -42,7 +57,10 @@ export const MapScrollytelling = () => {
     <GraphicContainer>
       <ScrollContainer>
         <ScrollVizContainer>
-          <Map location={state.data.location} />
+          <Map
+            location={state.data.location}
+            toggledOffLayers={state.data.toggledOffLayers}
+          />
         </ScrollVizContainer>
 
         <Scrollama

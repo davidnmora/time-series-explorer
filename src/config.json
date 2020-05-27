@@ -1,7 +1,17 @@
 {
   "map": {
     "MAPBOX_API_KEY": "pk.eyJ1IjoicnVyYWxpbm5vIiwiYSI6ImNqeHl0cW0xODBlMm0zY2x0dXltYzRuazUifQ.zZBovoCHzLIW0wCZveEKzA",
-    "MAPBOX_STYLE_URL": "mapbox://styles/ruralinno/cka5wv42k00361ipehpyhe6v7/draft"
+    "MAPBOX_STYLE_URL": "mapbox://styles/ruralinno/cka5wv42k00361ipehpyhe6v7/draft",
+    "MAPBOX_STYLE_ID": "cka5wv42k00361ipehpyhe6v7",
+    "layers": {
+      "data": {
+        "BREWERIES": "breweries_poi_factory-8k26fv",
+        "CHILD_CARE": "child_care_centers-bn4p82"
+      },
+      "basemap": {
+        "POI": "poi_label"
+      }
+    }
   },
   "cartoData": {
     "ABBREV_STATE_NAME": "MI",
