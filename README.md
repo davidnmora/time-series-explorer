@@ -4,14 +4,16 @@
 
 This app isn't perfectly setup for non-dev editing, but at least some substantial efforts were made to ensure commonly editable things can be changed without too much trouble.
 
-## How to change...
-### **The MRLI data stuff**: Edit `src/config.json`. 
+## How to change stuff. TLDR: open `*Config.js`
+### **The data stuff**: Edit `src/dataConfig.json`. 
 
 From there, you can search some of the data names if you want to see how they're being used in the app.
 
-### **Map(box) stuff**: see `src/mapConfig.js`
-
 If interested, the actual API call is made via `useCartoData`, which itself relies on `DataFetcher.js`, a JS helper class used throughout CORI's projects for API calls to CARTO.
+
+### **Map(box) stuff**: see `src/mapConfig.js` and `src/mapStepsConfig.js` for the scroll steps
+
+For really fundamental stuff, see `src/data-viz/map/*`.
 
 ### **Text / content / order**:
 Open `src/App.js`. From there you'll see the exact high level react components that make up the sections of the app, in order.

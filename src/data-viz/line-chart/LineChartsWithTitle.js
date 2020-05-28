@@ -5,7 +5,7 @@ import {
   Subtitle,
   LabelText,
 } from '../../general-ui/styles'
-import config from '../../config'
+import { dataConfig } from '../../dataConfig'
 import RegionDataSection from './RegionDataSection'
 
 const dataByRegionFilter = (dataByRegion, filterField, match) =>
@@ -30,7 +30,7 @@ export const LineChartsWithTitle = ({
     <LineChartSection>
       {dataByRegionFilter(
         dataByRegion,
-        config.cartoData.MRLI_FIELDS.TOTAL_SPEND_COVID_TREND,
+        dataConfig.MRLI_FIELDS.TOTAL_SPEND_COVID_TREND,
         trend
       ).map((regionId) => (
         <RegionDataSection

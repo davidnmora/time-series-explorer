@@ -1,5 +1,5 @@
 import { group as d3group, mean, rollups } from 'd3-array'
-import config from '../config'
+import { dataConfig } from '../dataConfig'
 import { YEAR_COLORS } from '../general-ui/colors'
 
 export const round = (num, decimalPlaces) => {
@@ -38,15 +38,15 @@ export const smartDisplayValue = (num, min, max) => {
 const nestDataByRegionAndYear = (fetchedData) => {
   return d3group(
     fetchedData,
-    (d) => d[config.cartoData.MRLI_FIELDS.REGION_COLUMN],
-    (d) => d[config.cartoData.MRLI_FIELDS.YEAR_COLUMN]
+    (d) => d[dataConfig.MRLI_FIELDS.REGION_COLUMN],
+    (d) => d[dataConfig.MRLI_FIELDS.YEAR_COLUMN]
   )
 }
 
 const stateAverageByField = (fetchedData) => {
   const unformattedAverage = rollups(
     fetchedData,
-    (v) => mean(v, (d) => d[config.cartoData.MRLI_FIELDS.TOTAL_SPEND_COLUMN]),
+    (v) => mean(v, (d) => d[dataConfig.MRLI_FIELDS.TOTAL_SPEND_COLUMN]),
     (d) => d.year,
     (d) => d.month
   )
@@ -67,12 +67,12 @@ const getRegion = (regionName, supplementaryCountyData) =>
 
 export const wikipediaThumbnailURL = (regionName, supplementaryCountyData) =>
   getRegion(regionName, supplementaryCountyData)[
-    config.cartoData.COUNTY_FIELDS.THUMBNAIL
+    dataConfig.COUNTY_FIELDS.THUMBNAIL
   ]
 
 export const totalPopulation = (regionName, supplementaryCountyData) =>
   smartDisplayValue(
     getRegion(regionName, supplementaryCountyData)[
-      config.cartoData.COUNTY_FIELDS.TOTAL_POPULATION
+      dataConfig.COUNTY_FIELDS.TOTAL_POPULATION
     ]
   )

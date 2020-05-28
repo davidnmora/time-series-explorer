@@ -3,12 +3,12 @@ import { line as d3line } from 'd3-shape'
 import { scaleLinear } from 'd3-scale'
 import { animated, useTransition } from 'react-spring'
 import { SVGContainer, WikipediaImage } from '../../general-ui/styles'
-import config from '../../config'
+import { dataConfig } from '../../dataConfig'
 import { TREND_COLORS, YEAR_COLORS } from '../../general-ui/colors'
 import { wikipediaThumbnailURL } from '../../data/utilsData'
 import COUNTY_FALLBACK_IMAGE from '../../images/county-wikipedia-fallback-image.jpg'
 
-const { MONTH_COLUMN, YEAR_COLUMN } = config.cartoData.MRLI_FIELDS
+const { MONTH_COLUMN, YEAR_COLUMN } = dataConfig.MRLI_FIELDS
 const MAX_CHART_WIDTH = 144
 
 const getLineOpacity = (lineData, dataColumn, visibleYears) => {

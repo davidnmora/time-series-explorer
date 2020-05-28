@@ -9,7 +9,7 @@ import {
   ColoredText,
 } from '../general-ui/styles'
 import { LineChartsWithTitle } from '../data-viz/line-chart/LineChartsWithTitle'
-import config from '../config'
+import { dataConfig } from '../dataConfig'
 import { YEAR_COLORS } from '../general-ui/colors'
 import { TREND_COLORS } from '../general-ui/colors'
 import useCartoData from '../data/useCartoData'
@@ -48,11 +48,11 @@ const STEPS_DATA = [
     text: (
       <>
         As COVID struck, counties saw unprecedented relative{' '}
-        <ColoredText color={TREND_COLORS[config.cartoData.trends.boost]}>
+        <ColoredText color={TREND_COLORS[dataConfig.trends.boost]}>
           growth
         </ColoredText>{' '}
         and{' '}
-        <ColoredText color={TREND_COLORS[config.cartoData.trends.plummet]}>
+        <ColoredText color={TREND_COLORS[dataConfig.trends.plummet]}>
           decrease
         </ColoredText>
         .
@@ -64,11 +64,11 @@ const STEPS_DATA = [
     text: (
       <>
         Removing urban counties, we see that most relative{' '}
-        <ColoredText color={TREND_COLORS[config.cartoData.trends.boost]}>
+        <ColoredText color={TREND_COLORS[dataConfig.trends.boost]}>
           growth
         </ColoredText>{' '}
         happened in rural counties, with two notable exceptions:{' '}
-        <ColoredText color={TREND_COLORS[config.cartoData.trends.plummet]}>
+        <ColoredText color={TREND_COLORS[dataConfig.trends.plummet]}>
           Grand Traverse & Isabella county
         </ColoredText>
         .
@@ -78,13 +78,13 @@ const STEPS_DATA = [
   },
 ]
 
-const COUNTY_FIELDS_ARRAY = Object.values(config.cartoData.COUNTY_FIELDS)
+const COUNTY_FIELDS_ARRAY = Object.values(dataConfig.COUNTY_FIELDS)
 
 export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
   const supplementaryCountyData = useCartoData(
-    config.cartoData.COUNTY_TABLE,
+    dataConfig.COUNTY_TABLE,
     COUNTY_FIELDS_ARRAY,
-    `WHERE  st_stusps = '${config.cartoData.ABBREV_STATE_NAME}'`
+    `WHERE  st_stusps = '${dataConfig.ABBREV_STATE_NAME}'`
   )
   const [state, setState] = useState({ data: STEPS_DATA[0] })
 
@@ -109,16 +109,14 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
             title={
               <>
                 Counties that{' '}
-                <ColoredText
-                  color={TREND_COLORS[config.cartoData.trends.boost]}
-                >
+                <ColoredText color={TREND_COLORS[dataConfig.trends.boost]}>
                   grew
                 </ColoredText>{' '}
                 during COVID-19
               </>
             }
             subtitle={DATA_SUBTITLE}
-            trend={config.cartoData.trends.boost}
+            trend={dataConfig.trends.boost}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}
           />
@@ -128,16 +126,14 @@ export const TimeSeriesScrollytelling = ({ classes, dataByRegion }) => {
             title={
               <>
                 Counties that{' '}
-                <ColoredText
-                  color={TREND_COLORS[config.cartoData.trends.plummet]}
-                >
+                <ColoredText color={TREND_COLORS[dataConfig.trends.plummet]}>
                   decreased
                 </ColoredText>{' '}
                 during COVID-19
               </>
             }
             subtitle={DATA_SUBTITLE}
-            trend={config.cartoData.trends.plummet}
+            trend={dataConfig.trends.plummet}
             ruralPercentLowerBound={state.data.ruralPercentLowerBound}
             visibleYears={state.data.visibleYears}
           />
