@@ -5,10 +5,11 @@
 This app isn't perfectly setup for non-dev editing, but at least some substantial efforts were made to ensure commonly editable things can be changed without too much trouble.
 
 ## How to change...
-### **The MRLI data stuff or Mapbox**: 
-Edit `src/config.json`. From there, you can search some of the data names if you want to see how they're being used in the app.
+### **The MRLI data stuff**: Edit `src/config.json`. 
 
-For Mapbox locations, see `src/data-viz/map/mapLocations.js`, which store locations that are referenced in `src/article-components/MapScrollytelling.js`.
+From there, you can search some of the data names if you want to see how they're being used in the app.
+
+### **Map(box) stuff**: see `src/mapConfig.js`
 
 If interested, the actual API call is made via `useCartoData`, which itself relies on `DataFetcher.js`, a JS helper class used throughout CORI's projects for API calls to CARTO.
 

@@ -8,68 +8,10 @@ import {
 } from '../general-ui/styles'
 import { Scrollama, Step } from 'react-scrollama'
 import { Map } from '../data-viz/map/Map'
-import { MAP_LOCATIONS } from '../data-viz/map/mapLocations'
-import config from '../config'
-
-const STEPS_DATA = [
-  {
-    location: MAP_LOCATIONS.michigan,
-    text: 'Welcome to Michigan!',
-    toggledOffLayers: [
-      config.map.layers.BREWERIES,
-      config.map.layers.CHILD_CARE,
-      config.map.layers.POI,
-    ],
-  },
-  {
-    location: MAP_LOCATIONS.traverseCity,
-    text: 'This is Traverse City, the heart of Grand Traverse County',
-    toggledOffLayers: [
-      config.map.layers.BREWERIES,
-      config.map.layers.CHILD_CARE,
-      config.map.layers.POI,
-    ],
-  },
-  {
-    location: MAP_LOCATIONS.traverseCity,
-    text: '... and a hotspot for breweries',
-    toggledOffLayers: [
-      // config.map.layers.BREWERIES,
-      config.map.layers.CHILD_CARE,
-      config.map.layers.POI,
-    ],
-  },
-  {
-    location: MAP_LOCATIONS.traverseCity,
-    text: '... and strong childcare to support a thriving workforce',
-    toggledOffLayers: [
-      // config.map.layers.BREWERIES,
-      // config.map.layers.CHILD_CARE,
-      config.map.layers.POI,
-    ],
-  },
-  {
-    location: MAP_LOCATIONS.isabella,
-    text: 'Welcome to Isabella County!',
-    toggledOffLayers: [
-      config.map.layers.BREWERIES,
-      config.map.layers.CHILD_CARE,
-      config.map.layers.POI,
-    ],
-  },
-  {
-    location: MAP_LOCATIONS.isabella,
-    text: '... which sports many POIs.',
-    toggledOffLayers: [
-      // config.map.layers.BREWERIES,
-      // config.map.layers.CHILD_CARE,
-      // config.map.layers.POI,
-    ],
-  },
-]
+import { MAP_STEPS } from '../mapStepsConfig'
 
 export const MapScrollytelling = () => {
-  const [state, setState] = useState({ data: STEPS_DATA[0] })
+  const [state, setState] = useState({ data: MAP_STEPS[0] })
 
   const onStepEnter = ({ element, data }) => {
     element.style.opacity = 1
@@ -95,7 +37,7 @@ export const MapScrollytelling = () => {
           onStepExit={onStepExit}
           offset={0.7}
         >
-          {STEPS_DATA.map((stepData, i) => (
+          {MAP_STEPS.map((stepData, i) => (
             <Step data={stepData} key={i}>
               <StepWrapper>
                 <StepContent>

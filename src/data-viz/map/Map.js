@@ -4,10 +4,9 @@ import ReactMapGL, {
   FlyToInterpolator /*NavigationControl*/,
 } from 'react-map-gl'
 import { easeQuadInOut } from 'd3-ease'
-import { MAP_LOCATIONS } from './mapLocations'
 import { MapBorderFade } from '../../general-ui/styles'
 import { useResizeListener } from './useResizeListener'
-import config from '../../config'
+import { mapConfig } from '../../mapConfig'
 
 const MAP_PAN_TRANSITION_DURATION = 4000
 const VIEWPORT_TRANSITION_PROPERTIES = {
@@ -51,7 +50,7 @@ const layerOpacityProps = {
 }
 
 export const Map = ({
-  location = MAP_LOCATIONS.michigan,
+  location = mapConfig.mapLocations.michigan,
   toggledOffLayers = [],
 }) => {
   const [viewport, setViewport] = useState({
@@ -72,10 +71,10 @@ export const Map = ({
   useEffect(() => {
     axios
       .get(
-        `https://api.mapbox.com/styles/v1/ruralinno/${config.map.MAPBOX_STYLE_ID}?access_token=${config.map.MAPBOX_API_KEY}`
+        `https://api.mapbox.com/styles/v1/ruralinno/${mapConfig.MAPBOX_STYLE_ID}?access_token=${mapConfig.MAPBOX_API_KEY}`
       )
       .then(({ data }) => setMapboxStyleJSON(data))
-  }, [])
+  }, [setMapboxStyleJSON])
 
   const setOpacity = (opacityProps, layer, opacity) =>
     opacityProps.reduce(
@@ -87,21 +86,24 @@ export const Map = ({
     )
 
   useEffect(() => {
-    if (!mapboxStyleJSON) return
-    const layers = mapboxStyleJSON.layers.map((layer) => {
-      const opacityProps = layerOpacityProps[layer.type] || []
-      if (Object.values(config.map.layers).includes(layer.id)) {
-        layer.paint = setOpacity(
-          opacityProps,
-          layer,
-          toggledOffLayers.includes(layer.id) ? 0 : 1
-        )
-      }
-      return layer
-    })
+    setMapboxStyleJSON((current) => {
+      if (!current) return current
 
-    setMapboxStyleJSON({ ...mapboxStyleJSON, layers })
-  }, [toggledOffLayers, mapboxStyleJSON, setMapboxStyleJSON])
+      const updatedLayers = current.layers.map((layer) => {
+        const opacityProps = layerOpacityProps[layer.type] || []
+        if (Object.values(mapConfig.layers).includes(layer.id)) {
+          layer.paint = setOpacity(
+            opacityProps,
+            layer,
+            toggledOffLayers.includes(layer.id) ? 0 : 1
+          )
+        }
+        return layer
+      })
+
+      return { ...current, layers: updatedLayers }
+    })
+  }, [toggledOffLayers, setMapboxStyleJSON])
 
   const handleViewportChange = useCallback(
     (newViewport = {}) =>
@@ -130,7 +132,7 @@ export const Map = ({
         {...DEFAULT_VIEWPORT}
         {...viewport}
         onViewportChange={handleViewportChange}
-        mapboxApiAccessToken={config.map.MAPBOX_API_KEY}
+        mapboxApiAccessToken={mapConfig.MAPBOX_API_KEY}
         mapStyle={mapboxStyleJSON}
       >
         <div style={navStyle}>
