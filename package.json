@@ -1,7 +1,7 @@
 {
   "name": "time-series-explorer",
-  "homepage": "https://ruralinnovation.github.io/time-series-explorer/",
-  "version": "0.1.0",
+  "homepage": "https://davidnmora.github.io/time-series-explorer/",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
