@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.js": "/time-series-explorer/static/js/main.89a6a362.chunk.js",
+    "main.js.map": "/time-series-explorer/static/js/main.89a6a362.chunk.js.map",
+    "runtime-main.js": "/time-series-explorer/static/js/runtime-main.11cf3576.js",
+    "runtime-main.js.map": "/time-series-explorer/static/js/runtime-main.11cf3576.js.map",
+    "static/css/2.df1e88b2.chunk.css": "/time-series-explorer/static/css/2.df1e88b2.chunk.css",
+    "static/js/2.26988ce0.chunk.js": "/time-series-explorer/static/js/2.26988ce0.chunk.js",
+    "static/js/2.26988ce0.chunk.js.map": "/time-series-explorer/static/js/2.26988ce0.chunk.js.map",
+    "index.html": "/time-series-explorer/index.html",
+    "precache-manifest.3fa876cadec95dad5578a78720099745.js": "/time-series-explorer/precache-manifest.3fa876cadec95dad5578a78720099745.js",
+    "service-worker.js": "/time-series-explorer/service-worker.js",
+    "static/css/2.df1e88b2.chunk.css.map": "/time-series-explorer/static/css/2.df1e88b2.chunk.css.map",
+    "static/js/2.26988ce0.chunk.js.LICENSE.txt": "/time-series-explorer/static/js/2.26988ce0.chunk.js.LICENSE.txt",
+    "static/media/cori-logo-black.png": "/time-series-explorer/static/media/cori-logo-black.f1a2d150.png",
+    "static/media/county-wikipedia-fallback-image.jpg": "/time-series-explorer/static/media/county-wikipedia-fallback-image.8f0cf1e8.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.11cf3576.js",
+    "static/css/2.df1e88b2.chunk.css",
+    "static/js/2.26988ce0.chunk.js",
+    "static/js/main.89a6a362.chunk.js"
+  ]
+}
