@@ -22,7 +22,7 @@ export const IntroText = ({ verticalPadding }) => (
       strengths and the needs of these areas?
     </Paragraph>
     <Paragraph>
-      With support and data from Mastercard, we're able to take a near real-time
+      With support and data from Partner, we're able to take a near real-time
       look at how these questions play out across Michigan.
     </Paragraph>
     <Paragraph>
@@ -104,7 +104,7 @@ export const IsabellaImageAndText = () => (
 export const ConclusionText = () => (
   <TextSection verticalPadding="112px">
     <Paragraph>
-      Wrapping up, Mastercard's data lets us spot near real-time trends in
+      Wrapping up, Partner's data lets us spot near real-time trends in
       spending, highlighting where to deploy our own rural-focused data to fill
       in the larger picture.
     </Paragraph>

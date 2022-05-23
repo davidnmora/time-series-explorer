@@ -1,4 +1,4 @@
-# Interactive "scrollytelling article" for mastercard.
+# Interactive "scrollytelling article" for A Partner.
 
 # For non-web developers:
 
