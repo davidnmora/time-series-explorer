@@ -58,11 +58,6 @@ const STEPS_DATA = [
 export const StateLevelTimeSeriesScrollytelling = ({
   stateMonthlyAveragesByYear,
 }) => {
-  // const supplementaryCountyData = useCartoData(
-  //   dataConfig.COUNTY_TABLE,
-  //   COUNTY_FIELDS_ARRAY,
-  //   `WHERE  st_stusps = '${dataConfig.ABBREV_STATE_NAME}'`
-  // )
   const [state, setState] = useState({ data: STEPS_DATA[0] })
 
   const onStepEnter = ({ element, data }) => {
